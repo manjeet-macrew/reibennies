@@ -1,0 +1,39 @@
+﻿<div class="container">
+    <!--login modal-->
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 style="margin-left:20px;"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-user"></span>&nbsp;REI Bennies</h1>
+                </div>
+                <div class="modal-body">
+                    <form id="frmLogin">
+                        <div class="form-group">
+                            <input id="txtbxUsername" ng-model="User.UserName" type="text" class="form-control input-lg" placeholder="UserName" ng-keyup="ForceLower()" required>
+                        </div>
+                        <div class="form-group">
+                            <input id="txtbxPassword" ng-model="User.Password" type="password" class="form-control input-lg" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <button id="btnSubmit" ng-click="Login()" class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-log-in"></span>&nbsp;Login</button>
+                        </div>
+                        <div class="form-group">
+                            <button ng-click="FormClear()" id="btnClear" class="btn btn-default btn-lg btn-block"><span class="glyphicon glyphicon-trash"></span>&nbsp;Clear</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-md-12">
+                        <span id="copyright"><small>© <span id="currentYear"></span> Copyright <a href="http://www.reibenjis.com">REI Benjis</a></small></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ajaxSpinnerContainer">
+        <center>
+            <img src="assets/images/ajax-loader.gif" id="ajaxSpinnerImage" alt="Fetching Data..." title="Fetching Data...">
+        </center>
+    </div>
+</div>
