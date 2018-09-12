@@ -11,15 +11,18 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 		}).
         when('/home', {
             controller: 'homeController',
-            templateUrl: 'views/common/home.html'
+            templateUrl: 'views/common/home.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn
+             }
         }).
-        //when('/test', {
-        //     controller: 'testController',
-        //     templateUrl: 'views/test.html',
-        //     resolve: {
-        //         loggedIn: onlyLoggedIn
-        //     }
-        // }).
+        when('/profile', {
+            controller: 'profileController',
+            templateUrl: 'views/user/profile.html',
+            resolve: {
+                loggedIn: onlyLoggedIn
+            }
+        }).
 		otherwise({
 		    redirectTo: '/'
 		});
@@ -42,14 +45,17 @@ var onlyLoggedIn = function ($location, $q, loginApi) {
 rEIBenniesApp.factory('httpRequestInterceptor', ['$rootScope', '$location', function ($rootScope, $location) {
     return {
         request: function ($config) {
-            $('#siteLoader').show();
+            debugger;
+            $('#ajaxSpinnerContainer').show();
             return $config;
         },
         response: function ($config) {
-            $('#siteLoader').hide();
+            debugger;
+            $('#ajaxSpinnerContainer').hide();
             return $config;
         },
         responseError: function (response) {
+            debugger;
             return response;
         }
     };

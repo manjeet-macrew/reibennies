@@ -2,17 +2,13 @@
 
 rEIBenniesApp.service('loginApi', ['$http', 'config', '$location', '$cookieStore', function ($http, config, $location, $cookieStore) {
     this.CheckIsLogin = function () {
-        var email = $cookieStore.get('Email');
-        var userId = $cookieStore.get('UserId');
-
-        if (email == "" || email == undefined || email == null || userId == "" || userId == undefined || userId == null) {
+        if (sessionStorage.getItem('AT') === "" || sessionStorage.getItem('AT') === null)
             return false;
-        } else
+        else
             return true;
     };
 
     this.Login = function (data) {
-        debugger;
         return $http({
             method: 'POST', url: config.epLoginToken,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8', },

@@ -126,11 +126,13 @@ function clearLogin(){
     $('#txtbxPassword').val('');
 }
 
-function showSpinner(){
+function showSpinner() {
+    debugger;
     $('#ajaxSpinnerContainer').show();
 }
 
 function hideSpinner() {
+    debugger;
     $('#ajaxSpinnerContainer').hide();
 }
 

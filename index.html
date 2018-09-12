@@ -34,16 +34,31 @@
 
     <script src="scripts/app.js"></script>
     <script src="scripts/services/common/login-service.js"></script>
+    <script src="scripts/services/user-service.js"></script>
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/common/mainController.js"></script>
     <script src="scripts/controllers/common/loginController.js"></script>
     <script src="scripts/controllers/common/homeController.js"></script>
+    <script src="scripts/controllers/user/profileController.js"></script>
 </head>
 
-<body ng-controller="mainController" style="background-color: #A1D461">
-    <div ng-view="">
-
+<body ng-controller="mainController">
+    <div ng-if="!IsLoginPage" ng-include src="'views/common/header.html'">
     </div>
-    <div id="siteLoader" class="ngo_loader_container"><div class="loader"></div></div>
+    <div ng-view="">
+        <!--Content will be renderd here-->
+    </div>
+    <div ng-if="!IsLoginPage" ng-include src="'views/common/footer.html'">
+    </div>
+    <!--<div id="siteLoader" class="ngo_loader_container">
+    <div class="loader">
+        </div>
+    </div>-->
+
+    <div id="ajaxSpinnerContainer">
+        <center>
+            <img src="assets/images/ajax-loader.gif" id="ajaxSpinnerImage" alt="Fetching Data..." title="Fetching Data...">
+        </center>
+    </div>
 </body>
 </html>

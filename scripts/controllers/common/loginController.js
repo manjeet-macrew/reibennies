@@ -1,6 +1,10 @@
 'use strict';
 
-rEIBenniesApp.controller("loginController", function ($scope, toastr, config, loginApi) {
+rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr, config, loginApi, $location) {
+    if (sessionStorage.getItem('AT') != "" && sessionStorage.getItem('AT') != null && sessionStorage.getItem('AT') != undefined)
+        $location.path("home");
+
+    $rootScope.IsLoginPage = true;
     $("#txtbxUsername").focus();
 
     //set current year
@@ -14,7 +18,6 @@ rEIBenniesApp.controller("loginController", function ($scope, toastr, config, lo
     $scope.User = { UserName: '', Password: '' }
 
     $scope.Login = function () {
-        debugger;
         var grantType = config.txtGrantType;
         //toastr.error($scope.User.UserName, 'Error');
 
@@ -35,7 +38,6 @@ rEIBenniesApp.controller("loginController", function ($scope, toastr, config, lo
     };
 
     $scope.SendLogin = function (userData) {
-        debugger;
         jQuery.ajax({
             type: "POST",
             url: config.epLoginToken,
@@ -187,7 +189,7 @@ rEIBenniesApp.controller("loginController", function ($scope, toastr, config, lo
         return isE;
     }
 
-    $scope.buildUserInfoData = function () {
+    $scope.buildUserInfoData = function (data) {
         var result = removeFirstLast(data);
         var jsonData = exposeJSON(result);
         var jData = exposeJSON($scope.getUIData(jsonData));
@@ -203,7 +205,7 @@ rEIBenniesApp.controller("loginController", function ($scope, toastr, config, lo
         sessionStorage.setItem('LN', uid.lastName);
 
         //redirect to home view
-        window.location.href = "home.html";
+        window.location.href = "#/home";
     }
 
     $scope.getUIData = function (jObj) {

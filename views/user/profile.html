@@ -1,0 +1,40 @@
+﻿<div class="container">
+    <div class="page-header">
+        Welcome, Profile <span id="greeting"></span>
+        <input type="button" value="Settings" ng-click="UpdateProfile()" class="btn btn-default" />
+    </div>
+    <div class="card" style="width: 18rem;" ng-if="IsView">
+        <img class="card-img-top" src={{UserData.ProfilePicPath}} alt="Card image cap" height="100px" width="100px">
+        <div class="card-body">
+            <h5 class="card-title">Name : {{UserData.firstName +" "+  UserData.lastName}}</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Email : {{UserData.Email}}</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">City : {{UserData.City}}</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Address : {{UserData.AddressOne}}</h5>
+        </div>
+    </div>
+    <form action="/action_page.php" ng-if="!IsView">
+        <div class="form-group">
+            <label for="email">First Name:</label>
+            <input type="email" class="form-control" id="fname" placeholder="First Name" name="fname">
+        </div>
+        <div class="form-group">
+            <label for="email">Last Name:</label>
+            <input type="email" class="form-control" id="lname" placeholder="Last Name" name="lname">
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Email" name="email">
+        </div>
+        <div class="checkbox">
+            <label><input type="checkbox" name="remember"> Remember me</label>
+        </div>
+        <button type="button" class="btn btn-default" ng-click="Submit()">Submit</button>
+        <button type="button" class="btn btn-default" ng-click="Cancel()">Cancel</button>
+    </form>
+</div>
