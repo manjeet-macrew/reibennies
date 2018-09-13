@@ -45,17 +45,14 @@ var onlyLoggedIn = function ($location, $q, loginApi) {
 rEIBenniesApp.factory('httpRequestInterceptor', ['$rootScope', '$location', function ($rootScope, $location) {
     return {
         request: function ($config) {
-            debugger;
             $('#ajaxSpinnerContainer').show();
             return $config;
         },
         response: function ($config) {
-            debugger;
             $('#ajaxSpinnerContainer').hide();
             return $config;
         },
         responseError: function (response) {
-            debugger;
             return response;
         }
     };

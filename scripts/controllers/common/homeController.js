@@ -1,10 +1,7 @@
 ﻿'use strict';
 
 rEIBenniesApp.controller("homeController", function ($scope, $rootScope) {
+    $rootScope.CurrentYear = getCurrentYear();
     $rootScope.IsLoginPage = false;
-    $("#greeting").html(sessionStorage.getItem('FN') + " " + sessionStorage.getItem('LN'));
-
-    //set current year
-    $("#currentYear").html(getCurrentYear());
-
+    $rootScope.Greeting = sessionStorage.getItem('FN') + " " + sessionStorage.getItem('LN')
 });

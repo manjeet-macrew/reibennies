@@ -7,7 +7,13 @@
     epLoginToken: "https://www.reibens.com/token",
     epGetUserInfo: "https://www.reibens.com/getuserinfo",
     epGetUserProfile: "https://www.reibens.com/getprofileinfo",
-    epGetUserProfileInfo: "https://www.reibens.com/getuserprofileinfo?userId="
+    epGetUserProfileInfo: "https://www.reibens.com/getuserprofileinfo?userId=",
+    epModifyUserSettingsDemographics: "https://www.reibens.com/modifyusersettingsdemographics?userId=",
+    epModifyUserPassword: "https://www.reibens.com/modifyuserpassword",
+    epGetUserPassword: "https://www.reibens.com/getuserpassword?userId=",
+    epGetStates: "https://www.reibens.com/getstates",
+    epGetSubscriptions: "https://www.reibens.com/getSubscriptions?userId=",
+
     //epLoginToken: "http://localhost:63808/token",
     //epGetUserInfo: "http://localhost:63808/getuserinfo",
     //epGetUserProfile: "http://localhost:63808/getprofileinfo",

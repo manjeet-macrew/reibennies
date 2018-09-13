@@ -1,6 +1,7 @@
 'use strict';
 
 rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr, config, loginApi, $location) {
+    $rootScope.CurrentYear = getCurrentYear();
     if (sessionStorage.getItem('AT') != "" && sessionStorage.getItem('AT') != null && sessionStorage.getItem('AT') != undefined)
         $location.path("home");
 
@@ -8,7 +9,6 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
     $("#txtbxUsername").focus();
 
     //set current year
-    $("#currentYear").html(getCurrentYear());
 
     //disable form event
     document.getElementById("frmLogin").addEventListener("click", function (event) {
