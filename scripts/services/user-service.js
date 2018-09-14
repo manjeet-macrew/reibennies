@@ -76,4 +76,66 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         });
     };
 
+    this.GetFaqs = function () {
+        return $http({
+            method: 'GET', url: config.epGetFaqs,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
+    this.GetInvestorTypes = function () {
+        return $http({
+            method: 'GET', url: config.epGetInvestorTypes,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
+    this.UpdateUserInvestorTypes = function (payload) {
+        return $http({
+            method: 'POST', url: config.epUpdateUserInvestorTypes,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            },
+            data: payload,
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
+    this.ChangeSubscription = function (payload) {
+        return $http({
+            method: 'POST', url: config.epChangeSubscription,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            },
+            data: payload,
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
+    this.CancelSubscription = function (payload) {
+        return $http({
+            method: 'POST', url: config.epCancelSubscription + payload,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            },
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
 }]);

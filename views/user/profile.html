@@ -1,7 +1,7 @@
 ﻿<div class="container">
     <!--<div class="page-header">
         Welcome, Profile <span id="greeting"></span>
-       
+
     </div>-->
     <h2>Profile</h2>
     <div id="tabs">
@@ -75,7 +75,12 @@
             </div>
             <div id="professionalExperties" class="tab-pane fade">
                 <h3>Professional Experties</h3>
-                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+                <div class="card">
+                    <span ng-repeat="inv in InvestorTypes">
+                        <input id="inv.lookupId" type="checkbox" ng-click="AddRemove(this)" ng-checked="IsChecked(inv.lookupId)" name="InvestorType" ng-model="InvestorType"> {{inv.investorType}}<br>
+                    </span>
+                    <button type="button" class="btn btn-primary" ng-click="UpdateUserInvestorTypes()">Save</button>
+                </div>
             </div>
             <div id="myBio" class="tab-pane fade">
                 <h4>My Bio :</h4>
@@ -141,19 +146,61 @@
                 </form>
             </div>
             <div id="subscription" class="tab-pane fade">
-                <h3>Subscription</h3>
-                <div class="card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Your Subscription</h3>
+                    </div>
+                </div>
+                <div class="card cardLayout">
                     <div class="card-body">
-                        <h5 class="card-title">Description : {{ActiveSubscription.Description}}</h5>
+                        <h5 class="card-title">Description : {{UserData.Description}}</h5>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Type : {{ActiveSubscription.Type}}</h5>
+                        <h5 class="card-title">Type : {{UserData.Title}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" ng-click="CancelSubscription(UserData)" class="btn btn-danger">Cancel Subscription</button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>All Subscription</h3>
+                    </div>
+                </div>
+                <div class="card cardLayout" ng-repeat="sub in ActiveSubscription">
+                    <div class="card-body">
+                        <h5 class="card-title">Description : {{sub.Description}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Type : {{sub.Type}}</h5>
+                    </div>
+                    <div class="card-body">
+                        <button type="button" ng-click="ChangeSubscription(sub)" class="btn btn-success">Select</button>
                     </div>
                 </div>
             </div>
             <div id="fAQS" class="tab-pane fade">
                 <h3>FAQs</h3>
-                <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <td>Title</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="faq in FAQs">
+                                    <td>{{faq.title}}</td>
+                                    <td>{{faq.description}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

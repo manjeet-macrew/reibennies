@@ -13,6 +13,14 @@
     epGetUserPassword: "https://www.reibens.com/getuserpassword?userId=",
     epGetStates: "https://www.reibens.com/getstates",
     epGetSubscriptions: "https://www.reibens.com/getSubscriptions?userId=",
+    epGetFaqs: "https://www.reibens.com/getfaqs",
+    epGetInvestorTypes: "https://www.reibens.com/getinvestortypes",
+    epUpdateUserInvestorTypes: "https://www.reibens.com/updateuserInvestortypes",
+    epChangeSubscription: "https://www.reibens.com/changesubscription",
+    epCancelSubscription: "https://www.reibens.com/cancelsubscription?userId="
+    
+
+    
 
     //epLoginToken: "http://localhost:63808/token",
     //epGetUserInfo: "http://localhost:63808/getuserinfo",
