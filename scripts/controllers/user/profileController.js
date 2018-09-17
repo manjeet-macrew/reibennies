@@ -1,6 +1,9 @@
 ﻿'use strict';
 
 rEIBenniesApp.controller("profileController", function ($scope, $rootScope, userService) {
+    $rootScope.IsProfile = true;
+    $rootScope.SelectedPage = "Profile";
+
     $scope.IsView = true;
     $scope.UserData = {};
     $scope.GetProfileInfo = function () {
@@ -148,6 +151,12 @@ rEIBenniesApp.controller("profileController", function ($scope, $rootScope, user
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.FAQs = res.data.ResponseData[0].FaqsInfoData;
+                     if ($scope.FAQs != null && $scope.FAQs != undefined) {
+                         setTimeout(function () {
+                             $scope.OpenAccordian($scope.FAQs[0].faqId);
+                         }, 25);
+                        
+                     }
                  } else {
                      JSAlert.alert("Failed to load Old Faq");
                  }
@@ -262,6 +271,11 @@ rEIBenniesApp.controller("profileController", function ($scope, $rootScope, user
             });
     }
 
-
+    $scope.OpenAccordian = function (id) {
+        debugger;
+        id = "#faq_" + id;
+        $('.panel-collapse.collapse.in').removeClass('in');
+        $(id).addClass('in');
+    }
 
 });

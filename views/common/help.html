@@ -1,0 +1,38 @@
+﻿<div class="container">
+    <div id="fullDemographics">
+        <h3>Request Help</h3>
+        <form ng-submit="Submit(UserData)">
+            <div class="form-group">
+                <label for="email">* First Name:</label>
+                <input required type="text" class="form-control" id="fname" ng-model="UserData.Name" placeholder="First Name" name="fname">
+            </div>
+            <div class="form-group">
+                <label for="email">* Last Name:</label>
+                <input required type="text" class="form-control" id="lname" ng-model="LastName" placeholder="Last Name" name="lname">
+            </div>
+            <div class="form-group">
+                <label for="Phone">* Primary Phone:</label>
+                <input required type="text" class="form-control" id="Phone" ng-model="UserData.Phone" placeholder="Phone" name="Phone">
+            </div>
+            <div class="form-group">
+                <label for="email">* Email:</label>
+                <input required type="email" class="form-control" id="email" ng-model="UserData.Email" placeholder="Email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="UserName"> User Name:</label>
+                <input type="text" class="form-control" id="UserName" ng-model="UserData.UserName" placeholder="UserName" name="UserName">
+            </div>
+            <div class="form-group">
+                <label for="topic">* Help Topic:</label>
+                <select required="required" class="form-control" ng-model="UserData.helpCenterCatId" ng-options="help.helpCenterCatId as help.hcName for help in HelpTopics">
+                    <option value="">-- Select Topic --</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="secondryPhone">* Concern:</label>
+                <textarea required rows="6" class="form-control" id="bio" ng-model="UserData.Body" placeholder="Concern" name="bio"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>

@@ -1,26 +1,38 @@
 ﻿'use strict';
 
-var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies','ngAnimate', 'toastr','angular.filter']);
+var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter']);
 
 rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 
     $routeProvider.
 		when('/', {
 		    controller: 'loginController',
-		    templateUrl: 'views/common/login.html'
+		    templateUrl: 'views/common/login.html',
+		    resolve: {
+		        forceSSL: onlySSL
+		    }
 		}).
         when('/home', {
             controller: 'homeController',
             templateUrl: 'views/common/home.html',
-             resolve: {
-                 loggedIn: onlyLoggedIn
-             }
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
         }).
         when('/profile', {
             controller: 'profileController',
             templateUrl: 'views/user/profile.html',
             resolve: {
-                loggedIn: onlyLoggedIn
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
+        when('/help', {
+            controller: 'helpController',
+            templateUrl: 'views/common/help.html',
+            resolve: {
+                forceSSL: onlySSL
             }
         }).
 		otherwise({
@@ -29,6 +41,16 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 
     $httpProvider.interceptors.push('httpRequestInterceptor');
 });
+
+var onlySSL = function ($location, $q, $window) {
+    if ($location.protocol() !== 'https') {
+        //alert("Need SSL");
+        //$window.location.href = $location.absUrl().replace('http', 'https');
+    }
+    var deferred = $q.defer();
+    deferred.resolve();
+    return deferred.promise;
+};
 
 var onlyLoggedIn = function ($location, $q, loginApi) {
     var isLogin = loginApi.CheckIsLogin();

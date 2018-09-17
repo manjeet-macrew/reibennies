@@ -10,7 +10,7 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#/home">Home</a></li>
+                <li ng-class="{ 'active' : IsHome && SelectedPage=='Home'}"><a href="#/home">Home</a></li>               
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Training<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -27,7 +27,7 @@
                         <li><a href="#/home">Terms of Use</a></li>
                     </ul>
                 </li>-->
-                <li><a href="#/profile">My Profile</a></li>
+                <li ng-class="{ 'active' : IsProfile && SelectedPage=='Profile'}"><a href="#/profile">My Profile</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/logout" ng-click="Logout()"><span class="glyphicon glyphicon-remove-circle"></span> Log Out</a></li>

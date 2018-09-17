@@ -23,9 +23,13 @@
 
                     </div>
                 </div>
-                <div class="card cardLayout" ng-if="IsView">
-                    <input type="button" value="Edit" ng-click="UpdateProfile()" class="btn btn-default" />
-                    <img class="card-img-top" src={{UserData.ProfilePicPath}} alt="Card image cap" height="100px" width="100px">
+                <div class="card cardLayout profile" ng-if="IsView">
+                    <button ng-click="UpdateProfile()" type="button" class="btn btn-default">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </button>
+
+                
+                    <img class="card-img-top img-circle" src={{UserData.ProfilePicPath}} alt="Card image cap" height="100px" width="100px">
                     <div class="card-body">
                         <h5 class="card-title">Name : {{UserData.firstName +" "+  UserData.lastName}}</h5>
                     </div>
@@ -184,21 +188,22 @@
                 <h3>FAQs</h3>
                 <div class="card">
                     <div class="card-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <td>Title</td>
-                                    <td>Description</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="faq in FAQs">
-                                    <td>{{faq.title}}</td>
-                                    <td>{{faq.description}}</td>
-                                </tr>
-                            </tbody>
-
-                        </table>
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default" ng-repeat="faq in FAQs">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion" ng-click="OpenAccordian(faq.faqId)" aria-expanded="true" aria-controls="collapseOne">
+                                            {{faq.title}}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="faq_{{faq.faqId}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                       {{faq.description}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
