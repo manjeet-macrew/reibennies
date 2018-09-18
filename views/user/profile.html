@@ -1,10 +1,6 @@
 ﻿<div class="container">
-    <!--<div class="page-header">
-        Welcome, Profile <span id="greeting"></span>
 
-    </div>-->
-    <h2>Profile</h2>
-    <div id="tabs">
+    <div id="tabs" class="main_profile">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="/#profile" ng-click="ShowTab('#basicInfo')">Profile</a></li>
             <li><a data-toggle="tab" href="/#profile" ng-click="ShowTab('#changePassword')">Change Password</a></li>
@@ -15,20 +11,19 @@
             <li><a data-toggle="tab" href="/#profile" ng-click="ShowTab('#fAQS')">FAQS</a></li>
         </ul>
 
-        <div id="tabContent" class="tab-content">
+        <div id="tabContent" class="tab-content ">
+            <div class="panel-heading panel-heading-tab1 active_tab">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#basicInfo',$event)">Profile</a>
+                </h4>
+            </div>
             <div id="basicInfo" class="tab-pane fade in active">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Profile</h3>
-
-                    </div>
-                </div>
                 <div class="card cardLayout profile" ng-if="IsView">
                     <button ng-click="UpdateProfile()" type="button" class="btn btn-default">
                         <span class="glyphicon glyphicon-pencil"></span> Edit
                     </button>
 
-                
+
                     <img class="card-img-top img-circle" src={{UserData.ProfilePicPath}} alt="Card image cap" height="100px" width="100px">
                     <div class="card-body">
                         <h5 class="card-title">Name : {{UserData.firstName +" "+  UserData.lastName}}</h5>
@@ -60,11 +55,13 @@
                     <button type="button" class="btn btn-default" ng-click="Cancel()">Cancel</button>
                 </form>
             </div>
-            <div id="changePassword" class="tab-pane fade">
-                <div class="row">
-                    <h3>Change Password</h3>
-                </div>
 
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#changePassword',$event)">Change Password</a>
+                </h4>
+            </div>
+            <div id="changePassword" class="tab-pane fade">
                 <form ng-submit="SubmitPassword()">
                     <div class="form-group">
                         <label for="password">* Old Password:</label>
@@ -77,8 +74,13 @@
                     <button type="submit" class="btn btn-primary">Change Password</button>
                 </form>
             </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#professionalExperties',$event)">Professional Experties</a>
+                </h4>
+            </div>
             <div id="professionalExperties" class="tab-pane fade">
-                <h3>Professional Experties</h3>
                 <div class="card">
                     <span ng-repeat="inv in InvestorTypes">
                         <input id="inv.lookupId" type="checkbox" ng-click="AddRemove(this)" ng-checked="IsChecked(inv.lookupId)" name="InvestorType" ng-model="InvestorType"> {{inv.investorType}}<br>
@@ -86,8 +88,13 @@
                     <button type="button" class="btn btn-primary" ng-click="UpdateUserInvestorTypes()">Save</button>
                 </div>
             </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#myBio',$event)">My Bio</a>
+                </h4>
+            </div>
             <div id="myBio" class="tab-pane fade">
-                <h4>My Bio :</h4>
                 <form ng-submit="Submit(UserData)">
                     <div class="form-group">
                         <textarea rows="8" class="form-control" id="bio" ng-model="UserData.Bio" placeholder="Bio" name="bio"></textarea>
@@ -95,8 +102,13 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#fullDemographics',$event)">My Full Demographics</a>
+                </h4>
+            </div>
             <div id="fullDemographics" class="tab-pane fade">
-                <h3>Full Demographics</h3>
                 <form ng-submit="Submit(UserData)">
                     <div class="form-group">
                         <label for="email">* First Name:</label>
@@ -136,11 +148,9 @@
                     </div>
                     <div class="form-group">
                         <label for="State">* State:</label>
-                        <select required="required" class="form-control col-md-7 col-xs-12" ng-model="UserData.State" ng-options="state.stateId as state.stateName for state in States">
+                        <select required="required" class="form-control" ng-model="UserData.State" ng-options="state.stateId as state.stateName for state in States">
                             <option value="">-- Select State --</option>
                         </select>
-
-                        <!--<input required type="text" class="form-control" id="State" ng-model="UserData.State" placeholder="State" name="State">-->
                     </div>
                     <div class="form-group">
                         <label for="Zip">* Zip Code:</label>
@@ -148,6 +158,12 @@
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+            </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#subscription',$event)">My Subscription</a>
+                </h4>
             </div>
             <div id="subscription" class="tab-pane fade">
                 <div class="row">
@@ -169,7 +185,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3>All Subscription</h3>
+                        <h3>All Subscriptions</h3>
                     </div>
                 </div>
                 <div class="card cardLayout" ng-repeat="sub in ActiveSubscription">
@@ -184,8 +200,13 @@
                     </div>
                 </div>
             </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#profile" ng-click="ShowTab('#fAQS',$event)">FAQS</a>
+                </h4>
+            </div>
             <div id="fAQS" class="tab-pane fade">
-                <h3>FAQs</h3>
                 <div class="card">
                     <div class="card-body">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -199,7 +220,7 @@
                                 </div>
                                 <div id="faq_{{faq.faqId}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
                                     <div class="panel-body">
-                                       {{faq.description}}
+                                        {{faq.description}}
                                     </div>
                                 </div>
                             </div>

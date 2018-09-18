@@ -66,7 +66,12 @@ rEIBenniesApp.controller("profileController", function ($scope, $rootScope, user
              });
     }
 
-    $scope.ShowTab = function (id) {
+    $scope.ShowTab = function (id, element) {
+        if (element != undefined) {
+            $('.panel-heading.panel-heading-tab1.active_tab').removeClass('active_tab');
+            element.currentTarget.parentNode.parentNode.classList.add('active_tab')
+        }
+
         $('.tab-pane.fade.in.active').removeClass('in active');
         $(id).addClass('in active');
 
@@ -272,7 +277,6 @@ rEIBenniesApp.controller("profileController", function ($scope, $rootScope, user
     }
 
     $scope.OpenAccordian = function (id) {
-        debugger;
         id = "#faq_" + id;
         $('.panel-collapse.collapse.in').removeClass('in');
         $(id).addClass('in');

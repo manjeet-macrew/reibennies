@@ -34,3 +34,65 @@
 .hlp_anchor{
     font-size:16px;
 }
+
+@media screen and (max-width:767px) {
+    .nav-tabs>li{width:100%;}
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
+            border: 1px solid #ddd !important;
+                border-radius: 4px;
+    }
+ .panel-heading {
+    color: #333;
+    background-color: #f5f5f5;
+    border-color: #ddd;
+}
+ .panel-body {
+    border:1px solid #ddd;
+}
+ .panel-heading-tab1{margin-bottom:4px;}
+
+ .main_profile .cardLayout, .main_profile .tab-pane {
+    width: 100%; padding:10px;
+    margin-bottom: 10px;
+}
+    .active_tab {
+        background: #000;
+        color: #fff;
+    }
+
+      .tab-content .tab-pane {
+    display: block;
+  }
+  .nav-tabs {
+    display: none;
+  }
+  .panel-title a {
+    display: block;
+  }
+  .panel {
+    margin: 0;
+    box-shadow: none;
+    border-radius: 0;
+    margin-top: -2px;
+  }
+  .tab-pane:first-child .panel {
+    border-radius: 5px 5px 0 0;
+  }
+  .tab-pane:last-child .panel {
+    border-radius: 0 0 5px 5px;
+  }
+  .panel-heading{padding:0;}
+}
+
+@media (min-width: 768px) {
+  .panel-heading-tab1 {
+    display: none;
+  }
+   .main_profile .cardLayout, .main_profile .tab-pane {
+   padding:20px 10px;
+    
+}
+}
+
+
+
