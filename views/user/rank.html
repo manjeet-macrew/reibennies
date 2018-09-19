@@ -1,0 +1,116 @@
+﻿<div class="container">
+    <button ng-if="!IsDetail" type="button" class="glyphicon filter_btn glyphicon-filter" ng-click="Filter()">Filter</button>
+    <div ng-if="IsFilter" class="filter_profile">
+
+        <div class="form-group col-sm-6">
+            <label for="email">First Name:</label>
+            <input required type="text" class="form-control" id="fname" ng-model="FilterData.firstname" placeholder="First Name" name="fname">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="email">Last Name:</label>
+            <input required type="text" class="form-control" id="lname" ng-model="FilterData.lastname" placeholder="Last Name" name="lname">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="City">City:</label>
+            <input required type="text" class="form-control" id="City" ng-model="FilterData.city" placeholder="City" name="City">
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="State">State:</label>
+            <select required="required" class="form-control" ng-model="FilterData.state" ng-options="state.stateId as state.stateName for state in States">
+                <option value="">-- Select State --</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-6">
+            <label for="State">Professional Experties:</label>
+            <select required="required" class="form-control" ng-model="FilterData.investortype" ng-options="investor.lookupId as investor.investorType for investor in InvestorTypes">
+                <option value="">-- Select Professional Experties --</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-6">
+            <button type="button" ng-click="Search()" class="btn btn-primary">Search</button>
+            <button type="button" ng-click="Reset()" class="btn btn-primary">Reset</button>
+            <button type="button" ng-click="Close()" class="btn btn-primary">Close</button>
+        </div>
+        </div>
+    <div class="clear"></div>
+
+    <div class="card card_block profile" ng-repeat="user in UserData" ng-if="IsList">
+        <div class="lst_card" ng-click="ShowDetail(user)">
+            <img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
+            <div class="card-body">
+                <h3 class="card-title">{{user.firstName +" "+  user.lastName}}</h3>
+             <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!IsList">
+        <div class="card  card_block_detail profile">
+            <div>
+                <img class="card-img-top img-circle" src={{SelectedUser.ProfilePicPath}} alt="Card image cap" height="100px" width="100px">
+                <div class="card-body text-center">
+                    <h3 class="card-title">{{SelectedUser.firstName +" "+  SelectedUser.lastName}}</h3>
+                <h5 class="card-title">{{SelectedUser.City}},{{SelectedUser.stateName}}</h5>
+                
+              
+                    <div ng-repeat="rnk in UserRanks" class="rating">
+                        <span ng-if="rnk.Value" class="glyphicon glyphicon-star rating_icon"></span>
+                        <span ng-if="!rnk.Value"  class="glyphicon glyphicon-star-empty rating_icon"></span>
+                    </div>
+                </div>
+
+
+
+                <div class="clear"></div>
+                <div class="card-body">
+                   <h3>Professional Experties:  </h3> 
+                     <ul><li class="card-title" ng-repeat="inv in SelectedUser.investorTypeName">{{inv}}</li></ul>
+                    
+                
+              
+                   <h3>Bio:</h3> 
+                    
+                    
+                     <p class="card-title">{{SelectedUser.Bio}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="center_align">
+            <button ng-if="SelectedUser.IsRankedByMe!='Y'" type="button" ng-click="OpenRankModel(SelectedUser)" class="btn btn-primar" data-toggle="modal" data-target="#myModal">Rank</button>
+            <button type="button" class="btn btn-default" ng-click="Cancel()">Back</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{RankingUser.firstName +" "+  RankingUser.lastName}}</h4>
+            </div>
+            <form ng-submit="Submit(RankingUser)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="State">Rank:</label>
+                        <select required="required" class="form-control" ng-model="RankingUser.Rank" ng-options="rnk.Value as rnk.Name for rnk in Ranks">
+                            <option value="">-- Select Rank --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="State">Notes:</label>
+                        <textarea required rows="4" class="form-control" id="bio" ng-model="RankingUser.Notes" placeholder="Enter notes" name="bio"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

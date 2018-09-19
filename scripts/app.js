@@ -35,6 +35,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                 forceSSL: onlySSL
             }
         }).
+         when('/rank', {
+             controller: 'rankController',
+             templateUrl: 'views/user/rank.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
 		otherwise({
 		    redirectTo: '/'
 		});

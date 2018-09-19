@@ -24,5 +24,9 @@ angular.module('app.config', []).constant('config', {
     epChangeSubscription: BaseUrl + "changesubscription",
     epCancelSubscription: BaseUrl + "cancelsubscription?userId=",
     epGetHelpTopics: BaseUrl + "gethelptopics",
-    epSaveConcern: BaseUrl + "saveconcern"
+    epSaveConcern: BaseUrl + "saveconcern",
+    epGetAllActiveUsers: BaseUrl + "getallactiveusers?userId=",
+    epSearchForUser: BaseUrl + "searchforuser?",
+    epViewAUser: BaseUrl + "viewauser?",
+    epSaveUserRank: BaseUrl + "saveuserrank?"
 });
