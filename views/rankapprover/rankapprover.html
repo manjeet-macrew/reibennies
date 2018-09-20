@@ -1,0 +1,57 @@
+﻿<div class="container">
+    <div>
+        <h3>Rank Request</h3>
+    </div>
+    <div class="clear"></div>
+
+    <div class="card card_block profile rankapp_block" ng-repeat="user in UserData" ng-if="IsList">
+        <div class="lst_card" ng-click="ShowDetail(user)">
+            <!--<img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
+            <div class="card-body">
+                <h3 class="card-title">{{user.firstName +" "+  user.lastName}}</h3>
+                <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
+            </div>-->
+            <div class="card-body rankapp">
+                <h4 class="card-title">Ranker: <span>{{user.rankerFirstName + " "+ user.rankerLastName}}</span> </h4>
+                <h4 class="card-title">Rankee: <span>{{user.rankeeFirstName + " " +user.rankeeLastName}}</span></h4>
+                <h4 class="card-title">Rank Value: <span> {{user.rankValue}}</span></h4>
+                <h4 class="card-title">Approved: <span>{{user.rankApproved}}</span></h4>
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="!IsList">
+        <form ng-submit="Submit(SelectedUser)">
+            <div class="card card_block_detail profile">
+                <div>
+                    <div class="clear"></div>
+                    <div class="card-body rankDtl">
+                        <h4 class="card-title">Ranker: <span>{{SelectedUser.rankerFirstName + " "+ SelectedUser.rankerLastName}}</span> </h4>
+                        <h4 class="card-title">Rankee: <span>{{SelectedUser.rankeeFirstName + " " +SelectedUser.rankeeLastName}}</span></h4>
+                        <h4 class="card-title">Rank Value: <span> {{SelectedUser.rankValue}}</span></h4>
+                        <h4 class="card-title">Reason for Rank: <span> {{SelectedUser.rankReason}}</span></h4>
+                        <h4 class="card-title">Rank Approved: <span> {{SelectedUser.rankApproved}}</span></h4>
+                        <!--<h4 class="card-title">Rank Notes: <span> {{SelectedUser.rankApprovedNotes}}</span></h4>-->
+                        <h4 class="card-title">Modified Date: <span> {{SelectedUser.modifiedDate}}</span></h4>
+                        <!--<h4 class="card-title">Modified By: <span> {{SelectedUser.modifiedBy}}</span></h4>-->
+                    </div>
+                    <div class="form-group">
+                        <label for="rankApprovedNotes">Rank Approved Notes:</label>
+                        <textarea required rows="4" class="form-control" id="bio" ng-model="SelectedUser.rankApprovedNotes" placeholder="Enter notes" name="Rank Approved Notes"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="State">Request:</label>
+                        <select required="required" class="form-control" ng-model="RequestApprove.Value" ng-options="r.Value as r.Name for r in Request">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="center_align">
+                <button type="submit" class="btn btn-primar">Submit</button>
+                <button type="button" class="btn btn-default" ng-click="Cancel()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>

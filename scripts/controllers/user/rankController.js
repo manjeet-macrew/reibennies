@@ -179,18 +179,17 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
             rankValue: user.Rank,
             rankReason: user.Notes
         }
-        rankService.SaveUserRank(data)
+        rankService.ApproveDenyUserRank(data)
             .then(function (res) {
                 debugger;
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
-                    $('#myModal').modal('hide');
                 } else {
-                    JSAlert.alert("Failed to load Old Investor Types");
+                    JSAlert.alert("Failed to process");
                 }
             }).catch(function (ex) {
                 $('#ajaxSpinnerContainer').hide();
-                JSAlert.alert("Failed to load Old Investor Types");
+                JSAlert.alert("Failed to process");
             });
     }
 

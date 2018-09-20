@@ -43,6 +43,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+         when('/rankapprover', {
+             controller: 'rankapproverController',
+             templateUrl: 'views/rankapprover/rankapprover.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
 		otherwise({
 		    redirectTo: '/'
 		});
@@ -53,7 +61,7 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 var onlySSL = function ($location, $q, $window) {
     if ($location.protocol() !== 'https') {
         //alert("Need SSL");
-        //$window.location.href = $location.absUrl().replace('http', 'https');
+        $window.location.href = $location.absUrl().replace('http', 'https');
     }
     var deferred = $q.defer();
     deferred.resolve();

@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/home"><span class="glyphicon glyphicon-user"></span> REI Bennies</a>
+            <a class="navbar-brand" href="#/home"><span class="glyphicon glyphicon-user"></span> REI Bennies - {{UserRole}}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
@@ -28,7 +28,8 @@
                     </ul>
                 </li>-->
                 <li ng-class="{ 'active' : IsProfile && SelectedPage=='Profile'}"><a href="#/profile">My Profile</a></li>
-                <li ng-class="{ 'active' : IsRank && SelectedPage=='Rank'}"><a href="#/rank">Ranking</a></li>
+                <li ng-if="UserRole=='Bennie' || UserRole=='App Admin'" ng-class="{ 'active' : IsRank && SelectedPage=='Rank'}"><a href="#/rank">Ranking</a></li>
+                <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'active' : IsRankApprover && SelectedPage=='RankApprover'}"><a href="#/rankapprover">Rank Approver</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/logout" ng-click="Logout()"><span class="glyphicon glyphicon-remove-circle"></span> Log Out</a></li>

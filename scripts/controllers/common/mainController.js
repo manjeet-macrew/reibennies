@@ -6,4 +6,7 @@ rEIBenniesApp.controller("mainController", function ($scope, $rootScope) {
         sessionStorage.clear();
         window.location.href = "#/";
     }
+
+    $rootScope.UserRole = sessionStorage.getItem('Role');
+
 });

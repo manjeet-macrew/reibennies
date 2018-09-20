@@ -28,5 +28,7 @@ angular.module('app.config', []).constant('config', {
     epGetAllActiveUsers: BaseUrl + "getallactiveusers?userId=",
     epSearchForUser: BaseUrl + "searchforuser?",
     epViewAUser: BaseUrl + "viewauser?",
-    epSaveUserRank: BaseUrl + "saveuserrank?"
+    epSaveUserRank: BaseUrl + "saveuserrank?",
+    epGetAllUserRankRequests: BaseUrl + "getalluserrankrequests",
+    epApproveDenyUserRank: BaseUrl + "approvedenyuserrank"
 });

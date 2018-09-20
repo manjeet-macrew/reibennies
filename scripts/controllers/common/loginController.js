@@ -1,6 +1,6 @@
 'use strict';
 
-rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr, config, loginApi, $location) {
+rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr, config, loginApi, $location, userService) {
     $rootScope.CurrentYear = getCurrentYear();
     if (sessionStorage.getItem('AT') != "" && sessionStorage.getItem('AT') != null && sessionStorage.getItem('AT') != undefined)
         $location.path("home");
@@ -144,7 +144,7 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
 
                 if (statusCode === 200) {
                     if ($scope.isUserInfoEmpty(status)) {
-                       $scope.buildUserInfoData(status)
+                        $scope.buildUserInfoData(status)
                     }
                     else {
                         JSAlert.alert(config.txtLoginFailure);
@@ -190,6 +190,7 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
     }
 
     $scope.buildUserInfoData = function (data) {
+        debugger;
         var result = removeFirstLast(data);
         var jsonData = exposeJSON(result);
         var jData = exposeJSON($scope.getUIData(jsonData));
@@ -205,7 +206,9 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
         sessionStorage.setItem('LN', uid.lastName);
 
         //redirect to home view
-        window.location.href = "#/home";
+
+        $scope.GetUserRoles();
+        // window.location.href = "#/home";
     }
 
     $scope.getUIData = function (jObj) {
@@ -218,4 +221,36 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
 
         return xData;
     }
+
+    $scope.UserData = {};
+    $scope.GetUserRoles = function () {
+        $scope.UserData = {};
+        var userId = sessionStorage.getItem('UID')
+        userService.GetUserProfileInfo(userId)
+             .then(function (res) {
+                 if (res.data.ResponseCode == 200) {
+                     if (res.data.ResponseData[0] != null)
+                         debugger;
+                     $scope.UserData = res.data.ResponseData[0].UserProfileInfoData[0];
+                     if ($scope.UserData.roleId == 1)
+                         sessionStorage.setItem('Role', "App Admin");
+                     else if ($scope.UserData.roleId == 2)
+                         sessionStorage.setItem('Role', "Bennie");
+                     else if ($scope.UserData.roleId == 3)
+                         sessionStorage.setItem('Role', "Rank Approver");
+                     else if ($scope.UserData.roleId == 4)
+                         sessionStorage.setItem('Role', "Staff");
+                     else if ($scope.UserData.roleId == 5)
+                         sessionStorage.setItem('Role', "Support");
+
+                     window.location.href = "#/home";
+                 } else {
+                     JSAlert.alert("Failed to load profile data");
+                 }
+             }).catch(function (ex) {
+                 $('#ajaxSpinnerContainer').hide();
+                 JSAlert.alert("Failed to load profile data");
+             });
+    }
+
 });

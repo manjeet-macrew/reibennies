@@ -9,4 +9,6 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope) {
     
     $rootScope.Greeting = sessionStorage.getItem('FN') + " " + sessionStorage.getItem('LN')
 
+    $rootScope.UserRole = sessionStorage.getItem('Role');
+
 });

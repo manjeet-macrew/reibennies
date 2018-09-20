@@ -116,7 +116,17 @@
     margin: 0;
     font-size: 16pt;}
 
+.rankapp h4 span{ font-weight: 300;
+    font-size: 11pt;
+}
+  .rankapp{width:100% !important; padding:0 !important;}
+  .rankapp_block{ width: 23%;}
+   .rankapp h4{border-bottom: 1px dotted #000;
+    padding-bottom: 10px;}
 
+   .rankDtl h4 span{ font-weight: 300;
+    font-size: 11pt;
+}
 
 @media screen and (max-width:767px) {
     .nav-tabs > li {
