@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter']);
+var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter', 'datatables']);
 
 rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 
@@ -43,6 +43,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+        when('/support', {
+            controller: 'supportController',
+            templateUrl: 'views/support/support.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
          when('/rankapprover', {
              controller: 'rankapproverController',
              templateUrl: 'views/rankapprover/rankapprover.html',
@@ -51,6 +59,22 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+        when('/users', {
+            controller: 'usersController',
+            templateUrl: 'views/admin/users.html',
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
+        when('/roles', {
+            controller: 'rolesController',
+            templateUrl: 'views/admin/roles.html',
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
 		otherwise({
 		    redirectTo: '/'
 		});

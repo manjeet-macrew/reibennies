@@ -142,6 +142,7 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
 
 
     $scope.Reset = function () {
+        $scope.GetAllActiveUsers();
         $scope.FilterData = {
             userId: '',
             firstname: '',

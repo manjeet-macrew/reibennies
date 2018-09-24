@@ -1,0 +1,81 @@
+﻿<div class="container">
+    <div>
+        <h3>Support</h3>
+    </div>
+    <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>User Name</th>
+                <th>Email</th>
+                <th>Is Resolved</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="n in SupportData">
+                <td>{{$index+1}}</td>
+                <td>{{n.Name}}</td>
+                <td>{{n.Phone}}</td>
+                <td>{{n.UserName}}</td>
+                <td>{{n.Email}}</td>
+                <td>{{n.isResolved}}</td>
+                <td style="text-align: center;">
+                    <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade support_dialog" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">{{HelpRequest.Name}} - {{HelpRequest.helpCategoryName}}</h3>
+            </div>
+            <form ng-submit="Submit(HelpRequest)">
+                <div class="modal-body">
+                    <div class="card-body rankapp">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h4 class="card-title">Name: <span>{{HelpRequest.Name}}</span> </h4>
+                                <h4 class="card-title">Phone: <span>{{HelpRequest.Phone}}</span></h4>
+                                <h4 class="card-title">UserName: <span> {{HelpRequest.UserName}}</span></h4>
+                                <h4 class="card-title">Category Name: <span>{{HelpRequest.helpCategoryName}}</span></h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="card-title">Email: <span>{{HelpRequest.Email}}</span></h4>
+                                <h4 class="card-title">IsResolved: <span>{{HelpRequest.isResolved}}</span></h4>
+                                <h4 class="card-title">Body: <span>{{HelpRequest.Body}}</span></h4>
+                              </div>
+                        </div>
+                        <h4 class="card-title">Category Description: <span>{{HelpRequest.helpCategoryDescription}}</span></h4>
+                         <!--<h4 class="card-title">Solution Notes: <span>{{HelpRequest.solutionNotes}}</span></h4>-->
+                    </div>
+
+                    <div class="form-group">
+                        <label for="State">Request:</label>
+                        <select required="required" class="form-control" ng-model="RequestApprove.Value" ng-options="r.Value as r.Name for r in Request">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="State">Solution Notes:</label>
+                        <textarea required rows="4" class="form-control" id="solutionNotes" ng-model="HelpRequest.solutionNotes" placeholder="Enter solution notes" name="solutionNotes"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
