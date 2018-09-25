@@ -11,9 +11,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
         $scope.UserData = [];
         rankService.GetAllUserRankRequests()
              .then(function (res) {
-                 debugger;
                  if (res.data.ResponseCode == 200) {
-                     debugger;
                      if (res.data.ResponseData[0] != null)
                          $scope.UserData = res.data.ResponseData[0].UserRankRequestInfoData;
                  } else {
@@ -30,7 +28,6 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
     $scope.SelectedUser = {};
     $scope.UserRanks = [];
     $scope.ShowDetail = function (user) {
-        debugger;
         $scope.UserRanks = [];
         $scope.IsDetail = true;
         $scope.SelectedUser = user;
@@ -78,7 +75,6 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
 
     $scope.RequestApprove = { Value: "0" };
     $scope.Submit = function (user) {
-        debugger;
         var data = {
             userId: user.userId,
             rankedUserId: user.rankedUserId,
@@ -86,10 +82,8 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
             rankApprovedNotes: user.rankApprovedNotes,
             modifiedBy: sessionStorage.getItem('UID')
         }
-        debugger;
         rankService.ApproveDenyUserRank(data)
             .then(function (res) {
-                debugger;
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
                     $('#myModal').modal('hide');

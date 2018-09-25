@@ -75,6 +75,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                 forceSSL: onlySSL
             }
         }).
+        when('/subscriptionmgmt', {
+            controller: 'subscriptionMgmtController',
+            templateUrl: 'views/staff/subscriptionMgmt.html',
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
 		otherwise({
 		    redirectTo: '/'
 		});

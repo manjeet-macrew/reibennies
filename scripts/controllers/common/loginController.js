@@ -190,7 +190,6 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
     }
 
     $scope.buildUserInfoData = function (data) {
-        debugger;
         var result = removeFirstLast(data);
         var jsonData = exposeJSON(result);
         var jData = exposeJSON($scope.getUIData(jsonData));
@@ -230,7 +229,6 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
-                         debugger;
                      $scope.UserData = res.data.ResponseData[0].UserProfileInfoData[0];
                      if ($scope.UserData.roleId == 1)
                          sessionStorage.setItem('Role', "App Admin");

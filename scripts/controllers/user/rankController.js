@@ -13,7 +13,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
         var userId = sessionStorage.getItem('UID')
         rankService.GetAllActiveUsers(userId)
              .then(function (res) {
-                 debugger;
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.UserData = res.data.ResponseData[0].ActiveUsersInfoData;
@@ -70,7 +69,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
     $scope.SelectedUser = {};
     $scope.UserRanks = [];
     $scope.ShowDetail = function (user) {
-        debugger;
         $scope.UserRanks = [];
         $scope.IsFilter = false;
         $scope.IsDetail = true;
@@ -80,7 +78,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
         var queryString = $.param(data);
         rankService.ViewAUser(queryString)
             .then(function (res) {
-                debugger;
                 if (res.data.ResponseCode == 200) {
                     if (res.data.ResponseData[0] != null)
                         $scope.SelectedUser = res.data.ResponseData[0].ViewUserInfoData[0];
@@ -119,7 +116,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
     };
 
     $scope.Search = function () {
-        debugger;
         $scope.UserData = [];
         $scope.FilterData.userId = sessionStorage.getItem('UID');
 
@@ -127,7 +123,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
         var queryString = $.param(data);
         rankService.SearchForUser(queryString)
             .then(function (res) {
-                debugger;
                 if (res.data.ResponseCode == 200) {
                     if (res.data.ResponseData[0] != null)
                         $scope.UserData = res.data.ResponseData[0].ActiveUsersInfoData;
@@ -173,7 +168,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
     }
 
     $scope.Submit = function (user) {
-        debugger;
         var data = {
             userId: sessionStorage.getItem('UID'),
             rankedUserId: user.userId,
@@ -182,7 +176,6 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
         }
         rankService.ApproveDenyUserRank(data)
             .then(function (res) {
-                debugger;
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
                 } else {

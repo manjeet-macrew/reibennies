@@ -15,9 +15,7 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
         $scope.SupportData = [];
         helpSupportService.GetActiveHelpCenterRequests()
              .then(function (res) {
-                 debugger;
                  if (res.data.ResponseCode == 200) {
-                     debugger;
                      if (res.data.ResponseData[0] != null)
                          $scope.SupportData = res.data.ResponseData[0].HelpCenterData;
                  } else {
@@ -45,7 +43,6 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
     }
 
     $scope.Submit = function (req) {
-        debugger;
         var data = {
             helpCenterId: req.helpCenterId,
             Name: req.Name,
@@ -63,14 +60,12 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
 
         helpSupportService.UpdateHelpCenterRequest(data)
             .then(function (res) {
-                debugger;
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
                     var myRedObject = $filter('filter')($scope.SupportData, { helpCenterId: data.helpCenterId })[0];
                     var index = $scope.SupportData.indexOf(myRedObject);
                     $scope.SupportData.splice(index, 1);
                     $('#myModal').modal('hide');
-                    debugger;
                 } else {
                     JSAlert.alert("Failed to process");
                 }
