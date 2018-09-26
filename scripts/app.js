@@ -83,6 +83,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                 forceSSL: onlySSL
             }
         }).
+        when('/useractivity', {
+            controller: 'useractivityController',
+            templateUrl: 'views/admin/useractivity.html',
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
 		otherwise({
 		    redirectTo: '/'
 		});
