@@ -217,4 +217,8 @@
     width:800px;
 }
 
+.navbar-inverse .navbar-nav>li>a:focus, .navbar-inverse .navbar-nav>li>a:hover {
+    cursor:pointer !important;
+}
+
 }

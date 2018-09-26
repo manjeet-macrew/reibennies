@@ -46,12 +46,12 @@
                             <div class="col-sm-6">
                                 <h4 class="card-title">Name: <span>{{HelpRequest.Name}}</span> </h4>
                                 <h4 class="card-title">Phone: <span>{{HelpRequest.Phone}}</span></h4>
-                                <h4 class="card-title">UserName: <span> {{HelpRequest.UserName}}</span></h4>
+                                <h4 class="card-title">User Name: <span> {{HelpRequest.UserName}}</span></h4>
                                 <h4 class="card-title">Category Name: <span>{{HelpRequest.helpCategoryName}}</span></h4>
                             </div>
                             <div class="col-sm-6">
                                 <h4 class="card-title">Email: <span>{{HelpRequest.Email}}</span></h4>
-                                <h4 class="card-title">IsResolved: <span>{{HelpRequest.isResolved}}</span></h4>
+                                <h4 class="card-title">Is Resolved: <span>{{HelpRequest.isResolved}}</span></h4>
                                 <h4 class="card-title">Body: <span>{{HelpRequest.Body}}</span></h4>
                               </div>
                         </div>
@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="State">Request:</label>
+                        <label for="State">Resolved:</label>
                         <select required="required" class="form-control" ng-model="RequestApprove.Value" ng-options="r.Value as r.Name for r in Request">
                             <option value="">-- Select --</option>
                         </select>
