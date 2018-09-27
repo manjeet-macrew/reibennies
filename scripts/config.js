@@ -33,5 +33,6 @@ angular.module('app.config', []).constant('config', {
     epApproveDenyUserRank: BaseUrl + "approvedenyuserrank",
     epGetActiveHelpCenterRequests: BaseUrl + "getactivehelpcenterrequests",
     epUpdateHelpCenterRequest: BaseUrl + "updatehelpcenterrequest",
-    epGetAllUserActivities: BaseUrl + "getalluseractivities"
+    epGetAllUserActivities: BaseUrl + "getalluseractivities",
+    epGetResolvedHelpCenteRrequests: BaseUrl + "getresolvedhelpcenterrequests"
 }); 

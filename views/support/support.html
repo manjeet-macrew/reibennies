@@ -1,33 +1,98 @@
 ﻿<div class="container">
-    <div>
-        <h3>Support</h3>
+    <div id="tabs" class="main_profile">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="/#support" ng-click="ShowTab('#unresolved')">Unresolved</a></li>
+            <li><a data-toggle="tab" href="/#support" ng-click="ShowTab('#resolved')">Resolved</a></li>
+        </ul>
+
+        <div id="tabContent" class="tab-content ">
+            <div class="panel-heading panel-heading-tab1 active_tab">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#support" ng-click="ShowTab('#unresolved',$event)">Unresolved</a>
+                </h4>
+            </div>
+            <div id="unresolved" class="tab-pane fade in active">
+                <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Is Resolved</th>
+                            <th style="text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="n in SupportData">
+                            <td>{{$index+1}}</td>
+                            <td>{{n.Name}}</td>
+                            <td>{{n.Phone}}</td>
+                            <td>{{n.UserName}}</td>
+                            <td>{{n.Email}}</td>
+                            <td>{{n.isResolved}}</td>
+                            <td style="text-align: center;">
+                                <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#support" ng-click="ShowTab('#resolved',$event)">Resolved</a>
+                </h4>
+            </div>
+            <div id="resolved" class="tab-pane fade">
+                <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Is Resolved</th>
+                            <th style="text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="n in SupportDataResloved">
+                            <td>{{$index+1}}</td>
+                            <td>{{n.Name}}</td>
+                            <td>{{n.Phone}}</td>
+                            <td>{{n.UserName}}</td>
+                            <td>{{n.Email}}</td>
+                            <td>{{n.isResolved}}</td>
+                            <td style="text-align: center;">
+                                <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-    <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Phone</th>
-                <th>User Name</th>
-                <th>Email</th>
-                <th>Is Resolved</th>
-                <th style="text-align: center;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="n in SupportData">
-                <td>{{$index+1}}</td>
-                <td>{{n.Name}}</td>
-                <td>{{n.Phone}}</td>
-                <td>{{n.UserName}}</td>
-                <td>{{n.Email}}</td>
-                <td>{{n.isResolved}}</td>
-                <td style="text-align: center;">
-                    <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
 
 <div class="modal fade support_dialog" id="myModal" role="dialog">
@@ -56,22 +121,23 @@
                               </div>
                         </div>
                         <h4 class="card-title">Category Description: <span>{{HelpRequest.helpCategoryDescription}}</span></h4>
-                         <!--<h4 class="card-title">Solution Notes: <span>{{HelpRequest.solutionNotes}}</span></h4>-->
+                        <h4 ng-if="HelpRequest.isResolved=='Y'" class="card-title">Solution Notes: <span>{{HelpRequest.solutionNotes}}</span></h4>
                     </div>
-
-                    <div class="form-group">
-                        <label for="State">Resolved:</label>
-                        <select required="required" class="form-control" ng-model="RequestApprove.Value" ng-options="r.Value as r.Name for r in Request">
-                            <option value="">-- Select --</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="State">Solution Notes:</label>
-                        <textarea required rows="4" class="form-control" id="solutionNotes" ng-model="HelpRequest.solutionNotes" placeholder="Enter solution notes" name="solutionNotes"></textarea>
+                    <div ng-if="HelpRequest.isResolved=='N'">
+                        <div class="form-group">
+                            <label for="State">Resolved:</label>
+                            <select required="required" class="form-control" ng-model="RequestApprove.Value" ng-options="r.Value as r.Name for r in Request">
+                                <option value="">-- Select --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="State">Solution Notes:</label>
+                            <textarea required rows="4" class="form-control" id="solutionNotes" ng-model="HelpRequest.solutionNotes" placeholder="Enter solution notes" name="solutionNotes"></textarea>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button ng-if="HelpRequest.isResolved=='N'" type="submit" class="btn btn-primary">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>

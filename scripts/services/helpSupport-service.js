@@ -27,4 +27,17 @@ rEIBenniesApp.service('helpSupportService', ['$http', 'config', '$location', '$c
         });
     };
 
+
+    this.GetResolvedHelpCenteRrequests = function () {
+        return $http({
+            method: 'GET', url: config.epGetResolvedHelpCenteRrequests,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
 }]);

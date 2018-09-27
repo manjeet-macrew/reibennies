@@ -38,6 +38,7 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
 
     $scope.HelpRequest = {};
     $scope.OpenModel = function (req) {
+        debugger;
         $scope.HelpRequest = req;
         $scope.RequestApprove = { Value: req.isResolved };
     }
@@ -62,9 +63,12 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
             .then(function (res) {
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
-                    var myRedObject = $filter('filter')($scope.SupportData, { helpCenterId: data.helpCenterId })[0];
-                    var index = $scope.SupportData.indexOf(myRedObject);
-                    $scope.SupportData.splice(index, 1);
+                    debugger;
+                    if ($scope.RequestApprove.Value == 'Y') {
+                        var myRedObject = $filter('filter')($scope.SupportData, { helpCenterId: data.helpCenterId })[0];
+                        var index = $scope.SupportData.indexOf(myRedObject);
+                        $scope.SupportData.splice(index, 1);
+                    }
                     $('#myModal').modal('hide');
                 } else {
                     JSAlert.alert("Failed to process");
@@ -74,5 +78,40 @@ rEIBenniesApp.controller("supportController", function ($scope, $rootScope, DTCo
                 JSAlert.alert("Failed to process");
             });
     }
+
+    $scope.SupportDataResloved = [];
+    $scope.GetResolvedHelpCenteRrequests = function () {
+        $scope.SupportData = [];
+        helpSupportService.GetResolvedHelpCenteRrequests()
+             .then(function (res) {
+                 debugger;
+                 if (res.data.ResponseCode == 200) {
+                     if (res.data.ResponseData[0] != null)
+                         $scope.SupportDataResloved = res.data.ResponseData[0].HelpCenterData;
+                 } else {
+                     JSAlert.alert("Failed to load users data");
+                 }
+             }).catch(function (ex) {
+                 $('#ajaxSpinnerContainer').hide();
+                 JSAlert.alert("Failed to load users data");
+             });
+    }
+
+    $scope.ShowTab = function (id, element) {
+        if (element != undefined) {
+            $('.panel-heading.panel-heading-tab1.active_tab').removeClass('active_tab');
+            element.currentTarget.parentNode.parentNode.classList.add('active_tab')
+        }
+
+        $('.tab-pane.fade.in.active').removeClass('in active');
+        $(id).addClass('in active');
+
+        if (id == '#resolved')
+            $scope.GetResolvedHelpCenteRrequests();
+        else if (id == '#unresolved')
+            $scope.GetActiveHelpCenterRequests();
+
+    }
+
 });
 
