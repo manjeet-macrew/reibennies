@@ -166,37 +166,44 @@
                 </h4>
             </div>
             <div id="subscription" class="tab-pane fade">
-                <div class="row">
+                <div ng-if="UserRole == 'App Admin' || UserRole == 'Rank Approver' || UserRole == 'Staff'">
                     <div class="col-md-12">
-                        <h3>Your Subscription</h3>
+                        <h3>You're an employee and your account is free.</h3>
                     </div>
                 </div>
-                <div class="card cardLayout">
-                    <div class="card-body">
-                        <h5 class="card-title">Description : {{UserData.Description}}</h5>
+                <div ng-if="UserRole != 'App Admin' && UserRole != 'Rank Approver' && UserRole != 'Staff'">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>Your Subscription</h3>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Type : {{UserData.Title}}</h5>
+                    <div class="card cardLayout">
+                        <div class="card-body">
+                            <h5 class="card-title">Description : {{UserData.Description}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Type : {{UserData.Title}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" ng-click="CancelSubscription(UserData)" class="btn btn-danger">Cancel Subscription</button>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <button type="button" ng-click="CancelSubscription(UserData)" class="btn btn-danger">Cancel Subscription</button>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>All Subscriptions</h3>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>All Subscriptions</h3>
+                        </div>
                     </div>
-                </div>
-                <div class="card cardLayout" ng-repeat="sub in ActiveSubscription">
-                    <div class="card-body">
-                        <h5 class="card-title">Description : {{sub.Description}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Type : {{sub.Type}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <button type="button" ng-click="ChangeSubscription(sub)" class="btn btn-success">Select</button>
+                    <div class="card cardLayout" ng-repeat="sub in ActiveSubscription">
+                        <div class="card-body">
+                            <h5 class="card-title">Description : {{sub.Description}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Type : {{sub.Type}}</h5>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" ng-click="ChangeSubscription(sub)" class="btn btn-success">Select</button>
+                        </div>
                     </div>
                 </div>
             </div>

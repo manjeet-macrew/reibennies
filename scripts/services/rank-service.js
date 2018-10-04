@@ -14,6 +14,18 @@ rEIBenniesApp.service('rankService', ['$http', 'config', '$location', '$cookieSt
         });
     };
 
+    this.GetAllRankedUnrankedUserRequests = function (isRanked) {
+        return $http({
+            method: 'GET', url: config.epGetAllRankedUnrankedUserRequests + "?isRanked=" + isRanked,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
     this.SearchForUser = function (payload) {
         return $http({
             method: 'GET', url: config.epSearchForUser + payload,

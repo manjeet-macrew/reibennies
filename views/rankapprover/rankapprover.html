@@ -3,23 +3,64 @@
         <h3>Rank Request</h3>
     </div>
     <div class="clear"></div>
-
-    <div class="card card_block profile rankapp_block" ng-repeat="user in UserData" ng-if="IsList">
-        <div class="lst_card" ng-click="ShowDetail(user)">
-            <!--<img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
+    <div id="tabs" class="main_profile">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#unranked')">UnRanked</a></li>
+            <li><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked')">Ranked</a></li>
+        </ul>
+        <div id="tabContent" class="tab-content ">
+            <div class="panel-heading panel-heading-tab1 active_tab">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#unranked',$event)">UnRanked</a>
+                </h4>
+            </div>
+            
+            <div id="unranked" class="tab-pane fade in active">
+                <div class="card card_block profile rankapp_block" ng-repeat="user in UnrankedUserData" ng-if="IsList">
+                    <div class="lst_card" ng-click="ShowDetail(user)">
+                        <!--<img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
             <div class="card-body">
                 <h3 class="card-title">{{user.firstName +" "+  user.lastName}}</h3>
                 <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
             </div>-->
-            <div class="card-body rankapp">
-                <h4 class="card-title">Ranker: <span>{{user.rankerFirstName + " "+ user.rankerLastName}}</span> </h4>
-                <h4 class="card-title">Rankee: <span>{{user.rankeeFirstName + " " +user.rankeeLastName}}</span></h4>
-                <h4 class="card-title">Rank Value: <span> {{user.rankValue}}</span></h4>
-                <h4 class="card-title">Approved: <span>{{user.rankApproved}}</span></h4>
+                        <div class="card-body rankapp">
+                            <h4 class="card-title">Ranker: <span>{{user.rankerFirstName + " "+ user.rankerLastName}}</span> </h4>
+                            <h4 class="card-title">Rankee: <span>{{user.rankeeFirstName + " " +user.rankeeLastName}}</span></h4>
+                            <h4 class="card-title">Rank Value: <span> {{user.rankValue}}</span></h4>
+                            <h4 class="card-title">Approved: <span>{{user.rankApproved}}</span></h4>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+           
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked',$event)">Ranked</a>
+                </h4>
+            </div>
+            <div  id="ranked" class="tab-pane fade">
+                <div class="card card_block profile rankapp_block" ng-repeat="user in UserData" ng-if="IsList">
+                    <div class="lst_card" ng-click="ShowDetail(user)">
+                        <!--<img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
+            <div class="card-body">
+                <h3 class="card-title">{{user.firstName +" "+  user.lastName}}</h3>
+                <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
+            </div>-->
+                        <div class="card-body rankapp">
+                            <h4 class="card-title">Ranker: <span>{{user.rankerFirstName + " "+ user.rankerLastName}}</span> </h4>
+                            <h4 class="card-title">Rankee: <span>{{user.rankeeFirstName + " " +user.rankeeLastName}}</span></h4>
+                            <h4 class="card-title">Rank Value: <span> {{user.rankValue}}</span></h4>
+                            <h4 class="card-title">Approved: <span>{{user.rankApproved}}</span></h4>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
+
+        </div>
+
+
+    </div>
     <div ng-if="!IsList">
         <form ng-submit="Submit(SelectedUser)">
             <div class="card card_block_detail profile">

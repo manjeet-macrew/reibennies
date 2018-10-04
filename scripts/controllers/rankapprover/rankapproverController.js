@@ -5,25 +5,60 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
     $rootScope.SelectedPage = "RankApprover";
     $scope.IsList = true;
     $rootScope.CurrentYear = getCurrentYear();
-
+    $scope.SelectedTab = 'N';
     $scope.UserData = [];
-    $scope.GetAllUserRankRequests = function () {
+    $scope.GetAllRankedUnrankedUserRequests = function (isRanked) {
+        $scope.UnrankedUserData = [];
         $scope.UserData = [];
-        rankService.GetAllUserRankRequests()
-             .then(function (res) {
-                 if (res.data.ResponseCode == 200) {
-                     if (res.data.ResponseData[0] != null)
-                         $scope.UserData = res.data.ResponseData[0].UserRankRequestInfoData;
-                 } else {
-                     JSAlert.alert("Failed to load users data");
-                 }
-             }).catch(function (ex) {
-                 $('#ajaxSpinnerContainer').hide();
-                 JSAlert.alert("Failed to load users data");
-             });
-    }
+        if (isRanked == 'Y') {
+            rankService.GetAllRankedUnrankedUserRequests(isRanked)
+                        .then(function (res) {
+                            if (res.data.ResponseCode == 200) {
+                                
+                                if (res.data.ResponseData[0] != null)
+                                    $scope.UserData = res.data.ResponseData[0].UserRankRequestInfoData;
+                            } else {
+                                JSAlert.alert("Failed to load users data");
+                            }
+                        }).catch(function (ex) {
+                            $('#ajaxSpinnerContainer').hide();
+                            JSAlert.alert("Failed to load users data");
+                        });
+        }
+        else {
+            rankService.GetAllRankedUnrankedUserRequests(isRanked)
+            .then(function (res) {
+                if (res.data.ResponseCode == 200) {
+                    if (res.data.ResponseData[0] != null)
+                        $scope.UnrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
+                } else {
+                    JSAlert.alert("Failed to load users data");
+                }
+            }).catch(function (ex) {
+                $('#ajaxSpinnerContainer').hide();
+                JSAlert.alert("Failed to load users data");
+            });
+        }
 
-    $scope.GetAllUserRankRequests();
+    }
+    $scope.GetAllRankedUnrankedUserRequests('N');
+    //$scope.GetAllUserRankRequests = function () {
+    //    $scope.UserData = [];
+    //    rankService.GetAllUserRankRequests()
+    //         .then(function (res) {
+    //             if (res.data.ResponseCode == 200) {
+    //                 if (res.data.ResponseData[0] != null)
+    //                     $scope.UserData = res.data.ResponseData[0].UserRankRequestInfoData;
+    //             } else {
+    //                 JSAlert.alert("Failed to load users data");
+    //             }
+    //         }).catch(function (ex) {
+    //             $('#ajaxSpinnerContainer').hide();
+    //             JSAlert.alert("Failed to load users data");
+    //         });
+    //}
+    //$scope.GetAllUserRankRequests();
+
 
     $scope.SelectedUser = {};
     $scope.UserRanks = [];
@@ -37,7 +72,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
         //var queryString = $.param(data);
         //rankService.ViewAUser(queryString)
         //    .then(function (res) {
-        //        debugger;
+        //        
         //        if (res.data.ResponseCode == 200) {
         //            if (res.data.ResponseData[0] != null)
         //                $scope.SelectedUser = res.data.ResponseData[0].ViewUserInfoData[0];
@@ -87,18 +122,39 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
                     $('#myModal').modal('hide');
-                    $scope.GetAllUserRankRequests();
+                    if( $scope.SelectedTab == 'N')
+                        $scope.GetAllRankedUnrankedUserRequests('N');
+                    else
+                        $scope.GetAllRankedUnrankedUserRequests('Y');
                     $scope.IsList = true;
                     $scope.IsDetail = false;
                 } else {
-                    JSAlert.alert("Failed to load Old Investor Types");
+                    JSAlert.alert("Failed to update");
                 }
             }).catch(function (ex) {
                 $('#ajaxSpinnerContainer').hide();
-                JSAlert.alert("Failed to load Old Investor Types");
+                JSAlert.alert("Failed to update");
             });
     }
 
+    $scope.ShowTab = function (id, element) {
+        if (element != undefined) {
+            $('.panel-heading.panel-heading-tab1.active_tab').removeClass('active_tab');
+            element.currentTarget.parentNode.parentNode.classList.add('active_tab')
+        }
 
+        $('.tab-pane.fade.in.active').removeClass('in active');
+        $(id).addClass('in active');
+
+        if (id == '#unranked') {
+            $scope.SelectedTab = 'N';
+            $scope.GetAllRankedUnrankedUserRequests('N');
+        }
+        else if (id == '#ranked') {
+            $scope.SelectedTab = 'Y';
+            $scope.GetAllRankedUnrankedUserRequests('Y');
+        }
+
+    }
 
 });

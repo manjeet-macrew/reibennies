@@ -132,20 +132,25 @@ rEIBenniesApp.controller("profileController", function ($scope, $rootScope, user
 
     $scope.ActiveSubscription = {};
     $scope.GetSubscriptions = function () {
-        $scope.ActiveSubscription = {};
-        var userId = sessionStorage.getItem('UID')
-        userService.GetSubscriptions(userId)
-             .then(function (res) {
-                 if (res.data.ResponseCode == 200) {
-                     if (res.data.ResponseData[0] != null)
-                         $scope.ActiveSubscription = res.data.ResponseData[0].ActiveSubscriptionInfoData;
-                 } else {
+        if ($rootScope.UserRole == 'App Admin' || $rootScope.UserRole == 'Rank Approver' || $rootScope.UserRole == 'Staff') {
+            $scope.ActiveSubscription = [];
+        }
+        else {
+            $scope.ActiveSubscription = {};
+            var userId = sessionStorage.getItem('UID')
+            userService.GetSubscriptions(userId)
+                 .then(function (res) {
+                     if (res.data.ResponseCode == 200) {
+                         if (res.data.ResponseData[0] != null)
+                             $scope.ActiveSubscription = res.data.ResponseData[0].ActiveSubscriptionInfoData;
+                     } else {
+                         JSAlert.alert("Failed to load Subscriptions");
+                     }
+                 }).catch(function (ex) {
+                     $('#ajaxSpinnerContainer').hide();
                      JSAlert.alert("Failed to load Subscriptions");
-                 }
-             }).catch(function (ex) {
-                 $('#ajaxSpinnerContainer').hide();
-                 JSAlert.alert("Failed to load Subscriptions");
-             });
+                 });
+        }
     }
 
     $scope.FAQs = [];
