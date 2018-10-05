@@ -37,5 +37,9 @@ angular.module('app.config', []).constant('config', {
     epGetResolvedHelpCenteRrequests: BaseUrl + "getresolvedhelpcenterrequests",
     epGetAllUsers: BaseUrl + "getallusers",
     epEnabledisableuser: BaseUrl + "enabledisableuser",
-    epGetAllRankedUnrankedUserRequests: BaseUrl + "getallrankedunrankeduserrequests"
+    epGetAllRankedUnrankedUserRequests: BaseUrl + "getallrankedunrankeduserrequests",
+    epGetAllRoles: BaseUrl + "getallroles",
+    epCreateRole: BaseUrl + "createrole",
+    epUpdateRole: BaseUrl + "updaterole",
+    epDeleteRole: BaseUrl + "deleterole"
 }); 

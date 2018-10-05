@@ -31,6 +31,9 @@
                         </div>
                     </div>
                 </div>
+                <div ng-if="UnrankedUserData.length<=0">
+                    No record
+                </div>
             </div>
            
             <div class="panel-heading panel-heading-tab1">
@@ -54,7 +57,9 @@
                         </div>
                     </div>
                 </div>
-
+                <div ng-if="UserData.length<=0">
+                    No record
+                </div>
             </div>
 
         </div>

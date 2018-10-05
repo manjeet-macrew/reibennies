@@ -39,7 +39,7 @@
             <img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
             <div class="card-body">
                 <h4 class="card-title">{{user.firstName +" "+  user.lastName}}</h4>
-                <h5 class="card-title">{{user.Rank ? user.Rank : 0}}/5</h5>
+                <h5 class="card-title">{{(user.Rank !=null && user.Rank !='') ? user.Rank : 0}}/5</h5>
              <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
             </div>
         </div>

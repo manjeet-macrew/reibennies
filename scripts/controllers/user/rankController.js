@@ -174,13 +174,15 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
             rankValue: user.Rank,
             rankReason: user.Notes
         }
-        rankService.ApproveDenyUserRank(data)
+        rankService.SaveUserRank(data)
             .then(function (res) {
+                debugger;
                 if (res.data.ResponseCode == 200) {
                     JSAlert.alert(res.data.Message);
                 } else {
                     JSAlert.alert("Failed to process");
                 }
+                $('#myModal').modal('hide');
             }).catch(function (ex) {
                 $('#ajaxSpinnerContainer').hide();
                 JSAlert.alert("Failed to process");
