@@ -10,12 +10,11 @@ rEIBenniesApp.controller("rolesController", function ($scope, $rootScope, DTColu
     ];
     $scope.RolesData = [];
     $scope.GetAllRoles = function () {
-        debugger;
         $scope.RolesData = [];
         var userId = sessionStorage.getItem('UID')
         roleService.GetAllRoles()
              .then(function (res) {
-                 debugger;
+                 
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.RolesData = res.data.ResponseData[0].RolesData;
@@ -31,7 +30,7 @@ rEIBenniesApp.controller("rolesController", function ($scope, $rootScope, DTColu
     $scope.GetAllRoles();
 
     $scope.OpenModal = function (roleInfo) {
-        debugger;
+        
         $scope.RoleInfo = roleInfo;
     };
     $scope.addRoleOpenModal = function () {
@@ -57,7 +56,7 @@ rEIBenniesApp.controller("rolesController", function ($scope, $rootScope, DTColu
             };
             roleService.UpdateRole(data)
                .then(function (res) {
-                   debugger;
+                   
                    if (res.data.ResponseCode == 200) {
                        JSAlert.alert(res.data.Message);
                    } else {
@@ -81,7 +80,7 @@ rEIBenniesApp.controller("rolesController", function ($scope, $rootScope, DTColu
             };
             roleService.CreateRole(data)
                 .then(function (res) {
-                    debugger;
+                    
                     if (res.data.ResponseCode == 200) {
                         JSAlert.alert(res.data.Message);
                         $scope.GetAllRoles();
@@ -105,7 +104,7 @@ rEIBenniesApp.controller("rolesController", function ($scope, $rootScope, DTColu
             var data = roleInfo.roleId;
             roleService.DeleteRole(data)
                .then(function (res) {
-                   debugger;
+                   
                    if (res.data.ResponseCode == 200) {
                        JSAlert.alert(res.data.Message);
                        var index = $scope.RolesData.indexOf(data);
