@@ -184,9 +184,21 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         }).error(function (response, status, headers, config) {
         });
     };
-    this.epCreateUpdateUserRoles = function (payload) {
+    this.CreateUpdateUserRoles = function (payload) {
         return $http({
             method: 'POST', url: config.epCreateUpdateUserRoles,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            },
+            data: payload
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+    this.SignUp = function (payload) {
+        return $http({
+            method: 'POST', url: config.epSignUp,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')

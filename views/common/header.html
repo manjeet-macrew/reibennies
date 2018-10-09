@@ -28,7 +28,8 @@
                 </li>
               
                 <li ng-if="UserRole=='Support' || UserRole=='App Admin'" ng-class="{ 'active' : IsSupport && SelectedPage=='Support'}"><a href="#/support">Support Management</a></li>               
-                <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription Management</a></li>    
+                <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription Management</a></li>
+                <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ Management</a></li>    
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsUserActivity && SelectedPage=='UserActivity'}"><a href="#/useractivity">User Activity</a></li>                          
                  <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Training<span class="caret"></span></a>

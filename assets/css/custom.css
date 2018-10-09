@@ -148,6 +148,16 @@ color:#fbd731;
 .ng-submitted input.ng-valid.ng-touched {
     border: 1px solid #ccc;
 }
+.validationClass {
+    color: red;
+    font-size: 10px;
+    padding: 4px;
+}
+.navbar-collapse .nav li a {
+    position: relative;
+    display: block;
+    padding: 10px 10px;
+}
 @media screen and (max-width:767px) {
     .nav-tabs > li {
         width: 100%;
