@@ -45,4 +45,8 @@ angular.module('app.config', []).constant('config', {
     epGetUserRoles: BaseUrl + "getuserroles",
     epCreateUpdateUserRoles: BaseUrl + "createupdateuserroles",
     epSignUp: BaseUrl + "signup",
+    epGetAllFaq: BaseUrl + "getallfaqs",
+    epCreateFaq: BaseUrl + "createfaq",
+    epUpdateFaq: BaseUrl + "updatefaq",
+    epDeleteFaq: BaseUrl + "deletefaq"
 }); 

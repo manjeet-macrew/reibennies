@@ -2,5 +2,63 @@
     <div>
         <h3>FAQ</h3>
     </div>
-   
+    <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="addfaqOpenModal()" data-target="#addEditFaq">Add FAQ</button>
+    <br />
+    <br />
+    <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="n in FaqData">
+                <td>{{$index+1}}</td>
+                <td>{{n.title}}</td>
+                <td>{{n.description}}</td>
+                <td style="text-align: center;">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="OpenModal(n)" data-target="#addEditFaq">Edit</button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="DeletFaq(n)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+</div>
+<div class="modal fade" id="addEditFaq" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/Edit FAQ</h4>
+            </div>
+            <form ng-submit="Submit(FaqInfo)" name="faqForm" novalidate>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="State">* Title:</label>
+                        <input type="text" class="form-control" ng-model="FaqInfo.title" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="State">* Description:</label>
+                        <textarea type="text" class="form-control" ng-model="FaqInfo.description" required ></textarea>
+                    </div>
+                    <input type="hidden" ng-model="FaqInfo.faqId" />
+                    <input type="hidden" ng-model="FaqInfo.createdBy" />
+                    <input type="hidden" ng-model="FaqInfo.createDate" />
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary" ng-disabled="!faqForm.$valid">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
 </div>
