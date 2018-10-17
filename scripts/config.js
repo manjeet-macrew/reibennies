@@ -48,5 +48,12 @@ angular.module('app.config', []).constant('config', {
     epGetAllFaq: BaseUrl + "getallfaqs",
     epCreateFaq: BaseUrl + "createfaq",
     epUpdateFaq: BaseUrl + "updatefaq",
-    epDeleteFaq: BaseUrl + "deletefaq"
+    epDeleteFaq: BaseUrl + "deletefaq",
+    epGetTotalNoOfBennies: BaseUrl + "gettotalnoofbennies?userId=",
+    epGetTotalNoOfBenniesSignedUpPerMonth: BaseUrl + "gettotalnoofbenniessigneduppermonth?userId=",
+    epGetTotalNoOfSubscriptions: BaseUrl + "gettotalnoofsubscriptions?userId=",
+    epGetTotalNoOfHelpRequestPerMonth: BaseUrl + "gettotalnoofhelprequestpermonth?userId=",
+    epGetTotalRevenuePerMonth: BaseUrl + "gettotalrevenuepermonth?userId=",
+    epGetTotalNoOfBenniesRankings: BaseUrl + "gettotalnoofbenniesrankings?userId=",
+    epGetTotalNoOfBenniesSignedUpPerState: BaseUrl + "gettotalnoofbenniessignedupperstate?userId="
 }); 

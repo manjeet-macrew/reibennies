@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter', 'datatables','checklist-model']);
+var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter', 'datatables', 'checklist-model', "chart.js"]);
 
 rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 
