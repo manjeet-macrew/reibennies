@@ -12,6 +12,10 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     $rootScope.UserRole = sessionStorage.getItem('Role');
     $scope.UserId = sessionStorage.getItem('UID');
 
+    $scope.options = { title: { display: true, text: "" } };
+   
+    
+
     $scope.GetTotalNumberOfbennies=function()
     {
         var userId = $scope.UserId;

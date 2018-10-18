@@ -57,11 +57,6 @@
                         <div class="col-md-12">
                             <h3>Subscription</h3>
                         </div>
-                        <div class="col-md-6" ng-if=showSubscriptionddl>
-                            <select ng-model="SubId" ng-change="SelectedSubscription(SubId)" ng-options="sub.subscriptionId as sub.Type for sub in Subscription">
-                                <option value="">-- Select Subscription --</option>
-                            </select>
-                        </div>
                     </div>
                     <div class="card cardLayout">
                         <div class="card-body">
@@ -70,17 +65,18 @@
                         <div class="card-body">
                             <h5 class="card-title"><b>Description</b> : {{ActiveSubscription.Description}}</h5>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="button" ng-disabled=disBtnStart class="btn btn-primary" ng-click="StartSubscription(ActiveSubscription)">Start</button>
-                            <button type="button" ng-disabled=disBtnChange class="btn btn-primary" ng-click="ShowSubsddl()">Change</button>
-                            <button type="button" ng-disabled=disBtnStop class="btn btn-primary" ng-click="CancelSubscription(userId)">Stop</button>
+                        <div class="card-body">
+                            <button type="button" ng-disabled=disBtnStop class="btn btn-danger" ng-click="CancelSubscription(userId)">Cancel Subscription</button>
                         </div>
                     </div>
+                    <!--<div class="row">
+                        <div class="col-md-12">
+                            <button type="button" ng-disabled=disBtnStop class="btn btn-danger" ng-click="CancelSubscription(userId)">Cancel Subscription</button>
+                        </div>
+                    </div>-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" ng-disabled="disBtnSave" ng-click="ChangeSubscription(selectedSubId)">Save</button>
+                    <button type="submit" class="btn btn-primary" >Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </form>

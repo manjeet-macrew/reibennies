@@ -3,43 +3,42 @@
         Welcome, <span>{{Greeting}}</span>
     </div>
     <!-- begin page content -->
+ <div ng-if="UserRole == 'App Admin'  || UserRole == 'Staff'" >
     <div>
-        <b>Total Bennies : {{TotalNoOfBennies}}</b>
-        <b>Total Rankings : {{TotalNoOfBenniesRankings}}</b>
+        <span ><b>Total Bennies : {{TotalNoOfBennies}}</b></span>
+        <span style="padding-left:30px;font-weight:700">Total Rankings : {{TotalNoOfBenniesRankings}}</span>
     </div>
     <br />
     <div class="row">
         <div class="col-sm-5">
             <b>Total Bennies Per Month</b>
-            <br />
             <!--<canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels"></canvas>-->
-            <canvas id="cnbenniespermonth" class="chart chart-line" chart-data="benniesPerMonthdata"  title="Total Bennies By Month" chart-labels="benniesPerMonthLabels" chart-legend="true" chart-series="series"></canvas>
+            <canvas id="cnbenniespermonth" class="chart chart-line" chart-data="benniesPerMonthdata" chart-options="options"  title="Total Bennies By Month" chart-labels="benniesPerMonthLabels" chart-legend="true" ></canvas>
         </div>
         <div class="col-sm-5">
             <b>Total Subscription By Type</b>
-            <br />
-            <canvas id="cnsubscriptionbytype" class="chart chart-line" chart-data="subscriptionByTypeData" title="Total Subscription By Type" chart-labels="subscriptionByTypeLabels" chart-legend="true" chart-series="series"></canvas>
+            <canvas id="cnsubscriptionbytype" class="chart chart-line" chart-data="subscriptionByTypeData" chart-options="options" title="Total Subscription By Type" chart-labels="subscriptionByTypeLabels" chart-legend="true" ></canvas>
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-5">
             <b>Total Bennies By State</b>
-            <br />
-            <canvas id="cnbenniesbystate" class="chart chart-bar" chart-data="benniesByStateData" title="Total Bennies By State" chart-labels="benniesByStateLabels" chart-legend="true" chart-series="series"></canvas>
+            <canvas id="cnbenniesbystate" class="chart chart-bar" chart-data="benniesByStateData" chart-options="options" title="Total Bennies By State" chart-labels="benniesByStateLabels" chart-legend="true"></canvas>
         </div>
         <div class="col-sm-5">
             <b>Total Help Request By Month</b>
-            <br />
-            <canvas id="cnhelpreqbymonth" class="chart chart-bar" chart-data="helpRequestByMonthData" title="Total Help Request By Month" chart-labels="helpRequestByMonthLabels" chart-legend="true" ></canvas>
+            <canvas id="cnhelpreqbymonth" class="chart chart-bar" chart-data="helpRequestByMonthData" chart-options="options"  title="Total Help Request By Month" chart-labels="helpRequestByMonthLabels" chart-legend="true" ></canvas>
         </div>
     </div>
+    <br />
     <div class="row">
         <div class="col-sm-5">
             <b>Total Revenue By Month</b>
-            <br />
-            <canvas id="cnrevenuebymonth" class="chart chart-line" chart-data="revenueByMonthData" title="Total Revenue By Month" chart-labels="revenueByMonthLabels" chart-legend="true"></canvas>
+            <canvas id="cnrevenuebymonth" class="chart chart-line" chart-options="options" chart-data="revenueByMonthData" title="Total Revenue By Month" chart-labels="revenueByMonthLabels" chart-legend="true"></canvas>
         </div>
     </div>
         <!-- end page content -->
  </div>
+</div>
 
