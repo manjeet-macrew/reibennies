@@ -18,6 +18,11 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
      DTColumnDefBuilder.newColumnDef(0).notSortable()
     ];
 
+    $scope.NotificationData = {};
+    $scope.titleValidation = false;
+    $scope.bodyValidation = false;
+
+
     $scope.UserData = [];
     $scope.GetAllUsers = function () {
 
@@ -283,6 +288,45 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
         $scope.UserRoles = [];
         $scope.UserRoles.roles = [];
     };
+
+    $scope.OpenSendNotificationModal = function (userInfo) {
+        $scope.bodyValidation = false;
+        $scope.titleValidation = false;
+        $scope.NotificationData = {
+            userId: userInfo.userId,
+            body: "",
+            title: ""
+        };
+    }
+
+    $scope.SendNotificationSubmit = function (notificationData) {
+        $scope.bodyValidation = false;
+        $scope.titleValidation = false;
+        debugger;
+        if ($scope.notificationform.$valid) {
+            var data = notificationData;
+            var queryString = $.param(data);
+            userService.SendFcmNotification(queryString)
+             .then(function (res) {
+                 if (res.data.ResponseCode == 200) {
+                    $('#sendNotificationModal').modal('hide');
+                     JSAlert.alert("Notification Sent Successfully");
+                 } else {
+                     $('#sendNotificationModal').modal('hide');
+                     JSAlert.alert("Failed to Sent Notification");
+                 }
+             }).catch(function (ex) {
+                 $('#ajaxSpinnerContainer').hide();
+                 JSAlert.alert("Failed to Sent Notification");
+             });
+        }
+        else {
+            if ($scope.NotificationData.body == null || $scope.NotificationData.body == '')
+                $scope.bodyValidation = true;
+            if ($scope.NotificationData.title == null || $scope.NotificationData.title == '')
+                $scope.titleValidation = true;
+        }
+    }
 
 
 });

@@ -1,9 +1,16 @@
 ﻿<div class="container">
     <div class="page-header">
         Welcome, <span>{{Greeting}}</span>
+        <div ng-if="UserRole == 'App Admin'" style="float:right;margin-top: -10px;" >
+            <button type="button"  ng-click="OpenSendNotificationModal()" class="btn btn-primary" data-toggle="modal" data-target="#sendNotificationModal">Send Notification</button>
+        </div>
     </div>
     <!-- begin page content -->
  <div ng-if="UserRole == 'App Admin'  || UserRole == 'Staff'" >
+     <div>
+         <span style="font-weight:700;font-size:20px">Dashboard &nbsp;{{CurrentYear}}</span>
+     </div>
+     <br />
     <div>
         <span ><b>Total Bennies : {{TotalNoOfBennies}}</b></span>
         <span style="padding-left:30px;font-weight:700">Total Rankings : {{TotalNoOfBenniesRankings}}</span>
@@ -28,7 +35,8 @@
         </div>
         <div class="col-sm-5">
             <b>Total Help Request By Month</b>
-            <canvas id="cnhelpreqbymonth" class="chart chart-bar" chart-data="helpRequestByMonthData" chart-options="options"  title="Total Help Request By Month" chart-labels="helpRequestByMonthLabels" chart-legend="true" ></canvas>
+            <!--<canvas id="cnhelpreqbymonth" class="chart chart-bar" chart-data="helpRequestByMonthData" chart-options="options"  title="Total Help Request By Month" chart-labels="helpRequestByMonthLabels" chart-legend="true" ></canvas>-->
+            <canvas id="cnhelpreqbymonth" ></canvas>
         </div>
     </div>
     <br />
@@ -37,8 +45,43 @@
             <b>Total Revenue By Month</b>
             <canvas id="cnrevenuebymonth" class="chart chart-line" chart-options="options" chart-data="revenueByMonthData" title="Total Revenue By Month" chart-labels="revenueByMonthLabels" chart-legend="true"></canvas>
         </div>
+        <div class="col-sm-5">
+            <b>Total Revenue By Year</b>
+            <canvas id="cnrevenuebyyear" class="chart chart-bar" chart-options="options" chart-data="revenueByYearData" title="Total Revenue By Year" chart-labels="revenueByYearLabels" chart-legend="true"></canvas>
+        </div>
     </div>
         <!-- end page content -->
  </div>
 </div>
+<div class="modal fade" id="sendNotificationModal" role="dialog">
+    <div class="modal-dialog">
 
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Send Notification</h4>
+            </div>
+            <form ng-submit="SendNotificationSubmit(NotificationData)" name="notificationform" novalidate>
+                <input type="hidden" ng-model="NotificationData.userId" />
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">* Title:</label>
+                        <input class="form-control" id="title" ng-model="NotificationData.title" required placeholder="title" name="tile">
+                        <span class="validationClass" ng-show="titleValidation">* Title is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="body">* Body:</label>
+                        <textarea rows="8" class="form-control" id="body" ng-model="NotificationData.body" required placeholder="body" name="body"></textarea>
+                        <span class="validationClass" ng-show="bodyValidation">* Body is required</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

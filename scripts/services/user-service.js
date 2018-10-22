@@ -208,4 +208,16 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         }).error(function (response, status, headers, config) {
         });
     };
+
+    this.SendFcmNotification = function (param) {
+        return $http({
+            method: 'POST', url: config.epSendFcmNotification + param,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        })
+    };
 }]);

@@ -38,9 +38,9 @@ rEIBenniesApp.service('homeService', ['$http', 'config', '$location', '$cookieSt
         });
     };
 
-    this.GetTotalNoOfHelpRequestPerMonth = function (id) {
+    this.GetTotalNoOfHelpRequestPerMonth = function (payload) {
         return $http({
-            method: 'GET', url: config.epGetTotalNoOfHelpRequestPerMonth + id,
+            method: 'GET', url: config.epGetTotalNoOfHelpRequestPerMonth +payload,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
@@ -79,6 +79,30 @@ rEIBenniesApp.service('homeService', ['$http', 'config', '$location', '$cookieSt
             method: 'GET', url: config.epGetTotalNoOfBenniesSignedUpPerState + id,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    }
+
+    this.GetTotalRevenuePerYear = function (id) {
+        return $http({
+            method: 'GET', url: config.epGetTotalRevenuePerYear + id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    }
+
+    this.GetAllCalendarItems = function () {
+        return $http({
+            method: 'GET', url: config.epGetAllCalendarItems,
+            headers: {
+                'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
             }
         }).success(function (data, status, headers, config) {
