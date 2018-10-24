@@ -41,6 +41,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                  $('#ajaxSpinnerContainer').hide();
                  JSAlert.alert("Failed to load users data");
              });
+        
     }
 
     $scope.GetAllUsers();
@@ -172,6 +173,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
 
                                   if (res.data.ResponseCode == 200) {
                                       JSAlert.alert("Updated Successfully");
+                                      $scope.GetAllUsers();
                                      // JSAlert.alert(res.data.Message);
                                   } else {
                                       JSAlert.alert("Failed to update");

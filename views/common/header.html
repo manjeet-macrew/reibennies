@@ -9,7 +9,7 @@
             <a class="navbar-brand" href="#/home"><span class="glyphicon glyphicon-user"></span> REI Bennies - {{UserRole}}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav">
+            <!--<ul class="nav navbar-nav">
                 <li ng-class="{ 'active' : IsHome && SelectedPage=='Home'}"><a href="#/home">Home</a></li>
                 <li ng-class="{ 'active' : IsProfile && SelectedPage=='Profile'}"><a href="#/profile">My Profile</a></li>
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsUsers && SelectedPage=='Users') || (IsRoles && SelectedPage=='Roles')}">
@@ -31,7 +31,7 @@
                 <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription Management</a></li>
                 <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ Management</a></li>    
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsUserActivity && SelectedPage=='UserActivity'}"><a href="#/useractivity">User Activity</a></li>                          
-                 <!--<li class="dropdown">
+                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Training<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="#/home">Contacts</a></li>
@@ -46,12 +46,12 @@
                         <li><a href="#/home">Privacy Policy</a></li>
                         <li><a href="#/home">Terms of Use</a></li>
                     </ul>
-                </li>-->
+                </li>
                
                 
                 
                
-            </ul>
+            </ul>-->
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/logout" ng-click="Logout()"><span class="glyphicon glyphicon-remove-circle"></span> Log Out</a></li>
             </ul>

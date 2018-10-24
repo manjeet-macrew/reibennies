@@ -95,19 +95,21 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                      if (res.data.ResponseData[0] != null)
                      {
                          $scope.HelpRequestMethCallCount++
-                         debugger;
                          if (requestType == 'A')
-                             $scope.TotalNoOfHelpRequestPerMonth =res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData.map(function (obj) { return obj.totalcount; });
-                     else if (requestType == 'Y')
-                         $scope.TotalResolvedHelpRequestPerMonth =res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData.map(function (obj) { return obj.totalcount; });
-                     else if (requestType == 'N')
-                     {
-                         $scope.TotalUnResolvedHelpRequestPerMonth = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData.map(function (obj) { return obj.totalcount; });
-                         
-                     }
+                         {
+                             $scope.TotalNoOfHelpRequestPerMonth = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData;//.map(function (obj) { return obj.totalcount; });
+                         }
+                         else if (requestType == 'Y')
+                         {
+                             $scope.TotalResolvedHelpRequestPerMonth = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData;//.map(function (obj) { return obj.totalcount; });
+                         }
+                         else if (requestType == 'N')
+                         {
+                             $scope.TotalUnResolvedHelpRequestPerMonth = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData;//.map(function (obj) { return obj.totalcount; });
+                         }
                          if ($scope.HelpRequestMethCallCount == 3)
                          {
-                             $scope.months = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData.map(function (obj) { return obj.month; });
+                            // $scope.months = res.data.ResponseData[0].TotalHeplRequestsPerMonthInfoData.map(function (obj) { return obj.month; });
                              $scope.HelpRequestChart();
                          }
                            
@@ -212,7 +214,6 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     }
 
     $scope.SetYearRevenueChartValues = function (chartLabels, chartData) {
-        debugger;
         $scope.revenueByYearLabels = chartLabels;
         $scope.revenueByYearData = chartData;
     }
@@ -318,18 +319,66 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
              });
     }
 
-    $scope.HelpRequestChart = function () {
+    $scope.CreateHelpRequestChartdata = function () {
 
+        $scope.mainHelpRequestObj = [{ month: "January", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "February", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "March", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "April", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "May", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "June", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "July", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "August", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "September", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "October", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "November", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 },
+        { month: "December", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 }];
+
+        for (var i = 0; i < $scope.mainHelpRequestObj.length; i++) {
+            debugger;
+            var countHelpRequest = $scope.TotalNoOfHelpRequestPerMonth.filter(function (node) {
+                return node.month == $scope.mainHelpRequestObj[i].month;
+            });
+
+            var countResolvedHelpRequest = $scope.TotalResolvedHelpRequestPerMonth.filter(function (node) {
+                return node.month == $scope.mainHelpRequestObj[i].month;
+            });
+
+            var countUnResolvedHelpRequest = $scope.TotalUnResolvedHelpRequestPerMonth.filter(function (node) {
+                return node.month == $scope.mainHelpRequestObj[i].month;
+            });
+            if (countHelpRequest.length > 0)
+                $scope.mainHelpRequestObj[i].helpRequestCount = countHelpRequest[0].totalcount;
+            if (countResolvedHelpRequest.length > 0)
+                $scope.mainHelpRequestObj[i].resolvedHelpRequestCount = countResolvedHelpRequest[0].totalcount;
+            if (countUnResolvedHelpRequest.length > 0)
+                $scope.mainHelpRequestObj[i].unResolvedHelpRequestCount = countUnResolvedHelpRequest[0].totalcount;
+        }
+       // console.log($scope.mainHelpRequestObj);
+        $scope.HelpRequestObj = [];
+        for (let obj of $scope.mainHelpRequestObj) {
+            if (obj.helpRequestCount != 0 || obj.resolvedHelpRequestCount != 0 || obj.unResolvedHelpRequestCount != 0) {
+                $scope.HelpRequestObj.push(obj);
+               // $scope.mainHelpRequestObj.splice($scope.mainHelpRequestObj.indexOf(obj), 1);
+            }
+        }
+        console.log($scope.ModifiedObj);
+    }
+    
+    $scope.HelpRequestChart = function () {
+        $scope.CreateHelpRequestChartdata();
         var helpRequestCanvas = document.getElementById("cnhelpreqbymonth");
 
         Chart.defaults.global.defaultFontFamily = "Lato";
         Chart.defaults.global.defaultFontSize = 15;
-
-        var months = $scope.TotalUnResolvedHelpRequestPerMonth.map(function (obj) { return obj.month; });
+        var months = $scope.HelpRequestObj.map(function (obj) { return obj.month; });
+        var helpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.helpRequestCount; });
+        var unResolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.unResolvedHelpRequestCount; });
+        var resolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.resolvedHelpRequestCount; });
 
         var dataTotalHelpRequest = {
             label: "Total Request",
-            data: $scope.TotalNoOfHelpRequestPerMonth,
+            data: helpRequestPerMonth,
             lineTension: 0.3,
             fill: false,
             borderColor: 'Black',
@@ -345,7 +394,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
 
         var dataResolvedHelpRequest = {
             label: "Resolved Request",
-            data: $scope.TotalResolvedHelpRequestPerMonth,
+            data: resolvedHelpRequestPerMonth,
             lineTension: 0.3,
             fill: false,
             borderColor: 'Green',
@@ -360,7 +409,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
 
         var dataUnResolvedHelpRequest = {
             label: "UnResolved Request",
-            data: $scope.TotalUnResolvedHelpRequestPerMonth,
+            data: unResolvedHelpRequestPerMonth,
             lineTension: 0.3,
             fill: false,
             borderColor: 'red',
@@ -375,7 +424,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
         };
 
         var helpData = {
-            labels: $scope.months,
+            labels: months,
             datasets: [dataTotalHelpRequest, dataResolvedHelpRequest, dataUnResolvedHelpRequest]
         };
 
@@ -395,15 +444,18 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
             options: chartOptions
         });
     }
-   
-    $scope.GetTotalNumberOfbennies();
-    $scope.GetTotalNoOfBenniesSignedUpPerMonth();
-    $scope.GetTotalNoOfSubscriptions();
-    $scope.GetTotalRevenuePerMonth();
-    $scope.GetTotalNoOfHelpRequestPerMonth('A');
-    $scope.GetTotalNoOfHelpRequestPerMonth('Y');
-    $scope.GetTotalNoOfHelpRequestPerMonth('N');
-    $scope.GetTotalNoOfBenniesRankings();
-    $scope.GetTotalNoOfBenniesSignedUpPerState();
-    $scope.GetTotalRevenuePerYear();
+    if ($rootScope.UserRole == "App Admin" || $rootScope.UserRole == "Staff")
+    {
+        $scope.GetTotalNumberOfbennies();
+        $scope.GetTotalNoOfBenniesSignedUpPerMonth();
+        $scope.GetTotalNoOfSubscriptions();
+        $scope.GetTotalRevenuePerMonth();
+        $scope.GetTotalNoOfHelpRequestPerMonth('A');
+        $scope.GetTotalNoOfHelpRequestPerMonth('Y');
+        $scope.GetTotalNoOfHelpRequestPerMonth('N');
+        $scope.GetTotalNoOfBenniesRankings();
+        $scope.GetTotalNoOfBenniesSignedUpPerState();
+        $scope.GetTotalRevenuePerYear();
+    }
+  
 });

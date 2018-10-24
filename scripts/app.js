@@ -99,6 +99,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                 forceSSL: onlySSL
             }
         }).
+         when('/calendarevents', {
+             controller: 'calendareventsController',
+             templateUrl: 'views/admin/calendarevents.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
 		otherwise({
 		    redirectTo: '/'
 		});

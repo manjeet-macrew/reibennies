@@ -22,8 +22,14 @@
             text-transform: lowercase;
         }
     </style>
+    
+    <link href="assets/css/calender/fullcalendar.min.css" rel="stylesheet" />
+    <link href="assets/css/calender/fullcalendar.print.min.css" rel="stylesheet" media='print'/>
+
+    <script src="scripts/js/moment.min.js"></script>
     <script src="scripts/js/utilities.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="scripts/js/calender/fullcalendar.min.js"></script>
     <script src="scripts/js/angular1.5.2.min.js"></script>
     <script src="scripts/js/angular-animate.js"></script>
     <script src="scripts/js/angular-route.js"></script>
@@ -43,6 +49,8 @@
     <script src="scripts/services/helpSupport-service.js"></script>
     <script src="scripts/services/faq-service.js"></script>
     <script src="scripts/services/home-service.js"></script>
+    <script src="scripts/services/calendarevents-service.js"></script>
+
     <script src="scripts/config.js"></script>
     <script src="scripts/controllers/common/mainController.js"></script>
     <script src="scripts/controllers/common/loginController.js"></script>
@@ -57,14 +65,15 @@
     <script src="scripts/controllers/staff/subscriptionMgmt.js"></script>
     <script src="scripts/controllers/admin/useractivityController.js"></script>
     <script src="scripts/controllers/rankapprover/faqMgmtController.js"></script>
+    <script src="scripts/controllers/admin/calendareventsController.js"></script>
 </head>
 
-<body ng-controller="mainController">
+<body ng-controller="mainController"  style="background-color: #A1D461">
     <div ng-if="!IsLoginPage" ng-include src="'views/common/header.html'">
     </div>
     <div ng-if="IsHelp && IsLoginPage" ng-include src="'views/common/logOutHeader.html'">
     </div>
-    <div ng-view="" class="content_section">
+    <div ng-view="" class="content_section" >
         <!--Content will be renderd here-->
     </div>
     <div ng-if="!IsLoginPage" ng-include src="'views/common/footer.html'">
