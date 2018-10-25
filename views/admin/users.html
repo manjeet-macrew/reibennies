@@ -4,11 +4,14 @@
         <h3>Users</h3>
     </div>
     <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="addUserOpenModal()" data-target="#manageUser">Add User</button>
+    <button type="button" ng-if="UserRole == 'App Admin'"  ng-click="OpenMultiSendNotificationModal()" class="btn btn-primary" data-toggle="modal"  >Send Notification</button>
+    <button type="button" ng-click="OpenAllSendNotificationModal()" class="btn btn-primary" data-toggle="modal" >Send Notification To All</button>
     <br />
     <br />
     <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
         <thead>
             <tr>
+                <th></th>
                 <th>#</th>
                 <th>First Name</th>
                 <th>Last Name</th>
@@ -19,6 +22,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="n in UserData">
+                <td><input type="checkbox" ng-model="n.checked" ng-true-value="1" ng-false-value="0"/></td>
                 <td>{{$index+1}}</td>
                 <td>{{n.firstName}}</td>
                 <td>{{n.lastName}}</td>
@@ -139,6 +143,7 @@
             </div>
             <form ng-submit="SendNotificationSubmit(NotificationData)" name="notificationform" novalidate>
                 <input type="hidden" ng-model="NotificationData.userId" />
+                <input type="hidden" ng-model="NotificationData.senderuserId" />
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="title">* Title:</label>

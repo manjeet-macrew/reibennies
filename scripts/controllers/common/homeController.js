@@ -237,74 +237,12 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                  JSAlert.alert("Failed to load users data");
              });
     }
-
-    $scope.OpenSendNotificationModal = function () {
-        $scope.GetAllUsers();
-        $scope.bodyValidation = false;
-        $scope.titleValidation = false;
-        $scope.NotificationData = {
-            userId: 0,
-            body: "",
-            title: ""
-        };
-    }
-
-    $scope.SendNotificationSubmit = function (notificationData) {
-        $scope.bodyValidation = false;
-        $scope.titleValidation = false;
-        $scope.SentNotificationCount = 0;
-        $scope.RequestProcessed = 0;
-        if ($scope.notificationform.$valid) {
-            angular.forEach($scope.UserIds, function (val, key) {
-                $scope.Data = {
-                    userId: val,
-                    body: notificationData.body,
-                    title: notificationData.title
-                };
-                var data = $scope.Data;
-                var queryString = $.param(data);
-                userService.SendFcmNotification(queryString)
-                 .then(function (res) {
-                     if (res.data.ResponseCode == 200) {
-                         $scope.SentNotificationCount++;
-                         $scope.RequestProcessed++;
-                         if ($scope.RequestProcessed == $scope.UserIds.length) {
-                             $('#sendNotificationModal').modal('hide');
-                             JSAlert.alert("Notification Sent SuccessFully To " + $scope.SentNotificationCount + " Out Of " + $scope.UserIds.length + " Users.");
-                         }
-                     } else {
-                         $scope.RequestProcessed++;
-                         if ($scope.RequestProcessed == $scope.UserIds.length) {
-                             $('#sendNotificationModal').modal('hide');
-                             JSAlert.alert("Notification Sent SuccessFully To " + $scope.SentNotificationCount + " Out Of " + $scope.UserIds.length + " Users.");
-                         }
-                        // JSAlert.alert("Failed to Sent Notification");
-                     }
-                 }).catch(function (ex) {
-                     $('#ajaxSpinnerContainer').hide();
-                     $scope.RequestProcessed++;
-                     if ($scope.RequestProcessed == $scope.UserIds.length) {
-                         $('#sendNotificationModal').modal('hide');
-                         JSAlert.alert("Notification Sent SuccessFully To " + $scope.SentNotificationCount + " Out Of " + $scope.UserIds.length + " Users.");
-                     }
-                 });
-            });
-        }
-        else {
-            if ($scope.NotificationData.body == null || $scope.NotificationData.body == '')
-                $scope.bodyValidation = true;
-            if ($scope.NotificationData.title == null || $scope.NotificationData.title == '')
-                $scope.titleValidation = true;
-        }
-    }
-
     $scope.GetTotalRevenuePerYear = function () {
         var userId = $scope.UserId;
         $scope.TotalRevenuePerYear = [];
         homeService.GetTotalRevenuePerYear(userId)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
-                     debugger;
                      if (res.data.ResponseData[0] != null)
                          $scope.TotalRevenuePerYear = res.data.ResponseData[0].TotalRevenuePerYearInfoData;
                      var revyears = $scope.TotalRevenuePerYear.map(function (obj) { return obj.year; });

@@ -58,7 +58,9 @@ angular.module('app.config', []).constant('config', {
     epGetTotalNoOfBenniesSignedUpPerState: BaseUrl + "gettotalnoofbenniessignedupperstate?userId=",
     epSendFcmNotification: BaseUrl + "sendfcmnotification?",
     epGetTotalRevenuePerYear: BaseUrl + "gettotalrevenueperyear?userId=",
-    epGetAllCalendarItems: BaseUrl + "getallcalendaritems"
+    epGetAllCalendarItems: BaseUrl + "getallcalendaritems",
+    epSendFcmNotificationToAllUsers: BaseUrl + "sendfcmnotificationtoallusers?",
+    epSendFcmNotificationToMultiUsers :BaseUrl + "sendfcmnotificationtomultiusers?"
     //epGetAllCalendarItemsMonth: BaseUrl + "getallcalendaritemsmonth?",
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

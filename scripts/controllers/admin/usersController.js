@@ -294,24 +294,61 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
     $scope.OpenSendNotificationModal = function (userInfo) {
         $scope.bodyValidation = false;
         $scope.titleValidation = false;
+        $scope.NotificationType = "SingleUser";
         $scope.NotificationData = {
             userId: userInfo.userId,
             body: "",
-            title: ""
+            title: "",
+            senderuserId: sessionStorage.getItem('UID')
+        };
+    }
+
+    $scope.SelectedUserIds = "";
+    $scope.OpenMultiSendNotificationModal = function () {
+        var arr = $scope.UserData.filter(
+          function (value) {
+              if (value.checked == 1) {
+                  return true;
+              }
+              else {
+                  return false;
+              }
+          });
+
+        if (arr.length > 0) {
+
+            $scope.SelectedUserIds = arr.map(function (obj) { return obj.userId }).join(",");
+            $('#sendNotificationModal').modal('show');
+        }
+        else {
+            JSAlert.alert("Select User to Send Notification");
+            $('#sendNotificationModal').modal('hide');
+        }
+        $scope.NotificationType = "MultiUser";
+        $scope.bodyValidation = false;
+        $scope.titleValidation = false;
+        $scope.NotificationData = {
+            userId: $scope.SelectedUserIds,
+            body: "",
+            title: "",
+            senderuserId: sessionStorage.getItem('UID')
         };
     }
 
     $scope.SendNotificationSubmit = function (notificationData) {
         $scope.bodyValidation = false;
         $scope.titleValidation = false;
-        debugger;
         if ($scope.notificationform.$valid) {
-            var data = notificationData;
-            var queryString = $.param(data);
-            userService.SendFcmNotification(queryString)
+           
+            if ($scope.NotificationType == "SingleUser")
+            {
+                var data = notificationData;
+                var queryString = $.param(data);
+
+                userService.SendFcmNotification(queryString)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
-                    $('#sendNotificationModal').modal('hide');
+                     $('#sendNotificationModal').modal('hide');
                      JSAlert.alert("Notification Sent Successfully");
                  } else {
                      $('#sendNotificationModal').modal('hide');
@@ -321,6 +358,55 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                  $('#ajaxSpinnerContainer').hide();
                  JSAlert.alert("Failed to Sent Notification");
              });
+            }
+            else if ($scope.NotificationType == "MultiUser")
+            {
+                notificationData.userId = $scope.SelectedUserIds;
+                var data = notificationData;
+                var queryString = $.param(data);
+
+                userService.SendFcmNotificationToMultiUsers(queryString)
+             .then(function (res) {
+                 if (res.data.ResponseCode == 200) {
+                     $('#sendNotificationModal').modal('hide');
+                     JSAlert.alert("Notification Sent Successfully");
+                 } else {
+                     $('#sendNotificationModal').modal('hide');
+                     JSAlert.alert("Failed to Sent Notification");
+                 }
+             }).catch(function (ex) {
+                 $('#ajaxSpinnerContainer').hide();
+                 JSAlert.alert("Failed to Sent Notification");
+             });
+            }
+            else
+            {
+                $scope.Data = {
+                    body: notificationData.body,
+                    title: notificationData.title,
+                    senderuserId: sessionStorage.getItem('UID')
+                };
+                var data = $scope.Data;
+                var queryString = $.param(data);
+                userService.SendFcmNotificationToAllUsers(queryString)
+                .then(function (res) {
+                    if (res.data.ResponseCode == 200) {
+                        $('#sendNotificationModal').modal('hide');
+                        JSAlert.alert("Notification Sent SuccessFully");
+                    
+                    } else {
+                        $('#sendNotificationModal').modal('hide');
+                        JSAlert.alert("Failed to Sent Notification");
+                    }
+                }).catch(function (ex) {
+                    $('#ajaxSpinnerContainer').hide();
+                    $scope.RequestProcessed++;
+                    if ($scope.RequestProcessed == $scope.UserIds.length) {
+                        $('#sendNotificationModal').modal('hide');
+                        JSAlert.alert("Failed to Sent Notification");
+                    }
+                });
+            }
         }
         else {
             if ($scope.NotificationData.body == null || $scope.NotificationData.body == '')
@@ -330,5 +416,18 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
         }
     }
 
+    $scope.OpenAllSendNotificationModal=function()
+    {
+        $scope.bodyValidation = false;
+        $scope.titleValidation = false;
+        $scope.NotificationType = "AllUser";
+        $scope.NotificationData = {
+            userId: 0,
+            body: "",
+            title: "",
+            senderuserId: sessionStorage.getItem('UID')
+        };
 
+        $('#sendNotificationModal').modal('show');
+    }
 });
