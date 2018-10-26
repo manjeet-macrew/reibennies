@@ -8,8 +8,8 @@
             </button>
             <a class="navbar-brand" href="#/home"><span class="glyphicon glyphicon-user"></span> REI Bennies - {{UserRole}}</a>
         </div>
-        <div class="collapse navbar-collapse" id="myNavbar">
-            <!--<ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse"  id="myNavbar">
+            <ul class="nav navbar-nav ">
                 <li ng-class="{ 'active' : IsHome && SelectedPage=='Home'}"><a href="#/home">Home</a></li>
                 <li ng-class="{ 'active' : IsProfile && SelectedPage=='Profile'}"><a href="#/profile">My Profile</a></li>
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsUsers && SelectedPage=='Users') || (IsRoles && SelectedPage=='Roles')}">
@@ -17,8 +17,9 @@
                     <ul class="dropdown-menu">
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsUsers && SelectedPage=='Users'}"><a href="#/users">Users</a></li>
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsRoles && SelectedPage=='Roles'}"><a href="#/roles">Roles</a></li>
+                        <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsCalendarEvents && SelectedPage=='CalendarEvents'}"><a href="#/calendarevents">Calendar Events</a></li>
                     </ul>
-                </li> 
+                </li>
                 <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsRankApprover && SelectedPage=='RankApprover') || (IsRank && SelectedPage=='Rank')}">
                     <a class="dropdown-toggle" data-toggle="dropdown">Rank Management<span class="caret"></span></a>
                     <ul class="dropdown-menu">
@@ -26,32 +27,32 @@
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsRank && SelectedPage=='Rank'}"><a href="#/rank">Ranking</a></li>
                     </ul>
                 </li>
-              
-                <li ng-if="UserRole=='Support' || UserRole=='App Admin'" ng-class="{ 'active' : IsSupport && SelectedPage=='Support'}"><a href="#/support">Support Management</a></li>               
+
+                <li ng-if="UserRole=='Support' || UserRole=='App Admin'" ng-class="{ 'active' : IsSupport && SelectedPage=='Support'}"><a href="#/support">Support Management</a></li>
                 <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription Management</a></li>
-                <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ Management</a></li>    
-                <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsUserActivity && SelectedPage=='UserActivity'}"><a href="#/useractivity">User Activity</a></li>                          
-                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Training<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#/home">Contacts</a></li>
-                        <li><a href="#/home">Events</a></li>
-                        <li><a href="#/home">Groups</a></li>
-                        <li><a href="#/home">Deal Analyzer</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Documents<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#/home">Privacy Policy</a></li>
-                        <li><a href="#/home">Terms of Use</a></li>
-                    </ul>
-                </li>
-               
-                
-                
-               
-            </ul>-->
+                <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ Management</a></li>
+                <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsUserActivity && SelectedPage=='UserActivity'}"><a href="#/useractivity">User Activity</a></li>
+                <!--<li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Training<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/home">Contacts</a></li>
+                <li><a href="#/home">Events</a></li>
+                <li><a href="#/home">Groups</a></li>
+                <li><a href="#/home">Deal Analyzer</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#/home">Documents<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="#/home">Privacy Policy</a></li>
+                <li><a href="#/home">Terms of Use</a></li>
+            </ul>
+        </li>-->
+
+
+
+
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#/logout" ng-click="Logout()"><span class="glyphicon glyphicon-remove-circle"></span> Log Out</a></li>
             </ul>

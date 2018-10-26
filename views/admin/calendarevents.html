@@ -1,7 +1,51 @@
 ﻿<div class="container content_section_inner">
     <div>
-        <h3> Calendar Events</h3>
-    </div>
+        <h3> Calendar Events</h3> 
+  </div>
     <div class="clear"></div>
     <div id="calendar"></div>
+</div>
+<div class="modal fade" id="eventDetail" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title"><span ng-bind="eventName"></span> </h3>
+            </div>
+            <div class="modal-body">
+                <div class="card-body rankapp">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <img class="card-img-top img-circle" src={{eventsDetail.profilePicPath}} alt="Card image cap" height="170px" width="170px">
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 class="card-title">Organiser Name: <span>{{eventsDetail.firstName +" " + eventsDetail.lastName}}</span></h4>
+                            <h4 class="card-title">Description: <span>{{eventsDetail.eventDescription}}</span></h4>
+                            <h4 class="card-title">Event Access: <span>{{eventsDetail.eventAccess}}</span> </h4>
+                            <h4 class="card-title">Price: <span>{{eventsDetail.eventPrice +" $"}}</span></h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h4 class="card-title">Address 1st: <span>{{eventsDetail.eventAddressOne}}</span></h4>
+                            <h4 class="card-title">StateName: <span>{{eventsDetail.stateName}}</span></h4>
+                            <h4 class="card-title">City: <span>{{eventsDetail.eventCity}}</span></h4>
+                            <h4 class="card-title">Start: <span>{{eventsDetail.start | date:'yyyy-MM-dd HH:mm:ss Z'}}</span></h4>
+                            <h4 class="card-title">Event Url: <a href="http://{{eventsDetail.eventURL}}" target="_blank">{{eventsDetail.eventURL}}</a></h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <h4 class="card-title">Address 2nd: <span>{{eventsDetail.eventAddressTwo}}</span></h4>
+                            <h4 class="card-title">Zip Code: <span>{{eventsDetail.eventZip}}</span></h4>
+                            <h4 class="card-title">Phone: <span>{{eventsDetail.eventPhone}}</span></h4>
+                            <h4 class="card-title">End: <span>{{eventsDetail.end | date:'yyyy-MM-dd HH:mm:ss Z'}}</span></h4>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+ </div>
 </div>

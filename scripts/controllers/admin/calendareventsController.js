@@ -7,7 +7,8 @@ rEIBenniesApp.controller("calendareventsController", function ($scope, $rootScop
     $scope.CurrentDate = new Date();
 
     $scope.CalenderItems = [];
-
+    $scope.eventsDetail = {};
+    
     $scope.GetAllCalendarItems = function () {
         $scope.CalenderItems = [];
         $scope.events = [];
@@ -19,9 +20,33 @@ rEIBenniesApp.controller("calendareventsController", function ($scope, $rootScop
                          $scope.CalenderItems = res.data.ResponseData[0].EventInfoData;
                          var data = res.data.ResponseData[0].EventInfoData;
                          for (var i = 0; i < data.length; i++) {
-                             $scope.events[i] = { id: data[i].eventId,userId: data[i].userId,profilePicPath:data[i].profilePicPath, title: data[i].eventTitle, start: new Date(data[i].startDateTime), end: new Date(data[i].endDateTime), allDay: false };
+                             $scope.events[i] = {
+                                 id: data[i].eventId,
+                                 title: data[i].eventTitle,
+                                 start: new Date(data[i].startDateTime),
+                                 end: new Date(data[i].endDateTime), allDay: false,
+                                 eventAccess: data[i].eventAccess,
+                                 eventAddressOne: data[i].eventAddressOne,
+                                 eventAddressTwo: data[i].eventAddressTwo,
+                                 eventCity: data[i].eventCity,
+                                 eventDescription: data[i].eventDescription,
+                                 eventDuration: data[i].eventDuration,
+                                 eventId: data[i].eventId,
+                                 eventPhone: data[i].eventPhone,
+                                 eventPrice: data[i].eventPrice,
+                                 eventTitle: data[i].eventTitle,
+                                 eventURL: data[i].eventURL,
+                                 eventZip: data[i].eventZip,
+                                 firstName: data[i].firstName,
+                                 isActive: data[i].isActive,
+                                 lastName: data[i].lastName,
+                                 profilePicPath: data[i].profilePicPath,
+                                 stateName: data[i].stateName,
+                                 timeZone: data[i].stateName,
+                                 userId: data[i].userId
+                             };
                          }
-                         //console.log($scope.CalenderItems);
+                         console.log($scope.CalenderItems);
                          $scope.LoadCalendar();
                      }
                         
@@ -35,16 +60,43 @@ rEIBenniesApp.controller("calendareventsController", function ($scope, $rootScop
     }
 
     $scope.GetAllCalendarItems();
-
     $scope.LoadEventDetail=function(data)
     {
-        JSAlert.alert(" Calender Events");
+      
+        $scope.eventsDetail = {};
+        debugger;
+        $scope.eventsDetail = {
+            start: data.start._d,
+            end: new Date(data.end),
+            allDay: false,
+            eventAccess: data.eventAccess,
+            eventAddressOne: data.eventAddressOne,
+            eventAddressTwo: data.eventAddressTwo,
+            eventCity: data.eventCity,
+            eventDescription: data.eventDescription,
+            eventDuration: data.eventDuration,
+            eventId: data.eventId,
+            eventPhone: data.eventPhone,
+            eventPrice: data.eventPrice,
+            eventTitle: data.eventTitle,
+            eventURL: data.eventURL,
+            eventZip: data.eventZip,
+            firstName: data.firstName,
+            isActive: data.isActive,
+            lastName: data.lastName,
+            profilePicPath: data.profilePicPath,
+            stateName: data.stateName,
+            timeZone: data.stateName,
+            userId: data.userId
+        };
+        $('#eventDetail').modal('show');
+        $scope.eventName = $scope.eventsDetail.eventTitle;
+        angular.element('#calendar').scope().$apply();
+       
     }
 
     $scope.LoadCalendar=function()
     {
-       // var today = Date();
-       // var currentDate = today.getFullYear + '-' + today.getMonth() + 1 + '-' + today.getDate();
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -56,12 +108,13 @@ rEIBenniesApp.controller("calendareventsController", function ($scope, $rootScop
             eventLimit: true, // allow "more" link when too many events
             events: $scope.events,
             eventClick: function (event) {
-               // $scope.LoadEventDetail(event);
+                $scope.LoadEventDetail(event);
             },
             dayClick: function (date, jsEvent, view) {
                // JSAlert.alert('clicked on ' + date.format());
             }
         });
     }
+   
     
 });
