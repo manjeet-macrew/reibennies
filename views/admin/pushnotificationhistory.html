@@ -1,0 +1,33 @@
+﻿<div class="container">
+    <div>
+        <h3>Push Notification History</h3>
+    </div>
+    <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Sender Name</th>
+                <th>title</th>
+                <th>Body</th>
+                <th>Created Date</th>
+                <!-- <th style="text-align: center;">Actions</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="n in NotificationHistory">
+                <td>{{$index+1}}</td>
+                <td>{{n.firstName}}</td>
+                <td>{{n.lastName}}</td>
+                <td>{{n.sender_name}}</td>
+                <td>{{n.title}}</td>
+                <td>{{n.body}}</td>
+                <td>{{n.created_date}}</td>
+                <!--<td style="text-align: center;">
+                    <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
+                </td>-->
+            </tr>
+        </tbody>
+    </table>
+</div>

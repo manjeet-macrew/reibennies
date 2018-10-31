@@ -60,7 +60,17 @@ angular.module('app.config', []).constant('config', {
     epGetTotalRevenuePerYear: BaseUrl + "gettotalrevenueperyear?userId=",
     epGetAllCalendarItems: BaseUrl + "getallcalendaritems",
     epSendFcmNotificationToAllUsers: BaseUrl + "sendfcmnotificationtoallusers?",
-    epSendFcmNotificationToMultiUsers :BaseUrl + "sendfcmnotificationtomultiusers?"
-    //epGetAllCalendarItemsMonth: BaseUrl + "getallcalendaritemsmonth?",
+    epSendFcmNotificationToMultiUsers :BaseUrl + "sendfcmnotificationtomultiusers?",
+    epGetTotalNoOfBenniesSignedUpPerMonthByYear: BaseUrl + "gettotalnoofbenniessigneduppermonthbyyear?",
+    epGetTotalNoOfSubscriptionsByYear: BaseUrl + "gettotalnoofsubscriptionsbyyear?",
+    epGetTotalNoofBenniesSignedUpPerStateByYear: BaseUrl + "gettotalnoofbenniessignedupperstatebyyear?",
+    epGetTotalRevenuePerMonthByYear: BaseUrl + "gettotalrevenuepermonthbyyear?",
+    epGetTotalNoOfHelpRequestPerMonthByYear: BaseUrl + "gettotalnoofhelprequestpermonthbyyear?",
+    epGetTotalNoOfBenniesSignedUpPerMonthByYearMonth: BaseUrl + "gettotalnoofbenniessigneduppermonthbyyearmonth?",
+    epGetTotalNoOfSubscriptionsByYearMonth: BaseUrl + "gettotalnoofsubscriptionsbyyearmonth?",
+    epGetTotalNoOfBenniesSignedupPerStateByYearMonth: BaseUrl + "gettotalnoofbenniessignedupperstatebyyearmonth?",
+    epGetTotalNoOfHelpRequestPerMonthByYearMonth: BaseUrl + "gettotalnoofhelprequestpermonthbyyearmonth?",
+    epGetTotalRevenuePerMonthByYearMonth: BaseUrl + "gettotalrevenuepermonthbyyearmonth?",
+    epGetAllFcmPushNotifications: BaseUrl + "getallfcmpushnotifications?userId="
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

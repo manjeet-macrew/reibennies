@@ -107,6 +107,30 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+         when('/yearlyreports', {
+             controller: 'yearlyReportsController',
+             templateUrl: 'views/reports/yearlyReports.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
+        when('/monthlyreports', {
+            controller: 'monthlyReportsController',
+            templateUrl: 'views/reports/monthlyReports.html',
+            resolve: {
+                loggedIn: onlyLoggedIn,
+                forceSSL: onlySSL
+            }
+        }).
+         when('/pushnotificationhistory', {
+             controller: 'pushnotificationhistoryController',
+             templateUrl: 'views/admin/pushnotificationhistory.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
 		otherwise({
 		    redirectTo: '/'
 		});

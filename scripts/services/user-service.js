@@ -244,4 +244,16 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         }).error(function (response, status, headers, config) {
         })
     };
+
+    this.GetAllFcmPushNotifications = function (id) {
+        return $http({
+            method: 'GET', url: config.epGetAllFcmPushNotifications +   id,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
 }]);
