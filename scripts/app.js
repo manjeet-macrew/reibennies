@@ -131,6 +131,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+         when('/marketplaces', {
+             controller: 'marketplacesController',
+             templateUrl: 'views/admin/marketplaces.html',
+             resolve: {
+                 loggedIn: onlyLoggedIn,
+                 forceSSL: onlySSL
+             }
+         }).
 		otherwise({
 		    redirectTo: '/'
 		});

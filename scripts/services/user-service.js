@@ -256,4 +256,17 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         }).error(function (response, status, headers, config) {
         });
     };
+
+
+    this.GetAllMarketPlaces = function () {
+        return $http({
+            method: 'GET', url: config.epGetAllMarketPlaces ,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
 }]);

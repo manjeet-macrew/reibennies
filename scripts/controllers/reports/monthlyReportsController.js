@@ -100,10 +100,17 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
 
         $scope.reportingYear = [];
         $scope.reportingYear = [
-                                { Key: "2016", Value: "2016" },
-                                { Key: "2017", Value: "2017" },
                                 { Key: "2018", Value: "2018" },
-                                { Key: "2019", Value: "2019" }];
+                                { Key: "2019", Value: "2019" },
+                                { Key: "2020", Value: "2020" },
+                                { Key: "2021", Value: "2021" },
+                                { Key: "2022", Value: "2022" },
+                                { Key: "2023", Value: "2023" },
+                                { Key: "2024", Value: "2024" },
+                                { Key: "2025", Value: "2025" },
+                                { Key: "2026", Value: "2026" },
+                                { Key: "2027", Value: "2027" },
+                                { Key: "2028", Value: "2028" }];
     }
 
     $scope.GetTotalNoOfBenniesSignedUpPerMonthByYearMonth = function () {
