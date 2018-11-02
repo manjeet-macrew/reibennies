@@ -5,8 +5,9 @@
     <div class="clear"></div>
     <div id="tabs" class="main_profile">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#unranked')">UnRanked</a></li>
-            <li><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked')">Ranked</a></li>
+            <li class="active"><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#unranked')">New Ranks</a></li>
+            <li><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked')">Approved Ranks</a></li>
+            <li><a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#deniedranked')">Denied Ranks</a></li>
         </ul>
         <div id="tabContent" class="tab-content ">
             <div class="panel-heading panel-heading-tab1 active_tab">
@@ -39,7 +40,7 @@
            
             <div class="panel-heading panel-heading-tab1">
                 <h4 class="panel-title">
-                    <a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked',$event)">Ranked</a>
+                    <a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#ranked',$event)">Approved Ranks</a>
                 </h4>
             </div>
             <div  id="ranked" class="tab-pane fade">
@@ -63,6 +64,35 @@
                     No record
                 </div>
             </div>
+
+            <div class="panel-heading panel-heading-tab1">
+                <h4 class="panel-title">
+                    <a data-toggle="tab" href="/#rankapprover" ng-click="ShowTab('#deniedranked',$event)">Denied Ranks</a>
+                </h4>
+            </div>
+
+            <div id="deniedranked" class="tab-pane fade ">
+                <div class="card card_block profile rankapp_block" ng-repeat="user in DeniedrankedUserData" ng-if="IsList">
+                    <div class="lst_card" ng-click="ShowDetail(user)">
+                        <!--<img class="card-img-top img-circle" src={{user.profilePicPath}} alt="Card image cap" height="100px" width="100px">
+                <div class="card-body">
+                    <h3 class="card-title">{{user.firstName +" "+  user.lastName}}</h3>
+                    <h5 class="card-title">{{user.City}},{{user.stateName}}</h5>
+                </div>-->
+                        <div class="card-body rankapp">
+                            <h4 class="card-title">Ranker: <span>{{user.rankerFirstName + " "+ user.rankerLastName}}</span> </h4>
+                            <h4 class="card-title">Rankee: <span>{{user.rankeeFirstName + " " +user.rankeeLastName}}</span></h4>
+                            <h4 class="card-title">Rank Value: <span> {{user.rankValue}}</span></h4>
+                            <h4 class="card-title">Approved: <span>{{user.rankApproved}}</span></h4>
+                            <h4 class="card-title">Notes: <span>{{user.rankApprovedNotes}}</span></h4>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="DeniedrankedUserData.length<=0">
+                    No record
+                </div>
+            </div>
+
 
         </div>
 

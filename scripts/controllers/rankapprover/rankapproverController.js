@@ -5,10 +5,11 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
     $rootScope.SelectedPage = "RankApprover";
     $scope.IsList = true;
     $rootScope.CurrentYear = getCurrentYear();
-    $scope.SelectedTab = 'N';
+    $scope.SelectedTab = 'New';
     $scope.UserData = [];
     $scope.GetAllRankedUnrankedUserRequests = function (isRanked) {
         $scope.UnrankedUserData = [];
+        $scope.DeniedrankedUserData = [];
         $scope.UserData = [];
         if (isRanked == 'Y') {
             rankService.GetAllRankedUnrankedUserRequests(isRanked)
@@ -25,12 +26,27 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
                             JSAlert.alert("Failed to load users data");
                         });
         }
+       else if (isRanked == 'New') {
+            rankService.GetAllRankedUnrankedUserRequests(isRanked)
+                        .then(function (res) {
+                            if (res.data.ResponseCode == 200) {
+
+                                if (res.data.ResponseData[0] != null)
+                                    $scope.UnrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
+                            } else {
+                                JSAlert.alert("Failed to load users data");
+                            }
+                        }).catch(function (ex) {
+                            $('#ajaxSpinnerContainer').hide();
+                            JSAlert.alert("Failed to load users data");
+                        });
+        }
         else {
             rankService.GetAllRankedUnrankedUserRequests(isRanked)
             .then(function (res) {
                 if (res.data.ResponseCode == 200) {
                     if (res.data.ResponseData[0] != null)
-                        $scope.UnrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
+                        $scope.DeniedrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
                 } else {
                     JSAlert.alert("Failed to load users data");
                 }
@@ -41,7 +57,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
         }
 
     }
-    $scope.GetAllRankedUnrankedUserRequests('N');
+    $scope.GetAllRankedUnrankedUserRequests('New');
     //$scope.GetAllUserRankRequests = function () {
     //    $scope.UserData = [];
     //    rankService.GetAllUserRankRequests()
@@ -120,9 +136,18 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
         rankService.ApproveDenyUserRank(data)
             .then(function (res) {
                 if (res.data.ResponseCode == 200) {
-                    JSAlert.alert(res.data.Message);
+                    if (data.rankApproved == 'N')
+                    {
+                        JSAlert.alert("User Rank denied successfully");
+                    }
+                    else
+                    {
+                        JSAlert.alert(res.data.Message);
+                    }
                     $('#myModal').modal('hide');
-                    if( $scope.SelectedTab == 'N')
+                    if ($scope.SelectedTab == 'New')
+                        $scope.GetAllRankedUnrankedUserRequests('New')
+                    else if( $scope.SelectedTab == 'N')
                         $scope.GetAllRankedUnrankedUserRequests('N');
                     else
                         $scope.GetAllRankedUnrankedUserRequests('Y');
@@ -147,14 +172,17 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
         $(id).addClass('in active');
 
         if (id == '#unranked') {
-            $scope.SelectedTab = 'N';
-            $scope.GetAllRankedUnrankedUserRequests('N');
+            $scope.SelectedTab = 'New';
+            $scope.GetAllRankedUnrankedUserRequests('New');
         }
         else if (id == '#ranked') {
             $scope.SelectedTab = 'Y';
             $scope.GetAllRankedUnrankedUserRequests('Y');
         }
-
+        else if (id == '#deniedranked') {
+            $scope.SelectedTab = 'N';
+            $scope.GetAllRankedUnrankedUserRequests('N');
+        }
     }
 
 });
