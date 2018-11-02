@@ -26,6 +26,11 @@ rEIBenniesApp.controller("marketplacesController", function ($scope, $rootScope,
                  JSAlert.alert("Failed to load market places");
              });
     }
+    $scope.MarketPlaceDetail = {};
+    $scope.OpenModel = function (req) {
+        $scope.MarketPlaceDetail = req;
+      
+    };
 
     $scope.GetAllMarketPlaces();
 });

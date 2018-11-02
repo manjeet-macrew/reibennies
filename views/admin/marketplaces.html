@@ -9,11 +9,12 @@
                 <th>First Name</th>
                 <th>Last Name</th>
                 <th>Title</th>
-                <th>Description</th>
+                <!--<th>Description</th>-->
                 <th>City</th>
                 <th>State</th>
                 <th>Price</th>
                 <th style="text-align:center;padding-right: 35px; ">Attachments</th>
+                <th style="text-align: center;">Actions</th>
                <!--<th>Created Date</th>-->
                 <!-- <th style="text-align: center;">Actions</th>-->
             </tr>
@@ -24,17 +25,20 @@
                 <td>{{n.firstName}}</td>
                 <td>{{n.lastName}}</td>
                 <td>{{n.title}}</td>
-                <td>{{n.description | limitTo:19}}{{n.description.length>19  ? '...': ''}}</td>
+                <!--<td>{{n.description | limitTo:19}}{{n.description.length>19  ? '...': ''}}</td>-->
                 <td>{{n.city}}</td>
                 <td>{{n.stateName}}</td>
                 <td>{{n.price}}</td>
-                <td  >
+                <td>
                     <ul style="list-style-type:none;">
                         <li ng-if="n.attachment1.length>0"><a href="{{n.attachment1}}" target="_blank">{{n.attachment1.length>0  ? 'ViewAttachment1': ''}}</a></li>
                         <li ng-if="n.attachment2.length>0"><a href="{{n.attachment2}}" target="_blank">{{n.attachment2.length>0  ? 'ViewAttachment2': ''}}</a></li>
-                        <li ng-if="n.attachment1.length==0 && n.attachment2.length==0">No Attachment</li>
+                        <li ng-if="(n.attachment1.length==0 && n.attachment2.length==0)||(n.attachment1==null && n.attachment2==null)">No Attachment</li>
                     </ul>
                 </td>
+                <td style="text-align: center;">
+                    <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View Detail</button>
+                 </td>
                <!--<td>{{n.createdDate}}</td>-->
                 <!--<td style="text-align: center;">
                     <button type="button" ng-click="OpenModel(n)" class="btn btn-primary" data-toggle="modal" data-target="#myModal">View</button>
@@ -43,3 +47,47 @@
         </tbody>
     </table>
 </div>
+<div class="modal fade support_dialog" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h3 class="modal-title">{{MarketPlaceDetail.title}} </h3>
+            </div>
+                <div class="modal-body">
+                    <div class="card-body rankapp">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h4 class="card-title">First Name: <span>{{MarketPlaceDetail.firstName}}</span> </h4>
+                                <h4 class="card-title">City: <span>{{MarketPlaceDetail.city}}</span></h4>
+                                <h4 class="card-title">Title: <span>{{MarketPlaceDetail.title}}</span></h4>
+                                <h4 class="card-title">
+                                    Attachments:
+                                    <span>
+                                        <a ng-if="MarketPlaceDetail.attachment1.length>0" href="{{MarketPlaceDetail.attachment1}}" target="_blank">{{MarketPlaceDetail.attachment1.length>0  ? 'ViewAttachment1': ''}}</a>
+                                        <a ng-if="MarketPlaceDetail.attachment2.length>0" href="{{MarketPlaceDetail.attachment2}}" target="_blank">{{MarketPlaceDetail.attachment2.length>0  ? '| ViewAttachment2': ''}}</a>
+                                    </span>
+                                    <span ng-if="(MarketPlaceDetail.attachment1.length==0 && MarketPlaceDetail.attachment2.length==0) ||(MarketPlaceDetail.attachment1==null && MarketPlaceDetail.attachment2==null)">No Attachment</span>
+                                </h4> 
+                             </div>
+                             <div class="col-md-6">
+                                 <h4 class="card-title">Last Name: <span>{{MarketPlaceDetail.lastName}}</span></h4>
+                              
+                                <h4 class="card-title">State: <span>{{MarketPlaceDetail.stateName}}</span></h4>
+                                <h4 class="card-title">Price: <span>{{MarketPlaceDetail.price}} $</span></h4>
+                              
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="card-title">Description: <span style="word-wrap: break-word;">{{MarketPlaceDetail.description}}</span></h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          </div>
+    </div>
+</div>
+
