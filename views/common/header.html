@@ -27,6 +27,7 @@
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ</a></li>
                         <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription</a></li>
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsMarketPlaces && SelectedPage=='MarketPlaces'}"><a href="#/marketplaces">Market Places</a></li>
+                        <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsPromoCodes && SelectedPage=='PromoCodes'}"><a href="#/promocodes">Promo Codes</a></li>
                      </ul>
                 </li>
                 <!--<li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsRankApprover && SelectedPage=='RankApprover') || (IsRank && SelectedPage=='Rank')}">

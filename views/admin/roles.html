@@ -23,7 +23,7 @@
                 <td>{{(n.isActive=='Y')?'Yes':'No'}}</td>
                 <td style="text-align: center;">
                     <button type="button"  class="btn btn-primary" data-toggle="modal" ng-click="OpenModal(n)" data-target="#addEditRole">Edit</button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" ng-click="DeleteRole(n)" >Delete</button>
+                    <button type="button" class="btn btn-primary" ng-disabled="n.roleName=='App Admin'" data-toggle="modal" ng-click="DeleteRole(n)" >Delete</button>
                 </td>
             </tr>
         </tbody>

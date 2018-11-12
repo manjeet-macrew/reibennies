@@ -72,6 +72,11 @@ angular.module('app.config', []).constant('config', {
     epGetTotalNoOfHelpRequestPerMonthByYearMonth: BaseUrl + "gettotalnoofhelprequestpermonthbyyearmonth?",
     epGetTotalRevenuePerMonthByYearMonth: BaseUrl + "gettotalrevenuepermonthbyyearmonth?",
     epGetAllFcmPushNotifications: BaseUrl + "getallfcmpushnotifications?userId=",
-    epGetAllMarketPlaces: BaseUrl + "getallmarketplaces"
+    epGetAllMarketPlaces: BaseUrl + "getallmarketplaces",
+    epGeneratePromoCode: BaseUrl + "generatepromocode?userId=",
+    epCreatePromoCode: BaseUrl + "createpromocode",
+    epUpdatePromoCode: BaseUrl + "updatepromocode",
+    epDeletePromoCode: BaseUrl + "deletepromocode?promoCodeId=",
+    epGetAllPromoCodes: BaseUrl + "getallpromocodes?"
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

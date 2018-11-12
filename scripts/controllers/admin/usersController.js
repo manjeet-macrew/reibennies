@@ -30,7 +30,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
         var userId = sessionStorage.getItem('UID')
         userService.GetAllUsers()
              .then(function (res) {
-
+                 
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.UserData = res.data.ResponseData[0].AllUsersInfoData;
@@ -97,7 +97,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
             });
     }
 
-    $scope.GetProfileInfo = function (userId) {
+    $scope.GetProfileInfo = function (userId,userName) {
         $scope.UserInfo = {};
         $scope.UserInfo.userId = 0;
         userService.GetUserProfileInfo(userId)
@@ -106,6 +106,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                      if (res.data.ResponseData[0] != null) {
                          $scope.UserInfo = res.data.ResponseData[0].UserProfileInfoData[0];
                          $scope.UserInfo.userId = userId;
+                         $scope.UserInfo.userName = userName;
                      }
                  } else {
                      JSAlert.alert("Failed to load profile data");
@@ -118,8 +119,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
 
 
     $scope.OpenModal = function (userInfo) {
-
-        $scope.GetProfileInfo(userInfo.userId);
+        $scope.GetProfileInfo(userInfo.userId, userInfo.userName);
         //$scope.UserInfo = userInfo;
         $scope.GetUserRoles(userInfo.userId);
     };
