@@ -66,7 +66,6 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
                  .then(function (res) {
 
                      if (res.data.ResponseCode == 200) {
-                         debugger;
                          if (res.data.ResponseData[0] != null)
                              $scope.UnUsedPromoCodeData = res.data.ResponseData[0].PromoCodeData;
                      } else {
@@ -111,7 +110,8 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
                     promoCode: PromoCodeInfo.promoCode,
                     promoCodeDuration: PromoCodeInfo.promoCodeDuration,
                     modifiedBy: userId,
-                    promoCodeId: promoCodeId
+                    promoCodeId: promoCodeId,
+                    isMultiUser: PromoCodeInfo.isMultiUser
                 };
                 promoCodeService.UpdatePromoCode(payLoad)
                 .then(function (res) {
@@ -123,8 +123,6 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
                             $scope.GetAllPromoCodes('N');
                         else
                             $scope.GetAllPromoCodes('Y');
-
-                        // JSAlert.alert(res.data.Message);
                     } else {
                         JSAlert.alert("Failed to update");
                     }
@@ -142,6 +140,7 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
                     promocode: PromoCodeInfo.promoCode,
                     promoCodeDuration: PromoCodeInfo.promoCodeDuration,
                     createdBy: userId,
+                    isMultiUser: PromoCodeInfo.isMultiUser
                 };
                 promoCodeService.CreatePromoCode(payLoad)
                 .then(function (res) {
@@ -192,7 +191,8 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
         $scope.PromoCodeInfo = {
             promoCode: n.promoCode,
             promoCodeDuration: n.promoCodeDuration,
-            promoCodeId: n.promoCodeId
+            promoCodeId: n.promoCodeId,
+            isMultiUser:n.isMultiUser
         };
     }
 
@@ -242,4 +242,14 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
         }
     }
 
+    $scope.addDays=function(stringDate,days)
+    {
+        var date = new Date(stringDate);
+        date.setDate(date.getDate() + parseInt(days));
+        return date;
+    }
+    $scope.ConvertStringToDate = function (stringDate) {
+        var date = new Date(stringDate);
+        return date;
+    }
 });

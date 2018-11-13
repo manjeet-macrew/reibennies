@@ -51,5 +51,17 @@ rEIBenniesApp.service('roleService', ['$http', 'config', '$location', '$cookieSt
         });
     };
 
+    this.GetUserListByRoleId = function (roleId) {
+        return $http({
+            method: 'GET', url: config.epGetUserListByRoleId + roleId,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+    
 
 }]);

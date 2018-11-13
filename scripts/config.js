@@ -77,6 +77,7 @@ angular.module('app.config', []).constant('config', {
     epCreatePromoCode: BaseUrl + "createpromocode",
     epUpdatePromoCode: BaseUrl + "updatepromocode",
     epDeletePromoCode: BaseUrl + "deletepromocode?promoCodeId=",
-    epGetAllPromoCodes: BaseUrl + "getallpromocodes?"
+    epGetAllPromoCodes: BaseUrl + "getallpromocodes?",
+    epGetUserListByRoleId: BaseUrl + "getuserlistbyroleid?roleId="
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 
