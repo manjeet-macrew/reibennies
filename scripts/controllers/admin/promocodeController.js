@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DTColumnDefBuilder, promoCodeService,  $filter) {
+rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DTColumnDefBuilder, promoCodeService, $filter) {
     $rootScope.IsPromoCodes = true;
     $rootScope.SelectedPage = "PromoCodes";
     $scope.promoCodeValidation = false;
@@ -145,15 +145,14 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
                 promoCodeService.CreatePromoCode(payLoad)
                 .then(function (res) {
                     if (res.data.ResponseCode == 200) {
-
-                        JSAlert.alert("PromoCode Saved Successfully");
+                        //JSAlert.alert("PromoCode Saved Successfully");
                         if ($scope.SelectedTab == 'A')
                             $scope.GetAllPromoCodes('A');
                         else if ($scope.SelectedTab == 'N')
                             $scope.GetAllPromoCodes('N');
                         else
                             $scope.GetAllPromoCodes('Y');
-
+                        
                         // JSAlert.alert(res.data.Message);
                     } else {
                         JSAlert.alert("Failed to save");
@@ -181,7 +180,7 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
     $scope.addPromoCodeOpenModal = function () {
         $scope.PromoCodeInfo = {
             promoCode: "",
-            promoCodeDuration: "",
+            promoCodeDuration: 90,
             promoCodeId: 0
         };
     };
@@ -252,4 +251,39 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
         var date = new Date(stringDate);
         return date;
     }
+    $scope.OpenModalViewUsers = function (n) {
+        $scope.GetUserListByPromoCode(n.promoCode);
+    }
+
+    $scope.GetUserListByPromoCode=function(promoCode)
+    {
+        $scope.UserData = [];
+        var userId = sessionStorage.getItem('UID');
+        $scope.Data = { promoCode: promoCode, userId: userId };
+        var queryString = $.param($scope.Data);
+        promoCodeService.GetUserListByPromoCode(queryString)
+        .then(function (res) {
+            if(res.data.ResponseCode==200)
+            {
+                if (res.data.ResponseData[0] != null)
+                    $scope.UserData = res.data.ResponseData[0].PromoCodeUsersInfoData;
+            }
+            else {
+                JSAlert.alert("Failed to load users data");
+            }
+        }).catch(function (ex) {
+            $('#ajaxSpinnerContainer').hide();
+            JSAlert.alert("Failed to load users data");
+        });
+
+    }
+    $scope.supported = false;
+    $scope.success = function (id) {
+        if(id==0)
+        JSAlert.alert("PromoCode Copied to clipBoard");
+    };
+
+    $scope.fail = function (err) {
+        console.error('Error!', err);
+    };
 });

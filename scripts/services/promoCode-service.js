@@ -63,4 +63,16 @@ rEIBenniesApp.service('promoCodeService', ['$http', 'config', '$location', '$coo
         }).error(function (response, status, headers, config) {
         });
     };
+
+    this.GetUserListByPromoCode = function (param) {
+        return $http({
+            method: 'GET', url: config.epGetUserListByPromoCode + param,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
 }])

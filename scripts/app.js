@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter', 'datatables', 'checklist-model', "chart.js"]);
+var rEIBenniesApp = angular.module("REIBenniesApp", ["ngRoute", "app.config", 'ngCookies', 'ngAnimate', 'toastr', 'angular.filter', 'datatables', 'checklist-model', "chart.js", "angular-clipboard"]);
 
 rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 
@@ -157,7 +157,7 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
 var onlySSL = function ($location, $q, $window) {
     if ($location.protocol() !== 'https') {
         //alert("Need SSL");
-       // $window.location.href = $location.absUrl().replace('http', 'https');
+       $window.location.href = $location.absUrl().replace('http', 'https');
     }
     var deferred = $q.defer();
     deferred.resolve();
