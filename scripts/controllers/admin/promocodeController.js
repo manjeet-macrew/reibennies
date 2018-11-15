@@ -257,7 +257,7 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
 
     $scope.GetUserListByPromoCode=function(promoCode)
     {
-        $scope.UserData = [];
+        $scope.UsersData = [];
         var userId = sessionStorage.getItem('UID');
         $scope.Data = { promoCode: promoCode, userId: userId };
         var queryString = $.param($scope.Data);
@@ -266,7 +266,7 @@ rEIBenniesApp.controller("promocodeController", function ($scope, $rootScope, DT
             if(res.data.ResponseCode==200)
             {
                 if (res.data.ResponseData[0] != null)
-                    $scope.UserData = res.data.ResponseData[0].PromoCodeUsersInfoData;
+                    $scope.UsersData = res.data.ResponseData[0].PromoCodeUsersInfoData;
             }
             else {
                 JSAlert.alert("Failed to load users data");
