@@ -16,24 +16,45 @@
         <span style="padding-left:30px;font-weight:700">Total Rankings : {{TotalNoOfBenniesRankings}}</span>
     </div>
     <br />
+     <div ng-if=noRecordRevByMon>
+         <span ><b>No Data for Total Revenue By Month</b></span>
+     </div>
+     <div ng-if=noRecordRevByYear>
+         <span ><b>No Data For Total Revenue By Year</b></span>
+     </div>
+     <div ng-if=noRecordBennByState>
+         <span ><b>No Record For Total Bennies By State</b></span>
+     </div>
+     <div ng-if=noRecordBenniesByMonth>
+         <span ><b>No Data For Total Bennies Per Month</b></span>
+     </div >
+     <div ng-if= noRecordHelpChart>
+         <span><b>No Data For Total Help Request By Month</b></span>
+     </div>
+     <div ng-if= noRecordSubByType>
+         <span><b>No Data For Subscription By Type</b></span>
+        
+     </div>
+     <br />
     <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-5" ng-if=!noRecordBenniesByMonth>
             <b>Total Bennies Per Month</b>
             <!--<canvas id="pie" class="chart chart-pie" chart-data="data" chart-labels="labels"></canvas>-->
             <canvas id="cnbenniespermonth" class="chart chart-line" chart-data="benniesPerMonthdata" chart-options="options"  title="Total Bennies By Month" chart-labels="benniesPerMonthLabels" chart-legend="true" ></canvas>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-5" ng-if=!noRecordSubByType>
             <b>Total Subscription By Type</b>
             <canvas id="cnsubscriptionbytype" class="chart chart-line" chart-data="subscriptionByTypeData" chart-options="options" title="Total Subscription By Type" chart-labels="subscriptionByTypeLabels" chart-legend="true" ></canvas>
         </div>
     </div>
     <br />
     <div class="row">
-        <div class="col-sm-5">
-            <b>Total Bennies By State</b>
-            <canvas id="cnbenniesbystate" class="chart chart-bar" chart-data="benniesByStateData" chart-options="options" title="Total Bennies By State" chart-labels="benniesByStateLabels" chart-legend="true"></canvas>
-        </div>
-        <div class="col-sm-5">
+        <div ng-if=!noRecordBennByState class="col-sm-5">
+            <b ng-if=!noRecordBennByState>Total Bennies By State</b>
+            <canvas id="cnbenniesbystate" class="chart chart-bar" chart-data="benniesByStateData" chart-options="options" title="Total Bennies By State" chart-labels="benniesByStateLabels" chart-legend="true" ng-if=!noRecordBennByState></canvas>
+          
+         </div>
+        <div class="col-sm-5" ng-if=!noRecordHelpChart >
             <b>Total Help Request By Month</b>
             <!--<canvas id="cnhelpreqbymonth" class="chart chart-bar" chart-data="helpRequestByMonthData" chart-options="options"  title="Total Help Request By Month" chart-labels="helpRequestByMonthLabels" chart-legend="true" ></canvas>-->
             <canvas id="cnhelpreqbymonth" ></canvas>
@@ -41,13 +62,18 @@
     </div>
     <br />
     <div class="row">
-        <div class="col-sm-5">
-            <b>Total Revenue By Month</b>
-            <canvas id="cnrevenuebymonth" class="chart chart-line" chart-options="options" chart-data="revenueByMonthData" title="Total Revenue By Month" chart-labels="revenueByMonthLabels" chart-legend="true"></canvas>
+        <div class="col-sm-5" ng-if=!noRecordRevByMon>
+            <b >Total Revenue By Month</b>
+                <canvas id="cnrevenuebymonth" class="chart chart-line" chart-options="options" chart-data="revenueByMonthData" title="Total Revenue By Month" chart-labels="revenueByMonthLabels" chart-legend="true" ng-if=!noRecordRevByMon></canvas>
+            
         </div>
-        <div class="col-sm-5">
-            <b>Total Revenue By Year</b>
-            <canvas id="cnrevenuebyyear" class="chart chart-bar" chart-options="options" chart-data="revenueByYearData" title="Total Revenue By Year" chart-labels="revenueByYearLabels" chart-legend="true"></canvas>
+        <div class="col-sm-5" ng-if=!noRecordRevByYear>
+            <b >Total Revenue By Year</b>
+            <!--<div ng-show=!noRecordRevByYear>-->
+                <canvas id="cnrevenuebyyear" class="chart chart-bar" chart-options="options" chart-data="revenueByYearData" title="Total Revenue By Year" chart-labels="revenueByYearLabels" chart-legend="true" ng-if=!noRecordRevByYear></canvas>
+              
+              <!--</div>-->
+               
         </div>
     </div>
         <!-- end page content -->

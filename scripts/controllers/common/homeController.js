@@ -188,34 +188,78 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     $scope.SetChartValues=function(chartLabels,chartData,chartName)
     {
         if (chartName == "BenniesByMonth") {
+            if (chartLabels.length == 0 && chartData.length == 0) {
+                $scope.noRecordBenniesByMonth = true;
+            }
+            else {
+                $scope.noRecordBenniesByMonth = false;
+            }
             $scope.benniesPerMonthLabels = chartLabels;
             $scope.benniesPerMonthdata = chartData;
         }
         else if(chartName=="SubscriptionByType")
         {
+            if (chartLabels.length == 0 && chartData.length == 0) {
+                $scope.noRecordSubByType = true;
+            }
+            else {
+                $scope.noRecordSubByType  = false;
+            }
+            chartLabels.unshift("");
+            chartData.unshift("0");
             $scope.subscriptionByTypeLabels = chartLabels;
             $scope.subscriptionByTypeData = chartData;
         }
         else if(chartName="BenniesByState")
         {
+            if (chartLabels.length == 0 && chartData.length == 0) {
+                $scope.noRecordBennByState = true;
+            }
+            else {
+                $scope.noRecordBennByState = false;
+            }
             $scope.benniesByStateLabels = chartLabels;
             $scope.benniesByStateData = chartData;
         }
     }
 
     $scope.SetHelpChartValues = function (chartLabels, chartData) {
+        if (chartLabels.length == 0 && chartData.length == 0) {
+            $scope.noRecordHelp = true;
+        }
+        else {
+            $scope.noRecordHelp = true;
             $scope.helpRequestByMonthLabels = chartLabels;
             $scope.helpRequestByMonthData = chartData;
+
+        }
+           
     }
 
     $scope.SetRevenueChartValues = function (chartLabels, chartData) {
-        $scope.revenueByMonthLabels = chartLabels;
-        $scope.revenueByMonthData = chartData;
+       
+        if (chartLabels.length == 0 && chartData.length == 0)
+        {
+            $scope.noRecordRevByMon = true;
+        }
+        else
+        {
+            $scope.noRecordRevByMon = false;
+            $scope.revenueByMonthLabels = chartLabels;
+            $scope.revenueByMonthData = chartData;
+        }
+       
     }
 
     $scope.SetYearRevenueChartValues = function (chartLabels, chartData) {
-        $scope.revenueByYearLabels = chartLabels;
-        $scope.revenueByYearData = chartData;
+        if (chartLabels.length == 0 && chartData.length == 0) {
+            $scope.noRecordRevByYear = true;
+        }
+        else {
+            $scope.noRecordRevByYear = false;
+            $scope.revenueByYearLabels = chartLabels;
+            $scope.revenueByYearData = chartData;
+        }
     }
 
     $scope.UserIds = [];
@@ -273,7 +317,6 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
         { month: "December", helpRequestCount: 0, unResolvedHelpRequestCount: 0, resolvedHelpRequestCount: 0 }];
 
         for (var i = 0; i < $scope.mainHelpRequestObj.length; i++) {
-            debugger;
             var countHelpRequest = $scope.TotalNoOfHelpRequestPerMonth.filter(function (node) {
                 return node.month == $scope.mainHelpRequestObj[i].month;
             });
@@ -304,83 +347,92 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     }
     
     $scope.HelpRequestChart = function () {
-        $scope.CreateHelpRequestChartdata();
-        var helpRequestCanvas = document.getElementById("cnhelpreqbymonth");
+        $scope.TotalResolvedHelpRequestPerMonth
+        $scope.TotalUnResolvedHelpRequestPerMonth
+        if ($scope.TotalNoOfHelpRequestPerMonth.length == 0 && $scope.TotalNoOfHelpRequestPerMonth.length == 0 && $scope.TotalNoOfHelpRequestPerMonth.length == 0) {
+            $scope.noRecordHelpChart = true;
+        }
+        else {
+            $scope.noRecordHelpChart = false;
 
-        Chart.defaults.global.defaultFontFamily = "Lato";
-        Chart.defaults.global.defaultFontSize = 15;
-        var months = $scope.HelpRequestObj.map(function (obj) { return obj.month; });
-        var helpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.helpRequestCount; });
-        var unResolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.unResolvedHelpRequestCount; });
-        var resolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.resolvedHelpRequestCount; });
+            $scope.CreateHelpRequestChartdata();
+            var helpRequestCanvas = document.getElementById("cnhelpreqbymonth");
 
-        var dataTotalHelpRequest = {
-            label: "Total Request",
-            data: helpRequestPerMonth,
-            lineTension: 0.3,
-            fill: false,
-            borderColor: 'Black',
-            backgroundColor: 'transparent',
-            pointBorderColor: 'black',
-            pointBackgroundColor: 'lightgreen',
-            pointRadius: 5,
-            pointHoverRadius: 5,
-            pointHitRadius: 5,
-            pointBorderWidth: 1,
-            pointStyle: 'rect'
-        };
+            Chart.defaults.global.defaultFontFamily = "Lato";
+            Chart.defaults.global.defaultFontSize = 15;
+            var months = $scope.HelpRequestObj.map(function (obj) { return obj.month; });
+            var helpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.helpRequestCount; });
+            var unResolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.unResolvedHelpRequestCount; });
+            var resolvedHelpRequestPerMonth = $scope.HelpRequestObj.map(function (obj) { return obj.resolvedHelpRequestCount; });
 
-        var dataResolvedHelpRequest = {
-            label: "Resolved Request",
-            data: resolvedHelpRequestPerMonth,
-            lineTension: 0.3,
-            fill: false,
-            borderColor: 'Green',
-            backgroundColor: 'transparent',
-            pointBorderColor: 'purple',
-            pointBackgroundColor: 'lightgreen',
-            pointRadius: 5,
-            pointHoverRadius: 5,
-            pointHitRadius: 1,
-            pointBorderWidth: 2
-        };
+            var dataTotalHelpRequest = {
+                label: "Total Request",
+                data: helpRequestPerMonth,
+                lineTension: 0.3,
+                fill: false,
+                borderColor: 'Black',
+                backgroundColor: 'transparent',
+                pointBorderColor: 'black',
+                pointBackgroundColor: 'lightgreen',
+                pointRadius: 5,
+                pointHoverRadius: 5,
+                pointHitRadius: 5,
+                pointBorderWidth: 1,
+                pointStyle: 'rect'
+            };
 
-        var dataUnResolvedHelpRequest = {
-            label: "UnResolved Request",
-            data: unResolvedHelpRequestPerMonth,
-            lineTension: 0.3,
-            fill: false,
-            borderColor: 'red',
-            backgroundColor: 'transparent',
-            pointBorderColor: 'red',
-            pointBackgroundColor: 'lightgreen',
-            pointRadius: 5,
-            pointHoverRadius: 5,
-            pointHitRadius: 5,
-            pointBorderWidth: 1,
-            pointStyle: 'dot'
-        };
+            var dataResolvedHelpRequest = {
+                label: "Resolved Request",
+                data: resolvedHelpRequestPerMonth,
+                lineTension: 0.3,
+                fill: false,
+                borderColor: 'Green',
+                backgroundColor: 'transparent',
+                pointBorderColor: 'purple',
+                pointBackgroundColor: 'lightgreen',
+                pointRadius: 5,
+                pointHoverRadius: 5,
+                pointHitRadius: 1,
+                pointBorderWidth: 2
+            };
 
-        var helpData = {
-            labels: months,
-            datasets: [dataTotalHelpRequest, dataResolvedHelpRequest, dataUnResolvedHelpRequest]
-        };
+            var dataUnResolvedHelpRequest = {
+                label: "UnResolved Request",
+                data: unResolvedHelpRequestPerMonth,
+                lineTension: 0.3,
+                fill: false,
+                borderColor: 'red',
+                backgroundColor: 'transparent',
+                pointBorderColor: 'red',
+                pointBackgroundColor: 'lightgreen',
+                pointRadius: 5,
+                pointHoverRadius: 5,
+                pointHitRadius: 5,
+                pointBorderWidth: 1,
+                pointStyle: 'dot'
+            };
 
-        var chartOptions = {
-            legend: {
-                display: true,
-                position: 'top',
-                labels: {
-                    boxWidth: 2,
-                    fontColor: 'black'
+            var helpData = {
+                labels: months,
+                datasets: [dataTotalHelpRequest, dataResolvedHelpRequest, dataUnResolvedHelpRequest]
+            };
+
+            var chartOptions = {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                        boxWidth: 2,
+                        fontColor: 'black'
+                    }
                 }
-            }
-        };
-        var lineChart = new Chart(helpRequestCanvas, {
-            type: 'line',
-            data: helpData,
-            options: chartOptions
-        });
+            };
+            var lineChart = new Chart(helpRequestCanvas, {
+                type: 'line',
+                data: helpData,
+                options: chartOptions
+            });
+        }
     }
     if ($rootScope.UserRole == "App Admin" || $rootScope.UserRole == "Staff")
     {
