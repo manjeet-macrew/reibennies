@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-rEIBenniesApp.controller("subscriptionMgmtController", function ($scope, $rootScope, DTColumnDefBuilder,rankService, helpSupportService, userService, $filter) {
+rEIBenniesApp.controller("subscriptionMgmtController", function ($scope, $rootScope, DTColumnDefBuilder,rankService, helpSupportService, userService,subscriptionMgmtService, $filter) {
     $rootScope.IsSubscriptionMgmt = true;
     $rootScope.SelectedPage = "SubscriptionMgmt";
     $scope.IsList = true;
@@ -14,10 +14,16 @@ rEIBenniesApp.controller("subscriptionMgmtController", function ($scope, $rootSc
     ];
 
     $scope.UserData = [];
-    $scope.GetAllActiveUsers = function () {
+    $scope.GetAllActiveUsersByRoleId = function () {
         $scope.UserData = [];
-        var userId = sessionStorage.getItem('UID')
-        rankService.GetAllActiveUsers(userId)
+        var userId = sessionStorage.getItem('UID');
+        var roleId = 2;
+        $scope.Data = {
+            userId: userId,
+            roleId: roleId
+        };
+        var queryString = $.param($scope.Data);
+        subscriptionMgmtService.GetAllActiveUsersByRoleId(queryString)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
@@ -31,7 +37,7 @@ rEIBenniesApp.controller("subscriptionMgmtController", function ($scope, $rootSc
              });
     }
 
-    $scope.GetAllActiveUsers();
+    $scope.GetAllActiveUsersByRoleId();
 
     $scope.OpenModel = function (req) {
         $scope.GetProfileInfo(req);
@@ -74,7 +80,7 @@ rEIBenniesApp.controller("subscriptionMgmtController", function ($scope, $rootSc
                     $scope.disBtnStop = true;
                     JSAlert.alert("Subscription Canceled Successfully");
                     $('#myModal').modal('hide');
-                    $scope.GetAllActiveUsers();
+                    $scope.GetAllActiveUsersByRoleId();
                 } else {
                     JSAlert.alert("Failed to Cancel Subscription");
                 }
