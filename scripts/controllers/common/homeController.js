@@ -12,7 +12,20 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     $rootScope.UserRole = sessionStorage.getItem('Role');
     $scope.UserId = sessionStorage.getItem('UID');
 
-    $scope.options = { title: { display: true, text: "" } };
+    $scope.options = {
+        title: { display: true, text: "" }, scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
 
     $scope.GetTotalNumberOfbennies=function()
     {
@@ -33,6 +46,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     }
 
     $scope.GetTotalNoOfBenniesSignedUpPerMonth = function () {
+        debugger;
         var userId = $scope.UserId;
         $scope.TotalNoOfBenniesSignedUpPerMonth = [];
         homeService.GetTotalNoOfBenniesSignedUpPerMonth(userId)
@@ -40,9 +54,10 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.TotalNoOfBenniesSignedUpPerMonth = res.data.ResponseData[0].BenniesSignedUpPerMonthInfoData;
-
-                         var months = $scope.TotalNoOfBenniesSignedUpPerMonth.map(function (a) { return a.month; });
+                        var months = $scope.TotalNoOfBenniesSignedUpPerMonth.map(function (a) { return a.month; });
                          var users = $scope.TotalNoOfBenniesSignedUpPerMonth.map(function (a) { return a.users; });
+                         //months.unshift("");
+                         //users.unshift("0");
                          $scope.SetChartValues(months, users, "BenniesByMonth");
 
                  } else {
@@ -65,7 +80,10 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
 
                      var subscriptionTypes = $scope.TotalNoOfSubscriptions.map(function (obj) { return obj.title; })
                      var subscriptionCounts = $scope.TotalNoOfSubscriptions.map(function (obj) { return obj.totalcount; })
-                     $scope.SetChartValues(subscriptionTypes, subscriptionCounts,"SubscriptionByType")
+                     //subscriptionTypes.unshift("");
+                     //subscriptionCounts.unshift("0");
+                     debugger;
+                     $scope.SetChartValues(subscriptionTypes, subscriptionCounts, "SubscriptionByType")
                  } else {
                      // JSAlert.alert("Bennies Not Found");
                  }
@@ -137,6 +155,8 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                          $scope.TotalRevenuePerMonth = res.data.ResponseData[0].TotalRevenuePerMonthInfoData;
                      var revmonths = $scope.TotalRevenuePerMonth.map(function (obj) { return obj.month; });
                      var revtotalbymonth = $scope.TotalRevenuePerMonth.map(function (obj) { return obj.revenue; });
+                     //revmonths.unshift("");
+                     //revtotalbymonth.unshift("0");
                      $scope.SetRevenueChartValues(revmonths, revtotalbymonth);
                  } else {
                      // JSAlert.alert("Bennies Not Found");
@@ -172,9 +192,11 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                          $scope.TotalNoOfBenniesSignedUpPerState = res.data.ResponseData[0].BenniesSignedUpPerStateInfoData;
-
+                    
                      var states = $scope.TotalNoOfBenniesSignedUpPerState.map(function (obj) { return obj.stateName; })
                      var counts = $scope.TotalNoOfBenniesSignedUpPerState.map(function (obj) { return obj.totalcount; })
+                     //states.unshift("");
+                     //counts.unshift("0");
                      $scope.SetChartValues(states, counts, "BenniesByState")
                  } else {
                     // JSAlert.alert("Bennies Not Found");
@@ -188,7 +210,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     $scope.SetChartValues=function(chartLabels,chartData,chartName)
     {
         if (chartName == "BenniesByMonth") {
-            if (chartLabels.length == 0 && chartData.length == 0) {
+            if (chartLabels.length == 0 && chartData.length ==0) {
                 $scope.noRecordBenniesByMonth = true;
             }
             else {
@@ -199,7 +221,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
         }
         else if(chartName=="SubscriptionByType")
         {
-            if (chartLabels.length == 0 && chartData.length == 0) {
+            if (chartLabels.length ==0 && chartData.length ==0) {
                 $scope.noRecordSubByType = true;
             }
             else {
@@ -212,7 +234,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
         }
         else if(chartName="BenniesByState")
         {
-            if (chartLabels.length == 0 && chartData.length == 0) {
+            if (chartLabels.length ==0  && chartData.length ==0) {
                 $scope.noRecordBennByState = true;
             }
             else {
@@ -224,7 +246,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     }
 
     $scope.SetHelpChartValues = function (chartLabels, chartData) {
-        if (chartLabels.length == 0 && chartData.length == 0) {
+        if (chartLabels.length == 0 && chartData.length ==0) {
             $scope.noRecordHelp = true;
         }
         else {
@@ -238,7 +260,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
 
     $scope.SetRevenueChartValues = function (chartLabels, chartData) {
        
-        if (chartLabels.length == 0 && chartData.length == 0)
+        if (chartLabels.length == 0 && chartData.length ==0 )
         {
             $scope.noRecordRevByMon = true;
         }
@@ -252,7 +274,7 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
     }
 
     $scope.SetYearRevenueChartValues = function (chartLabels, chartData) {
-        if (chartLabels.length == 0 && chartData.length == 0) {
+        if (chartLabels.length == 0 && chartData.length ==0) {
             $scope.noRecordRevByYear = true;
         }
         else {
@@ -291,6 +313,8 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                          $scope.TotalRevenuePerYear = res.data.ResponseData[0].TotalRevenuePerYearInfoData;
                      var revyears = $scope.TotalRevenuePerYear.map(function (obj) { return obj.year; });
                      var revtotalbyyear = $scope.TotalRevenuePerYear.map(function (obj) { return obj.revenue; });
+                     //revyears.unshift("");
+                     //revtotalbyyear.unshift(0);
                      $scope.SetYearRevenueChartValues(revyears, revtotalbyyear);
                  } else {
                      JSAlert.alert("Revenue Not Found");

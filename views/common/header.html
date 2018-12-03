@@ -45,8 +45,8 @@
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsRankApprover && SelectedPage=='RankApprover') || (IsRank && SelectedPage=='Rank')}">
                     <a class="dropdown-toggle" data-toggle="dropdown">Rank<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'active' : IsRankApprover && SelectedPage=='RankApprover'}"><a href="#/rankapprover">Approval</a></li>
-                        <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsRank && SelectedPage=='Rank'}"><a href="#/rank">Ranking</a></li>
+                        <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'active' : IsRankApprover && SelectedPage=='RankApprover'}"><a href="#/rankapprover">Requests</a></li>
+                        <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsRank && SelectedPage=='Rank'}"><a href="#/rank">Rankings</a></li>
                     </ul>
                 </li>
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsUserActivity && SelectedPage=='UserActivity') || (IsPushNotificationHistory && SelectedPage=='PushNotificationHistory') || (IsYearlyReports && SelectedPage=='YearlyReports') || (IsMonthlyReports && SelectedPage=='MonthlyReports')}">

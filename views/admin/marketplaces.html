@@ -28,7 +28,7 @@
                 <!--<td>{{n.description | limitTo:19}}{{n.description.length>19  ? '...': ''}}</td>-->
                 <td>{{n.city}}</td>
                 <td>{{n.stateName}}</td>
-                <td>{{n.price}}</td>
+                <td>${{n.price}}</td>
                 <td>
                     <ul style="list-style-type:none;">
                         <li ng-if="n.attachment1.length>0"><a href="{{n.attachment1}}" target="_blank">{{n.attachment1.length>0  ? 'ViewAttachment1': ''}}</a></li>
@@ -76,7 +76,7 @@
                                  <h4 class="card-title">Last Name: <span>{{MarketPlaceDetail.lastName}}</span></h4>
                               
                                 <h4 class="card-title">State: <span>{{MarketPlaceDetail.stateName}}</span></h4>
-                                <h4 class="card-title">Price: <span>{{MarketPlaceDetail.price}} $</span></h4>
+                                <h4 class="card-title">Price: <span>${{MarketPlaceDetail.price}}</span></h4>
                               
                             </div>
                         </div>
