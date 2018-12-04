@@ -13,7 +13,9 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
     $scope.addressValidation = false;
     $scope.cityValidation = false;
     $scope.stateValidation = false;
-    $scope.zipValidation = false;
+   // $scope.zipValidation = false;
+    $scope.userNameValidation = false;
+    $scope.passwordValidation = false;
     $scope.dtColumnDefs = [
      DTColumnDefBuilder.newColumnDef(0).notSortable()
     ];
@@ -146,16 +148,17 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
     };
 
     $scope.Submit = function (UserInfo) {
-        
         $scope.roleAssignedValidation = false;
         $scope.frstNameValidation = false;
         $scope.lastNameValidation = false;
         $scope.emailValidation = false;
-        $scope.primaryValidation = false;
-        $scope.addressValidation = false;
-        $scope.cityValidation = false;
+       // $scope.primaryValidation = false;
+      //  $scope.addressValidation = false;
+       // $scope.cityValidation = false;
         $scope.stateValidation = false;
-        $scope.zipValidation = false;
+       // $scope.zipValidation = false;
+        $scope.userNameValidation = false;
+        $scope.passwordValidation = false;
         if ($scope.userForm.$valid) {
             var payload = [];
             var userId = UserInfo.userId;
@@ -194,7 +197,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                     });
             }
             else {
-              
+                debugger;
                 //update User Settings
                 userService.SignUp(UserInfo)
                     .then(function (res) {
@@ -244,16 +247,20 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                 $scope.lastNameValidation = true;
             if ($scope.UserInfo.Email == null || $scope.UserInfo.Email == '')
                 $scope.emailValidation = true;
-            if ($scope.UserInfo.phoneOne == null || $scope.UserInfo.phoneOne == '')
-                $scope.primaryValidation = true;
-            if ($scope.UserInfo.AddressOne == null || $scope.UserInfo.AddressOne == '')
-                $scope.addressValidation = true;
-            if ($scope.UserInfo.City == null || $scope.UserInfo.City == '')
-                $scope.cityValidation = true;
+            if ($scope.UserInfo.userName == null || $scope.UserInfo.userName == '')
+                $scope.userNameValidation = true;
+            if ($scope.UserInfo.Password == null || $scope.UserInfo.Password == '')
+                $scope.passwordValidation = true;
+            //if ($scope.UserInfo.phoneOne == null || $scope.UserInfo.phoneOne == '')
+            //    $scope.primaryValidation = true;
+            //if ($scope.UserInfo.AddressOne == null || $scope.UserInfo.AddressOne == '')
+            //    $scope.addressValidation = true;
+            //if ($scope.UserInfo.City == null || $scope.UserInfo.City == '')
+            //    $scope.cityValidation = true;
             if ($scope.UserInfo.State == null || $scope.UserInfo.State == '')
                 $scope.stateValidation = true;
-            if ($scope.UserInfo.zipCode == null || $scope.UserInfo.zipCode == '')
-                $scope.zipValidation = true;
+            //if ($scope.UserInfo.zipCode == null || $scope.UserInfo.zipCode == '')
+            //    $scope.zipValidation = true;
         }
 
     };
@@ -336,6 +343,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
     }
 
     $scope.SendNotificationSubmit = function (notificationData) {
+        debugger;
         $scope.bodyValidation = false;
         $scope.titleValidation = false;
         if ($scope.notificationform.$valid) {

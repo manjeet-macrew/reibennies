@@ -227,8 +227,8 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
             else {
                 $scope.noRecordSubByType  = false;
             }
-            chartLabels.unshift("");
-            chartData.unshift("0");
+           // chartLabels.unshift("");
+            //chartData.unshift("0");
             $scope.subscriptionByTypeLabels = chartLabels;
             $scope.subscriptionByTypeData = chartData;
         }
@@ -449,7 +449,19 @@ rEIBenniesApp.controller("homeController", function ($scope, $rootScope, homeSer
                         boxWidth: 2,
                         fontColor: 'black'
                     }
+                }, scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
+
             };
             var lineChart = new Chart(helpRequestCanvas, {
                 type: 'line',

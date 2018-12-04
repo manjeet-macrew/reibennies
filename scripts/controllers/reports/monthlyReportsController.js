@@ -12,7 +12,20 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
     $scope.showbenniesbystate = false;
     $scope.showsubscriptionbytype = false;
     $scope.showpermonthbennies = false;
-    $scope.options = { title: { display: true, text: "" } };
+    $scope.options = {
+        title: { display: true, text: "" }, scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
     $scope.showtitle = true;
     $scope.HelpRequestMethCallCount = 0
     $scope.CreateReportByType = function () {
@@ -133,8 +146,8 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
                          $scope.reportDataExist = true;
                          var months = $scope.TotalNoOfBenniesSignedUpPerMonth.map(function (a) { return a.month; });
                          var users = $scope.TotalNoOfBenniesSignedUpPerMonth.map(function (a) { return a.users; });
-                         months.unshift("");
-                         users.unshift("0");
+                        // months.unshift("");
+                        // users.unshift("0");
                          $scope.CreateReport(months, users, "BenniesByMonth");
                      }
                      else {
@@ -186,8 +199,8 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
                          var subscriptionTypes = $scope.TotalNoOfSubscriptions.map(function (a) { return a.title; });
                          var subscriptionCounts = $scope.TotalNoOfSubscriptions.map(function (a) { return a.totalcount; });
                          $scope.CreateReport(subscriptionTypes, subscriptionCounts, "SubscriptionByType");
-                         subscriptionTypes.unshift("");
-                         subscriptionCounts.unshift("0");
+                        // subscriptionTypes.unshift("");
+                        // subscriptionCounts.unshift("0");
                      }
                      else {
                          $scope.showbenniesbystate = false;
@@ -236,8 +249,8 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
                          $scope.reportDataExist = true;
                          var states = $scope.TotalNoOfBenniesSignedUpPerState.map(function (a) { return a.stateName; });
                          var counts = $scope.TotalNoOfBenniesSignedUpPerState.map(function (a) { return a.totalcount; });
-                         states.unshift("");
-                         counts.unshift("0");
+                         //states.unshift("");
+                        // counts.unshift("0");
                          $scope.CreateReport(states, counts, "BenniesByState");
                      }
                      else {
@@ -288,8 +301,8 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
 
                          var revmonths = $scope.TotalRevenuePerMonth.map(function (obj) { return obj.month; });
                          var revtotalbymonth = $scope.TotalRevenuePerMonth.map(function (obj) { return obj.revenue; });
-                         revmonths.unshift("");
-                         revtotalbymonth.unshift("0");
+                        // revmonths.unshift("");
+                        // revtotalbymonth.unshift("0");
                          $scope.CreateRevenueByMonthReport(revmonths, revtotalbymonth);
                      }
                      else {
@@ -690,6 +703,17 @@ rEIBenniesApp.controller("monthlyReportsController", function ($scope, $rootScop
                 labels: {
                     boxWidth: 2,
                     fontColor: 'black'
+                }, scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
             }
         };

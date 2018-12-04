@@ -53,39 +53,43 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="State">* First Name:</label>
-                        <input type="text" class="form-control" ng-model="UserInfo.firstName" required  placeholder="First Name"/>
-                         <span class="validationClass" ng-show="frstNameValidation">* First Name is required</span> 
-                     </div>
-                    <div class="form-group">
-                        <label for="email">Middle Name:</label>
-                        <input type="text" class="form-control" id="mname" ng-model="UserInfo.middleName" placeholder="Middle Name" name="mname">
+                        <input type="text" class="form-control" ng-model="UserInfo.firstName" required placeholder="First Name" />
+                        <span class="validationClass" ng-show="frstNameValidation">* First Name is required</span>
                     </div>
                     <div class="form-group">
                         <label for="State">* Last Name:</label>
                         <input type="text" class="form-control" ng-model="UserInfo.lastName" required placeholder="Last Name" />
-                        <span class="validationClass" ng-show="lastNameValidation">* Last Name is required</span> 
+                        <span class="validationClass" ng-show="lastNameValidation">* Last Name is required</span>
                     </div>
                     <div class="form-group">
-                        <label for="State">Roles Assigned:</label><span class="validationClass" ng-show="roleAssignedValidation">Please select atleast one role</span><br />
-                        <span ng-repeat="rol in RolesData" class="checkbox-inline">
-                            <input type="checkbox" checklist-model="UserRoles.roles" checklist-value="rol.roleId" ng-required="UserRoles.roles.length==0"> {{rol.roleName}}<br>
-                        </span>
-
-                    </div>
-                    <div class="form-group">
-                        <label for="usrName">User Name:</label>
-                        <input type="text"  class="form-control" id="uname" ng-model="UserInfo.userName" placeholder="User Name" name="uname">
-                    </div>
-                    <div class="form-group" ng-hide="UserInfo.userId>0">
-                        <label for="password">password:</label>
-                        <input type="password" class="form-control" id="pswrd" ng-model="UserInfo.Password" placeholder="Password" name="pswrd">
+                        <label for="State">* State:</label>
+                        <select required="required" class="form-control" ng-model="UserInfo.State" ng-options="state.stateId as state.stateName for state in States">
+                            <option value="">-- Select State --</option>
+                        </select>
+                        <span class="validationClass" ng-show="stateValidation">* State is required</span>
                     </div>
                     <div class="form-group">
                         <label for="email">* Email:</label>
                         <input required type="email" class="form-control" id="email" ng-model="UserInfo.Email" placeholder="Email" name="email">
-                        <span class="validationClass" ng-show="emailValidation">* Email is required</span> 
+                        <span class="validationClass" ng-show="emailValidation">* Email is required</span>
                     </div>
                     <div class="form-group">
+                        <label for="usrName">* User Name:</label>
+                        <input type="text" class="form-control" id="uname" ng-model="UserInfo.userName" placeholder="User Name" name="uname">
+                        <span class="validationClass" ng-show="userNameValidation">* User Name is required</span>
+                    </div>
+                    <div class="form-group" ng-hide="UserInfo.userId>0">
+                        <label for="password">* Temp Password:</label>
+                        <input type="password" class="form-control" id="pswrd" ng-model="UserInfo.Password" placeholder="Password" name="pswrd">
+                        <span class="validationClass" ng-show="passwordValidation">* Temp Password is required</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="State">* Roles Assigned:</label><span class="validationClass" ng-show="roleAssignedValidation">Please select atleast one role</span><br />
+                        <span ng-repeat="rol in RolesData" class="checkbox-inline">
+                            <input type="checkbox" checklist-model="UserRoles.roles" checklist-value="rol.roleId" ng-required="UserRoles.roles.length==0"> {{rol.roleName}}<br>
+                        </span>
+                    </div>
+                    <!--<div class="form-group">
                         <label for="Phone">* Primary Phone:</label>
                         <input required type="text" class="form-control" id="Phone" ng-model="UserInfo.phoneOne" placeholder="Phone" name="Phone">
                         <span class="validationClass" ng-show="primaryValidation">* Primary Phone is required</span>
@@ -93,8 +97,8 @@
                     <div class="form-group">
                         <label for="secondryPhone">Secondary Phone:</label>
                         <input type="text" class="form-control" id="secondryPhone" ng-model="UserInfo.phoneTwo" placeholder="Secondry Phone" name="secondryPhone">
-                    </div>
-                    <div class="form-group">
+                    </div>-->
+                    <!--<div class="form-group">
                         <label for="Address">* Address:</label>
                         <input required type="text" class="form-control" id="Address" ng-model="UserInfo.AddressOne" placeholder="Address" name="Address">
                         <span class="validationClass" ng-show="addressValidation">* Address is required</span>
@@ -107,8 +111,8 @@
                         <label for="City">* City:</label>
                         <input required type="text" class="form-control" id="City" ng-model="UserInfo.City" placeholder="City" name="City">
                         <span class="validationClass" ng-show="cityValidation">* City is required</span>
-                    </div>
-                    <div class="form-group">
+                    </div>-->
+                    <!--<div class="form-group">
                         <label for="State">* State:</label>
                         <select required="required" class="form-control" ng-model="UserInfo.State" ng-options="state.stateId as state.stateName for state in States">
                             <option value="">-- Select State --</option>
@@ -119,7 +123,7 @@
                         <label for="Zip">* Zip Code:</label>
                         <input required type="text" class="form-control" id="Zip" ng-model="UserInfo.zipCode" placeholder="Zip" name="Zip">
                         <span class="validationClass" ng-show="zipValidation">* Zip Code is required</span>
-                    </div>
+                    </div>-->
                    
                 </div>
                 <div class="modal-footer">

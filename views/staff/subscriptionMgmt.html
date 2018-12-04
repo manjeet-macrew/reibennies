@@ -45,20 +45,23 @@
                                 <h4 class="card-title">First Name: <span>{{ActiveSubscription.firstName}}</span> </h4>
                                 <h4 class="card-title">Phone: <span>{{ActiveSubscription.phoneOne}}</span></h4>
                                 <h4 class="card-title">City: <span>{{ActiveSubscription.City}}</span></h4>
+                                <h4 ng-if="(ActiveSubscription.isAppliedPromoCode=='Y' && ActiveSubscription.isExpiredPromoCode!='Y')" class="card-title">Start Date: <span>{{ActiveSubscription.PromoCodeStartDate}}</span></h4>
+                                
                             </div>
                             <div class="col-sm-6">
                                 <h4 class="card-title">Last Name: <span>{{ActiveSubscription.lastName}}</span></h4>
                                 <h4 class="card-title">Email: <span>{{ActiveSubscription.Email}}</span></h4>
                                 <h4 class="card-title">Zip Code: <span>{{ActiveSubscription.zipCode}}</span></h4>
+                                <h4 ng-if="(ActiveSubscription.isAppliedPromoCode=='Y'&& ActiveSubscription.isExpiredPromoCode!='Y')  " class="card-title">End Date: <span>{{ActiveSubscription.PromoCodeEndDate}}</span></h4>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-if="ActiveSubscription.hasSubscription=='Y'">
                         <div class="col-md-12">
                             <h3>Subscription</h3>
                         </div>
                     </div>
-                    <div class="card cardLayout">
+                    <div class="card cardLayout" ng-if="ActiveSubscription.hasSubscription=='Y'">
                         <div class="card-body">
                             <h5 class="card-title"><b>Type</b> : {{ActiveSubscription.Title}}</h5>
                         </div>

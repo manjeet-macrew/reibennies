@@ -66,7 +66,7 @@ rEIBenniesApp.controller("calendareventsController", function ($scope, $rootScop
         $scope.eventsDetail = {};
         debugger;
         $scope.eventsDetail = {
-            start: data.start._d,
+            start: new Date(data.start),
             end: new Date(data.end),
             allDay: false,
             eventAccess: data.eventAccess,

@@ -21,7 +21,7 @@
             </select>
         </div>
         <div class="form-group col-sm-6">
-            <label for="State">Professional Experties:</label>
+            <label for="State">Professional Expertise:</label>
             <select required="required" class="form-control" ng-model="FilterData.investortype" ng-options="investor.lookupId as investor.investorType for investor in InvestorTypes">
                 <option value="">-- Select Professional Experties --</option>
             </select>
@@ -64,7 +64,7 @@
 
                 <div class="clear"></div>
                 <div class="card-body">
-                   <h3>Professional Experties:  </h3> 
+                   <h3>Professional Expertise:  </h3> 
                      <ul><li class="card-title" ng-repeat="inv in SelectedUser.investorTypeName">{{inv}}</li></ul>
                     
                 

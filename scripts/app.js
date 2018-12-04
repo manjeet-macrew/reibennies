@@ -147,6 +147,14 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
                  forceSSL: onlySSL
              }
          }).
+    when('/accountactivation', {
+        controller: 'accountactivationController',
+        templateUrl: 'views/admin/accountactivation.html',
+        resolve: {
+            loggedIn: AccountActivation,
+            forceSSL: onlySSL
+        }
+    }).
 		otherwise({
 		    redirectTo: '/'
 		});
@@ -173,6 +181,12 @@ var onlyLoggedIn = function ($location, $q, loginApi) {
         deferred.reject();
         $location.url('/');
     }
+    return deferred.promise;
+};
+
+var AccountActivation= function ($location, $q, loginApi) {
+    var deferred = $q.defer();
+        deferred.resolve();
     return deferred.promise;
 };
 

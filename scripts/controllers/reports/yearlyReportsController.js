@@ -11,7 +11,20 @@ rEIBenniesApp.controller("yearlyReportsController", function ($scope, $rootScope
     $scope.showbenniesbystate = false;
     $scope.showsubscriptionbytype = false;
     $scope.showpermonthbennies = false;
-    $scope.options = { title: { display: true, text: "" } };
+    $scope.options = {
+        title: { display: true, text: "" }, scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }],
+            xAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    };
     $scope.showtitle = true;
     $scope.HelpRequestMethCallCount=0
     $scope.CreateReportByType = function ()
@@ -628,6 +641,17 @@ rEIBenniesApp.controller("yearlyReportsController", function ($scope, $rootScope
                 labels: {
                     boxWidth: 2,
                     fontColor: 'black'
+                }, scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
                 }
             }
         };
