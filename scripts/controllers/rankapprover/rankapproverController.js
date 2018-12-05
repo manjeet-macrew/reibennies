@@ -163,6 +163,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
     }
 
     $scope.ShowTab = function (id, element) {
+        $scope.IsList = true;
         if (element != undefined) {
             $('.panel-heading.panel-heading-tab1.active_tab').removeClass('active_tab');
             element.currentTarget.parentNode.parentNode.classList.add('active_tab')

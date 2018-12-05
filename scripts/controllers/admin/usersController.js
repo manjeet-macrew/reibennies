@@ -111,6 +111,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                          $scope.UserInfo.userName = userName;
                      }
                  } else {
+                     $('#ajaxSpinnerContainer').hide();
                      JSAlert.alert("Failed to load profile data");
                  }
              }).catch(function (ex) {
@@ -139,6 +140,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                         $scope.UserRoles.roles.push(value.roleId);
                     })
                 } else {
+                    $('#ajaxSpinnerContainer').hide();
                     JSAlert.alert("Failed to load users data");
                 }
             }).catch(function (ex) {
@@ -197,38 +199,36 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                     });
             }
             else {
-                debugger;
                 //update User Settings
                 userService.SignUp(UserInfo)
                     .then(function (res) {
-                        
                         if (res.data.ResponseCode == 200) {
-                           
-                            if (res.data.ResponseData["length"] > 1)
+                            if (res.data.ResponseData.length >= 1)
                             {
-                                userId = res.data.ResponseData[1];
+                                userId = res.data.ResponseData[0];
                                 angular.forEach($scope.UserRoles.roles, function (value, key) {
                                     payload.push({ "userId": userId, "roleId": value });
                                 });
                                 //Create Update Roles
                                 userService.CreateUpdateUserRoles(payload)
                                   .then(function (res) {
-
                                       if (res.data.ResponseCode == 200) {
                                           JSAlert.alert("User Added Successfully");
                                           $scope.GetAllUsers();
                                       } else {
-                                          JSAlert.alert("Failed to update");
+                                          $('#ajaxSpinnerContainer').hide();
+                                          JSAlert.alert("Failed to Create User");
                                       }
                                       $('#ajaxSpinnerContainer').hide();
                                       $('#manageUser').modal('hide');
                                   }).catch(function (ex) {
                                       $('#ajaxSpinnerContainer').hide();
-                                      JSAlert.alert("Failed to update");
+                                      JSAlert.alert("Failed to Create User");
                                   });
                             }
                            
                         } else {
+                            $('#ajaxSpinnerContainer').hide();
                             JSAlert.alert(res.data.Message);
                         }
                     }).catch(function (ex) {
@@ -292,7 +292,8 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
             zipCode: "",
             userName: "",
             Password: "",
-            roleId:0
+            roleId: 0,
+            IsSignUpFromApp : 'N'
         };
         $scope.UserRoles = [];
         $scope.UserRoles.roles = [];
@@ -351,36 +352,34 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
             if ($scope.NotificationType == "SingleUser")
             {
                 var data = notificationData;
-                var queryString = $.param(data);
 
-                userService.SendFcmNotification(queryString)
+                userService.SendFcmNotification(notificationData)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      $('#sendNotificationModal').modal('hide');
-                     JSAlert.alert("Notification Sent Successfully");
+                     JSAlert.alert(res.data.Message);
                  } else {
                      $('#sendNotificationModal').modal('hide');
-                     JSAlert.alert("Failed to Sent Notification");
+                     JSAlert.alert(res.data.Message);
                  }
              }).catch(function (ex) {
                  $('#ajaxSpinnerContainer').hide();
-                 JSAlert.alert("Failed to Sent Notification");
+                 JSAlert.alert(res.data.Message);
              });
             }
             else if ($scope.NotificationType == "MultiUser")
             {
                 notificationData.userId = $scope.SelectedUserIds;
-                var data = notificationData;
-                var queryString = $.param(data);
+              
 
-                userService.SendFcmNotificationToMultiUsers(queryString)
+                userService.SendFcmNotificationToMultiUsers(notificationData)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      $('#sendNotificationModal').modal('hide');
-                     JSAlert.alert("Notification Sent Successfully");
+                     JSAlert.alert(res.data.Message);
                  } else {
                      $('#sendNotificationModal').modal('hide');
-                     JSAlert.alert("Failed to Sent Notification");
+                     JSAlert.alert(res.data.Message);
                  }
              }).catch(function (ex) {
                  $('#ajaxSpinnerContainer').hide();
@@ -396,15 +395,15 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
                 };
                 var data = $scope.Data;
                 var queryString = $.param(data);
-                userService.SendFcmNotificationToAllUsers(queryString)
+                userService.SendFcmNotificationToAllUsers($scope.Data)
                 .then(function (res) {
                     if (res.data.ResponseCode == 200) {
                         $('#sendNotificationModal').modal('hide');
-                        JSAlert.alert("Notification Sent SuccessFully");
+                        JSAlert.alert(res.data.Message);
                     
                     } else {
                         $('#sendNotificationModal').modal('hide');
-                        JSAlert.alert("Failed to Sent Notification");
+                        JSAlert.alert(res.data.Message);
                     }
                 }).catch(function (ex) {
                     $('#ajaxSpinnerContainer').hide();
@@ -417,6 +416,7 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
             }
         }
         else {
+            $('#sendNotificationModal').modal('hide');
             if ($scope.NotificationData.body == null || $scope.NotificationData.body == '')
                 $scope.bodyValidation = true;
             if ($scope.NotificationData.title == null || $scope.NotificationData.title == '')

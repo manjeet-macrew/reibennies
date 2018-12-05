@@ -50,6 +50,7 @@
             </div>
             <form ng-submit="Submit(UserInfo)" name="userForm" novalidate>
                 <input type="hidden" ng-model="UserInfo.userId" />
+                <input type="hidden" ng-model="UserInfo.IsSignUpFromApp" />
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="State">* First Name:</label>

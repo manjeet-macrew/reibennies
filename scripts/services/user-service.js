@@ -211,7 +211,8 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
 
     this.SendFcmNotification = function (param) {
         return $http({
-            method: 'POST', url: config.epSendFcmNotification + param,
+            method: 'POST', url: config.epSendFcmNotification,
+            data: param,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
@@ -223,7 +224,8 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
 
     this.SendFcmNotificationToAllUsers = function (param) {
         return $http({
-            method: 'POST', url: config.epSendFcmNotificationToAllUsers + param,
+            method: 'POST', url: config.epSendFcmNotificationToAllUsers,
+            data: param,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
@@ -235,7 +237,8 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
 
     this.SendFcmNotificationToMultiUsers = function (param) {
         return $http({
-            method: 'POST', url: config.epSendFcmNotificationToMultiUsers + param,
+            method: 'POST', url: config.epSendFcmNotificationToMultiUsers,
+            data: param,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
