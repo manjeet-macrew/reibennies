@@ -80,6 +80,10 @@ angular.module('app.config', []).constant('config', {
     epGetAllPromoCodes: BaseUrl + "getallpromocodes?",
     epGetUserListByRoleId: BaseUrl + "getuserlistbyroleid?roleId=",
     epGetUserListByPromoCode: BaseUrl + "getuserlistbypromocode?",
-    epGetAllActiveUsersByRoleId: BaseUrl + "getallactiveusersbyroleid?"
+    epGetAllActiveUsersByRoleId: BaseUrl + "getallactiveusersbyroleid?",
+    epActivateUserAccount: BaseUrl + "activateuseraccount",
+    epGetUserActivationInfo: BaseUrl + "getuseractivationinfo?userId=",
+    epCreateUserActivationSubscription: BaseUrl + "createuseractivationsubscription?userId="
+
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

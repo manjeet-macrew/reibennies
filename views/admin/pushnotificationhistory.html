@@ -6,9 +6,8 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Sender Name</th>
+                <th>Sender</th>
+                <th>Recipient</th>
                 <th>title</th>
                 <th>Body</th>
                 <th>Created Date</th>
@@ -18,9 +17,8 @@
         <tbody>
             <tr ng-repeat="n in NotificationHistory">
                 <td>{{$index+1}}</td>
-                <td>{{n.firstName}}</td>
-                <td>{{n.lastName}}</td>
                 <td>{{n.sender_name}}</td>
+                <td>{{n.recipient_name}}</td>
                 <td>{{n.title}}</td>
                 <td>{{n.body}}</td>
                 <td>{{n.created_date}}</td>

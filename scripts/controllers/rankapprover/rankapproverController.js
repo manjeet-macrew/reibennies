@@ -34,6 +34,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
                                 if (res.data.ResponseData[0] != null)
                                     $scope.UnrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
                             } else {
+                                $('#ajaxSpinnerContainer').hide();
                                 JSAlert.alert("Failed to load users data");
                             }
                         }).catch(function (ex) {
@@ -48,6 +49,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
                     if (res.data.ResponseData[0] != null)
                         $scope.DeniedrankedUserData = res.data.ResponseData[0].UserRankRequestInfoData;
                 } else {
+                    $('#ajaxSpinnerContainer').hide();
                     JSAlert.alert("Failed to load users data");
                 }
             }).catch(function (ex) {
@@ -154,6 +156,7 @@ rEIBenniesApp.controller("rankapproverController", function ($scope, $rootScope,
                     $scope.IsList = true;
                     $scope.IsDetail = false;
                 } else {
+                    $('#ajaxSpinnerContainer').hide();
                     JSAlert.alert("Failed to update");
                 }
             }).catch(function (ex) {

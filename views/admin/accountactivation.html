@@ -3,5 +3,34 @@
         <h3> Account Activation</h3>
     </div>
     <div class="clear"></div>
-   
+    <div id="basicInfo" >
+      
+        <div class="card cardLayout" ng-if="!IsActivation && UserData.IsAccountActivatedByUser=='N' && !NoRecord">
+            <button ng-click="ActivationReq()" ng-if="UserData.IsAccountActivatedByUser=='N'" type="button" class="btn btn-default">
+                <span class="glyphicon glyphicon-pencil"></span> Activate
+            </button>
+            <div class="card-body" ng-if="UserData.IsAccountActivatedByUser=='N'">
+                <h5 class="card-title">User Name : {{UserData.userName }}</h5>
+            </div>
+            <div class="card-body" ng-if="UserData.IsAccountActivatedByUser=='N'">
+                <h5 class="card-title">Temp Password : {{UserData.password}}</h5>
+            </div>
+           
+        </div>
+        <div ng-if="UserData.IsAccountActivatedByUser=='Y' && !NoRecord">
+            Your Account has  been already activated Please use link to Login.  <a href="#/">Login</a>
+        </div>
+        <div ng-if="NoRecord">
+           There is no matching record for this activation Link.Please check again.
+        </div>
+        <form ng-if="IsActivation && UserData.IsAccountActivatedByUser=='N' && !NoRecord" ng-submit="SubmitActivationReq()">
+            <div class="form-group">
+                <label for="password">Enter New Password *</label>
+                <input required type="text" class="form-control" id="password"  placeholder="New Password" name="password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-default" ng-click="Cancel()">Cancel</button>
+        </form>
+    </div>
+    <!--<input type="button" id="myButton" ng-click="Cancel()" style="display:none" />-->
 </div>
