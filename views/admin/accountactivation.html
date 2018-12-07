@@ -17,8 +17,11 @@
             </div>
            
         </div>
-        <div ng-if="UserData.IsAccountActivatedByUser=='Y' && !NoRecord">
-            Your Account has  been already activated Please use link to Login.  <a href="#/">Login</a>
+        <div ng-if="UserData.IsAccountActivatedByUser=='Y' && !NoRecord && !IsPreviouslyActivated">
+            Your account has  been activated.
+        </div>
+        <div ng-if="IsPreviouslyActivated && !NoRecord && UserData.IsAccountActivatedByUser=='Y'">
+            Your account has  been already activated.
         </div>
         <div ng-if="NoRecord">
            There is no matching record for this activation Link.Please check again.

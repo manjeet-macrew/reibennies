@@ -7,11 +7,12 @@ rEIBenniesApp.controller("accountactivationController", function ($scope, $rootS
     $scope.UserId = obj.userId;
     $scope.RoleCount = 0;
     $scope.NoRecord = true;
-    $scope.IsActivation=false;
+    $scope.IsActivation = false;
+    $scope.IsPreviouslyActivated=true;
     $scope.GetUserActivationInfo = function () {
+
         $scope.UserData = {};
         var userId = $scope.UserId;
-        $scope.payPalurl = 'https://www.google.com';
         accountactivationService.GetUserActivationInfo(userId)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
@@ -46,8 +47,16 @@ rEIBenniesApp.controller("accountactivationController", function ($scope, $rootS
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      $scope.payPalurl = res.data.ResponseData[0];
-                     window.location.href=$scope.payPalurl;
-                     //$window.open($scope.payPalurl, '_blank');
+                   //  window.location.href=$scope.payPalurl;
+                     var payPalRedirect = window.open($scope.payPalurl, '_blank');
+                     if(payPalRedirect==null)
+                     {
+                         JSAlert.confirm("Browser has blocked the redirection to PayPal Url.If you want to complete your activation request Please click Ok?").then(function (result) {
+                             // Check if pressed yes
+                             if (result)
+                                 window.open($scope.payPalurl, '_blank');
+                         });
+                     }
                  } else {
                      $('#ajaxSpinnerContainer').hide();
                      JSAlert.alert("Failed to load Activation data");
@@ -80,6 +89,7 @@ rEIBenniesApp.controller("accountactivationController", function ($scope, $rootS
                          $scope.GetUserActivationInfo();
                          $scope.IsActivation = false;
                      }
+                     $scope.IsPreviouslyActivated = false;
                  } else {
                      $('#ajaxSpinnerContainer').hide();
                      JSAlert.alert("Failed to load Activation data");
@@ -95,24 +105,11 @@ rEIBenniesApp.controller("accountactivationController", function ($scope, $rootS
     }
     $scope.SubmitActivationReq=function()
     {
+       
         $scope.ActivateUserAccount();
     }
     $scope.Cancel = function () {
         $scope.IsActivation = false;
     }
-    $scope.navigate = function () {
-        var redirectWindow = window.open($scope.payPalurl, '_blank');
-        redirectWindow.location;
-    }
     $scope.GetUserActivationInfo();
-
-    
-        //var a = document.createElement('a');
-        //a.href = href;
-        //    a.setAttribute('target', '_blank');
-        //a.click();
-       
-          
-       
-    
 });
