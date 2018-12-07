@@ -11,11 +11,11 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
     $scope.GetAllActiveUsers = function () {
         $scope.UserData = [];
         var userId = sessionStorage.getItem('UID')
-        rankService.GetAllActiveUsers(userId)
+        userService.GetAllUsers(userId)
              .then(function (res) {
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
-                         $scope.UserData = res.data.ResponseData[0].ActiveUsersInfoData;
+                         $scope.UserData = res.data.ResponseData[0].AllUsersInfoData;
                  } else {
                      JSAlert.alert("Failed to load users data");
                  }
@@ -121,11 +121,11 @@ rEIBenniesApp.controller("rankController", function ($scope, $rootScope, rankSer
 
         var data = $scope.FilterData;
         var queryString = $.param(data);
-        rankService.SearchForUser(queryString)
+        rankService.SearchForAllUsers(queryString)
             .then(function (res) {
                 if (res.data.ResponseCode == 200) {
                     if (res.data.ResponseData[0] != null)
-                        $scope.UserData = res.data.ResponseData[0].ActiveUsersInfoData;
+                        $scope.UserData = res.data.ResponseData[0].AllUsersInfoData;
                 } else {
                     JSAlert.alert("Failed to load Old Investor Types");
                 }

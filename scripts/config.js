@@ -83,7 +83,8 @@ angular.module('app.config', []).constant('config', {
     epGetAllActiveUsersByRoleId: BaseUrl + "getallactiveusersbyroleid?",
     epActivateUserAccount: BaseUrl + "activateuseraccount",
     epGetUserActivationInfo: BaseUrl + "getuseractivationinfo?userId=",
-    epCreateUserActivationSubscription: BaseUrl + "createuseractivationsubscription?userId="
+    epCreateUserActivationSubscription: BaseUrl + "createuseractivationsubscription?userId=",
+    epSearchForAllUsers: BaseUrl + "searchforallusers?"
 
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

@@ -39,6 +39,8 @@ rEIBenniesApp.service('rankService', ['$http', 'config', '$location', '$cookieSt
         });
     };
 
+
+
     this.ViewAUser = function (param) {
         return $http({
             method: 'GET', url: config.epViewAUser + param,
@@ -80,6 +82,19 @@ rEIBenniesApp.service('rankService', ['$http', 'config', '$location', '$cookieSt
     this.ApproveDenyUserRank = function (payload) {
         return $http({
             method: 'POST', url: config.epApproveDenyUserRank,
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            },
+            data: payload,
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
+
+    this.SearchForAllUsers = function (payload) {
+        return $http({
+            method: 'GET', url: config.epSearchForAllUsers + payload,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
