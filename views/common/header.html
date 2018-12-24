@@ -20,14 +20,15 @@
                         <!--<li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsCalendarEvents && SelectedPage=='CalendarEvents'}"><a href="#/calendarevents">Calendar Events</a></li>-->
                     </ul>
                 </li>
-                <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsCalendarEvents && SelectedPage=='CalendarEvents') || ( IsFAQMgmt && SelectedPage=='FAQMgmt') || ( IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt')|| ( IsMarketPlaces && SelectedPage=='MarketPlaces')}">
+                <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsCalendarEvents && SelectedPage=='CalendarEvents') || ( IsFAQMgmt && SelectedPage=='FAQMgmt') || ( IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt')|| ( IsMarketPlaces && SelectedPage=='MarketPlaces') || ( IsProExpertise && SelectedPage=='ProExpertise')}">
                     <a class="dropdown-toggle" data-toggle="dropdown">Content<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li ng-if="UserRole=='Rank Approver' || UserRole=='App Admin'" ng-class="{ 'active' : IsCalendarEvents && SelectedPage=='CalendarEvents'}"><a href="#/calendarevents">Calendar</a></li>
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsFAQMgmt && SelectedPage=='FAQMgmt'}"><a href="#/faqmgmt">FAQ</a></li>
                         <li ng-if="UserRole=='Staff' || UserRole=='App Admin'" ng-class="{ 'active' : IsSubscriptionMgmt && SelectedPage=='SubscriptionMgmt'}"><a href="#/subscriptionmgmt">Subscription</a></li>
                         <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsMarketPlaces && SelectedPage=='MarketPlaces'}"><a href="#/marketplaces">Market Places</a></li>
-                    </ul>
+                        <li ng-if="UserRole=='App Admin'" ng-class="{ 'active' : IsProExpertise && SelectedPage=='ProExpertise'}"><a href="#/proExpertise">Pro Expertise</a></li>
+                     </ul>
                 </li>
                 <li ng-if="UserRole=='App Admin'" ng-class="{ 'dropdown active' : (IsPromoCodes && SelectedPage=='PromoCodes')}">
                     <a class="dropdown-toggle" data-toggle="dropdown">Marketing<span class="caret"></span></a>

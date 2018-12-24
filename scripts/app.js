@@ -155,6 +155,15 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
             forceSSL: onlySSL
         }
     }).
+    when('/proExpertise', {
+        controller: 'proExpertiseController',
+        templateUrl: 'views/admin/proexpertise.html',
+        resolve: {
+            loggedIn: AccountActivation,
+            forceSSL: onlySSL
+        }
+    })
+        .
 		otherwise({
 		    redirectTo: '/'
 		});

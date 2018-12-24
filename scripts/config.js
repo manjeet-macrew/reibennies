@@ -84,7 +84,13 @@ angular.module('app.config', []).constant('config', {
     epActivateUserAccount: BaseUrl + "activateuseraccount",
     epGetUserActivationInfo: BaseUrl + "getuseractivationinfo?userId=",
     epCreateUserActivationSubscription: BaseUrl + "createuseractivationsubscription?userId=",
-    epSearchForAllUsers: BaseUrl + "searchforallusers?"
+    epSearchForAllUsers: BaseUrl + "searchforallusers?",
+    epGetAllProfessionalExpertise: BaseUrl + "getallprofessionalexpertise",
+    epCreateProfessionalExpertise: BaseUrl + "createprofessionalexpertise",
+    epUpdateProfessionalExpertise: BaseUrl + "updateprofessionalexpertise",
+    epDeleteProfessionalExpertise: BaseUrl + "deleteprofessionalexpertise?lookupId="
+
+
 
     //epgetallcalendaritemsday: BaseUrl + "getallcalendaritemsday?"
 }); 

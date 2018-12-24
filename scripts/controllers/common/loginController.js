@@ -230,15 +230,16 @@ rEIBenniesApp.controller("loginController", function ($scope, $rootScope, toastr
                  if (res.data.ResponseCode == 200) {
                      if (res.data.ResponseData[0] != null)
                      $scope.UserData = res.data.ResponseData[0].UserProfileInfoData[0];
-                     if ($scope.UserData.roleId == 1)
+
+                     if ($scope.UserData.userRole.indexOf("1") != -1)
                          sessionStorage.setItem('Role', "App Admin");
-                     else if ($scope.UserData.roleId == 2)
+                     else if ($scope.UserData.userRole.indexOf("2") != -1)
                          sessionStorage.setItem('Role', "Bennie");
-                     else if ($scope.UserData.roleId == 3)
+                     else if ($scope.UserData.userRole.indexOf("3") != -1)
                          sessionStorage.setItem('Role', "Rank Approver");
-                     else if ($scope.UserData.roleId == 4)
+                     else if ($scope.UserData.userRole.indexOf("4") != -1)
                          sessionStorage.setItem('Role', "Staff");
-                     else if ($scope.UserData.roleId == 5)
+                     else if ($scope.UserData.userRole.indexOf("5") != -1)
                          sessionStorage.setItem('Role', "Support");
 
                      window.location.href = "#/home";
