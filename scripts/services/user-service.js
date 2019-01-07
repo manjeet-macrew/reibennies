@@ -272,4 +272,16 @@ rEIBenniesApp.service('userService', ['$http', 'config', '$location', '$cookieSt
         }).error(function (response, status, headers, config) {
         });
     };
+
+    this.GetAllUsersDevice = function () {
+        return $http({
+            method: 'GET', url: config.epGetAllUsersDeviceDetail,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Authorization': sessionStorage.getItem('TT') + ' ' + sessionStorage.getItem('AT')
+            }
+        }).success(function (data, status, headers, config) {
+        }).error(function (response, status, headers, config) {
+        });
+    };
 }]);

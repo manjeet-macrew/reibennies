@@ -162,8 +162,16 @@ rEIBenniesApp.config(function ($routeProvider, $httpProvider) {
             loggedIn: AccountActivation,
             forceSSL: onlySSL
         }
-    })
-        .
+    }).
+     when('/userDevices', {
+         controller: 'userDevicesController',
+         templateUrl: 'views/admin/userdevice.html',
+         resolve: {
+             loggedIn: onlyLoggedIn,
+             forceSSL: onlySSL
+         }
+     }).
+       
 		otherwise({
 		    redirectTo: '/'
 		});

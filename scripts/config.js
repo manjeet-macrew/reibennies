@@ -88,7 +88,8 @@ angular.module('app.config', []).constant('config', {
     epGetAllProfessionalExpertise: BaseUrl + "getallprofessionalexpertise",
     epCreateProfessionalExpertise: BaseUrl + "createprofessionalexpertise",
     epUpdateProfessionalExpertise: BaseUrl + "updateprofessionalexpertise",
-    epDeleteProfessionalExpertise: BaseUrl + "deleteprofessionalexpertise?lookupId="
+    epDeleteProfessionalExpertise: BaseUrl + "deleteprofessionalexpertise?lookupId=",
+    epGetAllUsersDeviceDetail: BaseUrl + "getallusersdevicedetails"
 
 
 

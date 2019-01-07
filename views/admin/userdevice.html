@@ -1,0 +1,39 @@
+﻿<div class="container">
+    <div>
+        <h3>User Device</h3>
+    </div>
+    <table datatable="ng" dt-column-defs="dtColumnDefs" class="table table-bordered bordered table-striped table-condensed datatable">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email Address</th>
+                <th>Device Type</th>
+                <th>Device OS</th>
+                <th>Device OS Version</th>
+                <th>Device OS Version</th>
+              
+                <th>Created Date</th>
+                <th>Created By</th>
+                <!-- <th style="text-align: center;">Actions</th>-->
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="n in UserDeviceData">
+                <td>{{$index+1}}</td>
+                <td>{{n.firstName +" "+ n.lastName}}</td>
+                <td>{{n.phoneOne}}</td>
+                <td>{{n.Email}}</td>
+                <td>{{n.deviceType}}</td>
+                <td>{{n.deviceOs}}</td>
+                <td>{{n.deviceOSVersion}}</td>
+                <td>{{n.deviceOSBuild}}</td>
+                <td>{{n.createDate}}</td>
+                <td>{{n.createdBy}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
