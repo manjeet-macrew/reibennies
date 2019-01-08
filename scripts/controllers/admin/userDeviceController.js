@@ -32,6 +32,11 @@ rEIBenniesApp.controller("userDevicesController", function ($scope, $rootScope, 
 
     }
 
+    $scope.ConvertStringToDate = function (stringDate) {
+        var date = new Date(stringDate);
+        return date;
+    }
+
     $scope.GetAllUsersDevice();
    
 });

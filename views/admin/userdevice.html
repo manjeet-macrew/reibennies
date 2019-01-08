@@ -29,7 +29,7 @@
                 <td>{{n.deviceOs}}</td>
                 <td>{{n.deviceOSVersion}}</td>
                 <td>{{n.deviceOSBuild}}</td>
-                <td>{{n.createDate}}</td>
+                <td>{{ConvertStringToDate(n.createDate)|date:'MM/dd/yyyy'}}</td>
                 <td>{{n.createdBy}}</td>
             </tr>
         </tbody>
