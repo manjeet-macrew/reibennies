@@ -99,6 +99,22 @@ rEIBenniesApp.controller("usersController", function ($scope, $rootScope, DTColu
             });
     }
 
+    $scope.ShowHideuser = function (userinfo, val) {
+        userService.ShowHideuser(userinfo.userId, val)
+            .then(function (res) {
+
+                if (res.data.ResponseCode == 200) {
+                    userinfo.isUserVisible = val;
+                    JSAlert.alert(res.data.Message);
+                } else {
+                    JSAlert.alert("Failed to update");
+                }
+            }).catch(function (ex) {
+                $('#ajaxSpinnerContainer').hide();
+                JSAlert.alert("Failed to update");
+            });
+    }
+
     $scope.GetProfileInfo = function (userId,userName) {
         $scope.UserInfo = {};
         $scope.UserInfo.userId = 0;
