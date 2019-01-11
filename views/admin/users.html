@@ -29,8 +29,8 @@
                 <td>{{n.stateName}}</td>
                 <td>{{n.City}}</td>
                 <td style="text-align: center;">
-                    <button type="button" ng-show="n.isUserVisible=='N'" ng-click="ShowHideuser(n,'Y')"   class="btn btn-primary">Show</button>
-                    <button type="button" ng-show="n.isUserVisible=='Y'" ng-click="ShowHideuser(n,'N')"   class="btn btn-primary">Hide</button>
+                    <button type="button" ng-show="n.isUserVisible=='N'" style="width:62px;"  ng-click="ShowHideuser(n,'Y')"   class="btn btn-primary">Show</button>
+                    <button type="button" ng-show="n.isUserVisible=='Y'" style="width:62px;"  ng-click="ShowHideuser(n,'N')"   class="btn btn-primary">Hide</button>
                     <button type="button" ng-disabled="n.isActive=='Y'" ng-click="ActivateDeactivate(n,'Y')" class="btn btn-primary">Activate</button>
                     <button type="button" ng-disabled="n.isActive=='N'" ng-click="ActivateDeactivate(n,'N')" class="btn btn-primary">Deactivate</button>
                     <button type="button"  ng-click="OpenModal(n)" class="btn btn-primary" data-toggle="modal" data-target="#manageUser">Manage</button>
